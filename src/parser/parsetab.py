@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'DIVIDE HOLA ID MINUS NUMBER PLUS TIMES\n    expression : expression PLUS term\n               | expression MINUS term\n               | term\n               | HOLA\n    \n    term : term TIMES factor\n         | term DIVIDE factor\n         | factor\n    \n    factor : NUMBER\n    '
+_lr_signature = 'ADD ALTER AND ARROBA AS BASE BEGIN BIT BOOL CADENA CAST COLUMN COMA CONCATENAR CONTAR CREATE DATA DATE DATETIME DECIMAL DECIMAL1 DECLARE DELETE DIFERENTE DIVIDE DROP END EQUALS EXEC FIREIGN FROM FUNCTION HOY ID IF IGUAL INSERT INT INTO KEY LPAREN MAYORIQ MAYORQ MENORIQ MENORQ MINUS NCHAR NOT NOT1 NULL NUMBER NVARCHAR OR PCOMA PLUS PRIMARY PROCEDURE PUNTO REFERENCES RETURN RETURNS RPAREN SELECT SET SUBSTRAER SUMA TABLE TIMES TRUNCATE UPDATE VALUES WHERE\n    initial : produccion initial\n            | produccion      \n    \n    produccion  : create PCOMA\n                | createdb PCOMA\n                | insert PCOMA\n                | update PCOMA\n                | select PCOMA\n                | alter PCOMA\n    \n    createdb : CREATE DATA BASE ID      \n    \n    create      : CREATE TABLE ID LPAREN  defcreate RPAREN      \n    \n    defcreate   : ID tipodato campo COMA defcreate\n                | ID tipodato\n                | ID tipodato campo     \n    \n    campo   : NOT NULL\n            | PRIMARY KEY\n            | foranea      \n    \n    foranea : REFERENCES ID LPAREN ID RPAREN\n    \n    tipodato  : INT\n                | DECIMAL\n                | BOOL\n                | NVARCHAR LPAREN NUMBER RPAREN     \n    \n    select  : selectbasico \n            | selectdefinidos \n    \n    selectdefinidos : SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN \n                    | SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER\n                    | SELECT HOY LPAREN RPAREN\n                    | SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios \n                    | SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios\n                    | SELECT CAST\n    \n    selectbasico  : SELECT TIMES FROM ID \n    \n    alter   : ALTER TABLE ID ADD ID tipodato\n            | ALTER TABLE ID drop\n    \n    truncate    : TRUNCATE TABLE ID \n    \n    drop : DROP TABLE ID\n         | DROP COLUMN ID  \n    \n    insert      : INSERT INTO ID parametros     \n    \n    parametros  : LPAREN valores RPAREN     \n    \n    valores : ID COMA valores\n            | ID     \n    \n    update  : UPDATE ID SET cambios WHERE ID EQUALS expression   \n    \n    cambios : campocambios COMA cambios\n            | campocambios    \n    \n    campocambios : ID EQUALS expression   \n    \n    delete  : DELETE FROM ID WHERE ID EQUALS expression\n    \n    funcion  : CREATE FUNCTION ID LPAREN RPAREN \n    \n    expression : expression PLUS term\n               | expression MINUS term\n               | term\n    \n    term : term TIMES factor\n         | term DIVIDE factor\n         | factor\n    \n    factor : NUMBER\n           | DECIMAL\n    \n    start : initial\n    '
     
-_lr_action_items = {'HOLA':([0,],[3,]),'NUMBER':([0,6,7,8,9,],[5,5,5,5,5,]),'$end':([1,2,3,4,5,10,11,12,13,],[0,-3,-4,-7,-8,-1,-2,-5,-6,]),'PLUS':([1,2,3,4,5,10,11,12,13,],[6,-3,-4,-7,-8,-1,-2,-5,-6,]),'MINUS':([1,2,3,4,5,10,11,12,13,],[7,-3,-4,-7,-8,-1,-2,-5,-6,]),'TIMES':([2,4,5,10,11,12,13,],[8,-7,-8,8,8,-5,-6,]),'DIVIDE':([2,4,5,10,11,12,13,],[9,-7,-8,9,9,-5,-6,]),}
+_lr_action_items = {'CREATE':([0,2,17,18,19,20,21,22,],[9,9,-3,-4,-5,-6,-7,-8,]),'INSERT':([0,2,17,18,19,20,21,22,],[10,10,-3,-4,-5,-6,-7,-8,]),'UPDATE':([0,2,17,18,19,20,21,22,],[11,11,-3,-4,-5,-6,-7,-8,]),'ALTER':([0,2,17,18,19,20,21,22,],[14,14,-3,-4,-5,-6,-7,-8,]),'SELECT':([0,2,17,18,19,20,21,22,],[15,15,-3,-4,-5,-6,-7,-8,]),'$end':([1,2,16,17,18,19,20,21,22,],[0,-2,-1,-3,-4,-5,-6,-7,-8,]),'PCOMA':([3,4,5,6,7,8,12,13,34,47,48,54,56,59,77,78,79,81,82,84,85,86,87,88,91,92,93,110,119,120,121,122,123,124,129,130,131,],[17,18,19,20,21,22,-22,-23,-29,-9,-36,-32,-30,-26,-18,-19,-20,-10,-37,-43,-48,-51,-52,-53,-31,-34,-35,-24,-46,-47,-49,-50,-40,-25,-21,-27,-28,]),'TABLE':([9,14,55,],[23,27,70,]),'DATA':([9,],[24,]),'INTO':([10,],[25,]),'ID':([11,23,25,27,36,38,40,45,46,49,53,67,68,70,71,83,96,97,102,114,125,126,128,],[26,35,37,39,47,50,56,61,62,65,69,89,50,92,93,65,112,113,117,62,50,50,132,]),'TIMES':([15,44,85,86,87,88,119,120,121,122,],[28,60,107,-51,-52,-53,107,107,-49,-50,]),'CONCATENAR':([15,],[29,]),'SUBSTRAER':([15,],[30,]),'HOY':([15,],[31,]),'CONTAR':([15,],[32,]),'SUMA':([15,],[33,]),'CAST':([15,],[34,]),'BASE':([24,],[36,]),'SET':([26,],[38,]),'FROM':([28,74,75,],[40,96,97,]),'LPAREN':([29,30,31,32,33,35,37,80,117,],[41,42,43,44,45,46,49,103,128,]),'ADD':([39,],[53,]),'DROP':([39,],[55,]),'CADENA':([41,42,72,],[57,58,94,]),'RPAREN':([43,60,61,63,64,65,76,77,78,79,94,98,101,104,115,116,118,127,129,132,133,],[59,74,75,81,82,-39,-12,-18,-19,-20,110,-13,-16,-38,-14,-15,129,-11,-21,133,-17,]),'EQUALS':([50,89,],[66,109,]),'WHERE':([51,52,84,85,86,87,88,90,112,113,119,120,121,122,],[67,-42,-43,-48,-51,-52,-53,-41,125,126,-46,-47,-49,-50,]),'COMA':([52,57,58,65,84,85,86,87,88,95,98,101,115,116,119,120,121,122,133,],[68,72,73,83,-43,-48,-51,-52,-53,111,114,-16,-14,-15,-46,-47,-49,-50,-17,]),'COLUMN':([55,],[71,]),'INT':([62,69,],[77,77,]),'DECIMAL':([62,66,69,105,106,107,108,109,],[78,88,78,88,88,88,88,88,]),'BOOL':([62,69,],[79,79,]),'NVARCHAR':([62,69,],[80,80,]),'NUMBER':([66,73,103,105,106,107,108,109,111,],[87,95,118,87,87,87,87,87,124,]),'NOT':([76,77,78,79,129,],[99,-18,-19,-20,-21,]),'PRIMARY':([76,77,78,79,129,],[100,-18,-19,-20,-21,]),'REFERENCES':([76,77,78,79,129,],[102,-18,-19,-20,-21,]),'PLUS':([84,85,86,87,88,119,120,121,122,123,],[105,-48,-51,-52,-53,-46,-47,-49,-50,105,]),'MINUS':([84,85,86,87,88,119,120,121,122,123,],[106,-48,-51,-52,-53,-46,-47,-49,-50,106,]),'DIVIDE':([85,86,87,88,119,120,121,122,],[108,-51,-52,-53,108,108,-49,-50,]),'NULL':([99,],[115,]),'KEY':([100,],[116,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,],[1,]),'term':([0,6,7,],[2,10,11,]),'factor':([0,6,7,8,9,],[4,4,4,12,13,]),}
+_lr_goto_items = {'initial':([0,2,],[1,16,]),'produccion':([0,2,],[2,2,]),'create':([0,2,],[3,3,]),'createdb':([0,2,],[4,4,]),'insert':([0,2,],[5,5,]),'update':([0,2,],[6,6,]),'select':([0,2,],[7,7,]),'alter':([0,2,],[8,8,]),'selectbasico':([0,2,],[12,12,]),'selectdefinidos':([0,2,],[13,13,]),'parametros':([37,],[48,]),'cambios':([38,68,],[51,90,]),'campocambios':([38,68,125,126,],[52,52,130,131,]),'drop':([39,],[54,]),'defcreate':([46,114,],[63,127,]),'valores':([49,83,],[64,104,]),'tipodato':([62,69,],[76,91,]),'expression':([66,109,],[84,123,]),'term':([66,105,106,109,],[85,119,120,85,]),'factor':([66,105,106,107,108,109,],[86,86,86,121,122,86,]),'campo':([76,],[98,]),'foranea':([76,],[101,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,13 +26,59 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expression PLUS term','expression',3,'p_expression','parser.py',6),
-  ('expression -> expression MINUS term','expression',3,'p_expression','parser.py',7),
-  ('expression -> term','expression',1,'p_expression','parser.py',8),
-  ('expression -> HOLA','expression',1,'p_expression','parser.py',9),
-  ('term -> term TIMES factor','term',3,'p_term','parser.py',24),
-  ('term -> term DIVIDE factor','term',3,'p_term','parser.py',25),
-  ('term -> factor','term',1,'p_term','parser.py',26),
-  ('factor -> NUMBER','factor',1,'p_factor','parser.py',38),
+  ("S' -> initial","S'",1,None,None,None),
+  ('initial -> produccion initial','initial',2,'p_initial','parser.py',6),
+  ('initial -> produccion','initial',1,'p_initial','parser.py',7),
+  ('produccion -> create PCOMA','produccion',2,'p_produccion','parser.py',12),
+  ('produccion -> createdb PCOMA','produccion',2,'p_produccion','parser.py',13),
+  ('produccion -> insert PCOMA','produccion',2,'p_produccion','parser.py',14),
+  ('produccion -> update PCOMA','produccion',2,'p_produccion','parser.py',15),
+  ('produccion -> select PCOMA','produccion',2,'p_produccion','parser.py',16),
+  ('produccion -> alter PCOMA','produccion',2,'p_produccion','parser.py',17),
+  ('createdb -> CREATE DATA BASE ID','createdb',4,'p_createdb','parser.py',24),
+  ('create -> CREATE TABLE ID LPAREN defcreate RPAREN','create',6,'p_create','parser.py',30),
+  ('defcreate -> ID tipodato campo COMA defcreate','defcreate',5,'p_defcreate','parser.py',35),
+  ('defcreate -> ID tipodato','defcreate',2,'p_defcreate','parser.py',36),
+  ('defcreate -> ID tipodato campo','defcreate',3,'p_defcreate','parser.py',37),
+  ('campo -> NOT NULL','campo',2,'p_campo','parser.py',42),
+  ('campo -> PRIMARY KEY','campo',2,'p_campo','parser.py',43),
+  ('campo -> foranea','campo',1,'p_campo','parser.py',44),
+  ('foranea -> REFERENCES ID LPAREN ID RPAREN','foranea',5,'p_foranea','parser.py',51),
+  ('tipodato -> INT','tipodato',1,'p_tipodato','parser.py',57),
+  ('tipodato -> DECIMAL','tipodato',1,'p_tipodato','parser.py',58),
+  ('tipodato -> BOOL','tipodato',1,'p_tipodato','parser.py',59),
+  ('tipodato -> NVARCHAR LPAREN NUMBER RPAREN','tipodato',4,'p_tipodato','parser.py',60),
+  ('select -> selectbasico','select',1,'p_select','parser.py',66),
+  ('select -> selectdefinidos','select',1,'p_select','parser.py',67),
+  ('selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN','selectdefinidos',7,'p_selectdefinidos','parser.py',72),
+  ('selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER','selectdefinidos',8,'p_selectdefinidos','parser.py',73),
+  ('selectdefinidos -> SELECT HOY LPAREN RPAREN','selectdefinidos',4,'p_selectdefinidos','parser.py',74),
+  ('selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios','selectdefinidos',9,'p_selectdefinidos','parser.py',75),
+  ('selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios','selectdefinidos',9,'p_selectdefinidos','parser.py',76),
+  ('selectdefinidos -> SELECT CAST','selectdefinidos',2,'p_selectdefinidos','parser.py',77),
+  ('selectbasico -> SELECT TIMES FROM ID','selectbasico',4,'p_selectbasico','parser.py',82),
+  ('alter -> ALTER TABLE ID ADD ID tipodato','alter',6,'p_alter','parser.py',88),
+  ('alter -> ALTER TABLE ID drop','alter',4,'p_alter','parser.py',89),
+  ('truncate -> TRUNCATE TABLE ID','truncate',3,'p_truncate','parser.py',95),
+  ('drop -> DROP TABLE ID','drop',3,'p_drop','parser.py',100),
+  ('drop -> DROP COLUMN ID','drop',3,'p_drop','parser.py',101),
+  ('insert -> INSERT INTO ID parametros','insert',4,'p_insert','parser.py',108),
+  ('parametros -> LPAREN valores RPAREN','parametros',3,'p_parametros','parser.py',113),
+  ('valores -> ID COMA valores','valores',3,'p_valores','parser.py',118),
+  ('valores -> ID','valores',1,'p_valores','parser.py',119),
+  ('update -> UPDATE ID SET cambios WHERE ID EQUALS expression','update',8,'p_update','parser.py',125),
+  ('cambios -> campocambios COMA cambios','cambios',3,'p_cambios','parser.py',130),
+  ('cambios -> campocambios','cambios',1,'p_cambios','parser.py',131),
+  ('campocambios -> ID EQUALS expression','campocambios',3,'p_campocambios','parser.py',136),
+  ('delete -> DELETE FROM ID WHERE ID EQUALS expression','delete',7,'p_delete','parser.py',144),
+  ('funcion -> CREATE FUNCTION ID LPAREN RPAREN','funcion',5,'p_funcion','parser.py',150),
+  ('expression -> expression PLUS term','expression',3,'p_expression','parser.py',157),
+  ('expression -> expression MINUS term','expression',3,'p_expression','parser.py',158),
+  ('expression -> term','expression',1,'p_expression','parser.py',159),
+  ('term -> term TIMES factor','term',3,'p_term','parser.py',171),
+  ('term -> term DIVIDE factor','term',3,'p_term','parser.py',172),
+  ('term -> factor','term',1,'p_term','parser.py',173),
+  ('factor -> NUMBER','factor',1,'p_factor','parser.py',185),
+  ('factor -> DECIMAL','factor',1,'p_factor','parser.py',186),
+  ('start -> initial','start',1,'p_start','parser.py',192),
 ]
