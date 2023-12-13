@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<Personas>
+  <Persona>
+    <Nombre>Juan</Nombre>
+    <Edad>25</Edad>
+    <Ciudad>México</Ciudad>
+  </Persona>
+  <Persona>
+    <Nombre>María</Nombre>
+    <Edad>30</Edad>
+    <Ciudad>Madrid</Ciudad>
+  </Persona>
+  <Persona>
+    <Nombre>Carlos</Nombre>
+    <Edad>22</Edad>
+    <Ciudad>Buenos Aires</Ciudad>
+  </Persona>
+</Personas>
