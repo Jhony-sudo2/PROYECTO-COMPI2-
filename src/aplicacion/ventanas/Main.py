@@ -18,15 +18,15 @@ def ejecutar_consulta():
      # Obtener el texto del campo
     print(texto)
     consola.insert(END, texto)
-    while True:
-        try:
-            s = texto
-        except EOFError:
-            break
-        if not s:
-            continue
+
+    try:
+        s = texto
         result = parser.parse(s, lexer=lexer)
         print(result)
+    except EOFError:
+        print("Error")
+
+
 
 
 def abrir_archivo():

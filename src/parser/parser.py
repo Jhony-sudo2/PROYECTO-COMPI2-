@@ -1,5 +1,6 @@
 import ply.yacc as yacc
 from .lexer import tokens
+from ..aplicacion.querys.CreateDB import CreateDB
 
 
 def p_initial(p):
@@ -24,6 +25,10 @@ def p_createdb(p):
     '''
     createdb : CREATE DATA BASE ID      
     '''
+    p[0] = p[4]
+    db = CreateDB(p[0])
+    db.crearDB()
+    print(p[0])
 
 #CREAR TABLA
 def p_create(p):
