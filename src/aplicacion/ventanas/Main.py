@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 
-from src.parser import lexer
+from src.parser.lexer import lexer
 from src.parser.parser import parser
 
 
