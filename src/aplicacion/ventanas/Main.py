@@ -2,15 +2,33 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 
+from src.parser import lexer
+from src.parser.parser import parser
+
+
 from Analizador import Analizador
+
+
 
 def ejecutar_consulta():
     analizador = Analizador("parser")
     analizador.escribir()
     consola.delete("1.0", END)
-    texto = campo_texto.get("1.0", END)  # Obtener el texto del campo
+    texto = campo_texto.get("1.0", END).strip()
+     # Obtener el texto del campo
     print(texto)
     consola.insert(END, texto)
+    while True:
+        try:
+            s = texto
+        except EOFError:
+            break
+        if not s:
+            continue
+        result = parser.parse(s, lexer=lexer)
+        print(result)
+
+
 def abrir_archivo():
     # Abre el cuadro de diálogo para seleccionar un archivo
     archivo = filedialog.askopenfilename()

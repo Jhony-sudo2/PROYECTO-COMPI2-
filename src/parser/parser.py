@@ -192,7 +192,7 @@ def p_if(p):
 
 def p_condicion(p):
     '''
-    condicion: expression toperador expression
+    condicion : expression toperador expression
     '''
 
 def p_toperador(p):

@@ -1,5 +1,5 @@
 from lexer import lexer
-from parser import parser
+from src.parser.parser import parser
 def main():
     while True:
         try:
