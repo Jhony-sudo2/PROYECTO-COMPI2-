@@ -1,8 +1,15 @@
 import ply.yacc as yacc
 from .lexer import tokens
 from ..aplicacion.querys.CreateDB import CreateDB
+from ..aplicacion.querys.CreateTable import CreateTable
+from ..aplicacion.querys.Operacion import Operacion
+from ..aplicacion.querys.Parametrostabla import Parametrostabla
+
+lista = []
 
 
+def getLista():
+    return lista
 def p_initial(p):
     '''
     initial : produccion initial
@@ -25,9 +32,8 @@ def p_createdb(p):
     '''
     createdb : CREATE DATA BASE ID      
     '''
-    p[0] = p[4]
-    db = CreateDB(p[0])
-    db.crearDB()
+    deb = CreateDB(str(p[4]))
+    lista.append(deb)
     print(p[0])
 
 #CREAR TABLA
@@ -35,38 +41,78 @@ def p_create(p):
     '''
     create      : CREATE TABLE ID LPAREN  defcreate RPAREN      
     '''
+    nuevatabla = CreateTable(str(p[3]),p[5])
+    p[0] = nuevatabla
+    lista.append(nuevatabla)
 
 def p_defcreate(p):
     '''
-    defcreate   : ID tipodato campo COMA defcreate
-                | ID tipodato
-                | ID tipodato campo     
+    defcreate   : campo COMA defcreate
+                | campo
     '''
+    if len(p) == 4:
+        parametros = p[3]
+        parametros.append(p[1])
+        p[0] = parametros
+    elif len(p) == 2:
+        parametros = []
+        parametros.append(p[1])
+        p[0] = parametros
 
 def p_campo(p):
     '''
-    campo   : NOT NULL
+        campo   : ID tipodato restriccion
+                | ID tipodato
+    '''
+    if len(p) == 3:
+        parametro = Parametrostabla(p[1],p[2])
+        p[0] = parametro
+    else:
+        if type (p[3]) is tuple:
+            parametro = Parametrostabla(p[1],p[2],foranea=p[3])
+        else:
+            parametro = Parametrostabla(p[1], p[2], condicion=p[3])
+        p[0] = parametro
+def p_restriccion(p):
+    '''
+    restriccion   : NOT NULL
             | PRIMARY KEY
             | foranea      
     '''
 
+    if(p[1] == 'NOT'):
+        p[0] = 1
+    elif p[1] == 'PRIMARY':
+        p[0] = 2
+    else:
+        p[0] = p[1]
 
 
 def p_foranea(p):
     '''
     foranea : REFERENCES ID LPAREN ID RPAREN
     '''
-
+    tmp = (p[2],p[4])
+    p[0] = tmp
 
 def p_tipodato(p):
     '''
     tipodato  : INT
                 | DECIMAL
                 | BOOL
-                | NVARCHAR LPAREN NUMBER RPAREN     
+                | NVARCHAR LPAREN NUMBER RPAREN
+                | NCHAR LPAREN NUMBER RPAREN
     '''
-    
-
+    if p[1] == 'INTEGER':
+        p[0] = 1
+    elif p[1] == 'DECIMAL':
+        p[0] = 2
+    elif p[1] == 'BOOL':
+        p[0] = 3
+    elif p[1] == 'NVARCHAR':
+        p[0] = 4
+    elif p[1] == 'NCHAR':
+        p[0] = 5
 
 #SELECT
 def p_select(p):
@@ -271,3 +317,4 @@ def find_column(input, token):
     return (token.lexpos - line_start) + 1
 
 parser = yacc.yacc()
+listado = getLista()

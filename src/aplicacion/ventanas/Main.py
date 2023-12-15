@@ -5,6 +5,7 @@ from tkinter import filedialog
 from src.parser.lexer import lexer
 from src.parser.parser import parser
 
+from src.parser.parser import listado
 
 from Analizador import Analizador
 
@@ -23,6 +24,9 @@ def ejecutar_consulta():
         s = texto
         result = parser.parse(s, lexer=lexer)
         print(result)
+
+        for elemento in listado:
+            elemento.ejecutar()
     except EOFError:
         print("Error")
 

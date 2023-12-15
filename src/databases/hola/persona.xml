@@ -1,0 +1,12 @@
+<tabla>
+    <estructura>
+        <nombre>nvarchar</nombre>
+        <edad>integer</edad>
+    </estructura>
+    <datos>
+        <entrada>
+        <nombre>Jhony</nombre>
+            <edad>21</edad>
+        </entrada>
+    </datos>
+</tabla>
