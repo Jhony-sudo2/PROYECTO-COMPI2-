@@ -20,197 +20,201 @@ Grammar
 Rule 0     S' -> initial
 Rule 1     initial -> produccion initial
 Rule 2     initial -> produccion
-Rule 3     produccion -> create PCOMA
-Rule 4     produccion -> createdb PCOMA
-Rule 5     produccion -> insert PCOMA
-Rule 6     produccion -> update PCOMA
-Rule 7     produccion -> select PCOMA
-Rule 8     produccion -> alter PCOMA
-Rule 9     createdb -> CREATE DATA BASE ID
-Rule 10    create -> CREATE TABLE ID LPAREN defcreate RPAREN
-Rule 11    defcreate -> campo COMA defcreate
-Rule 12    defcreate -> campo
-Rule 13    campo -> ID tipodato restriccion
-Rule 14    campo -> ID tipodato
-Rule 15    restriccion -> NOT NULL
-Rule 16    restriccion -> PRIMARY KEY
-Rule 17    restriccion -> foranea
-Rule 18    foranea -> REFERENCES ID LPAREN ID RPAREN
-Rule 19    tipodato -> INT
-Rule 20    tipodato -> DECIMAL
-Rule 21    tipodato -> BOOL
-Rule 22    tipodato -> NVARCHAR LPAREN NUMBER RPAREN
-Rule 23    tipodato -> NCHAR LPAREN NUMBER RPAREN
-Rule 24    select -> selectbasico
-Rule 25    select -> selectdefinidos
-Rule 26    select -> selectasignacion
-Rule 27    selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN
-Rule 28    selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
-Rule 29    selectdefinidos -> SELECT HOY LPAREN RPAREN
-Rule 30    selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
-Rule 31    selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
-Rule 32    selectdefinidos -> SELECT CAST
-Rule 33    selectbasico -> SELECT TIMES FROM ID
-Rule 34    selectasignacion -> SELECT
-Rule 35    alter -> ALTER TABLE ID ADD ID tipodato
-Rule 36    alter -> ALTER TABLE ID drop
-Rule 37    truncate -> TRUNCATE TABLE ID
-Rule 38    drop -> DROP TABLE ID
-Rule 39    drop -> DROP COLUMN ID
-Rule 40    insert -> INSERT INTO ID parametrosi VALUES entradas
-Rule 41    parametrosi -> LPAREN valores RPAREN
-Rule 42    entradas -> LPAREN valentradas RPAREN
-Rule 43    valentradas -> expression COMA valentradas
-Rule 44    valentradas -> expression
-Rule 45    valores -> ID COMA valores
-Rule 46    valores -> ID
-Rule 47    update -> UPDATE ID SET cambios WHERE ID EQUALS expression
-Rule 48    cambios -> campocambios COMA cambios
-Rule 49    cambios -> campocambios
-Rule 50    campocambios -> ID EQUALS expression
-Rule 51    delete -> DELETE FROM ID WHERE ID EQUALS expression
-Rule 52    acciones -> variable PCOMA
-Rule 53    acciones -> select PCOMA
-Rule 54    acciones -> if
-Rule 55    variable -> DECLARE ARROBA ID tipodato
-Rule 56    funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN END
-Rule 57    parametros -> ARROBA ID tipodato COMA parametros
-Rule 58    parametros -> ARROBA ID tipodato
-Rule 59    accionesfuncion -> <empty>
-Rule 60    if -> IF LPAREN condicion RPAREN
-Rule 61    condicion -> expression toperador expression
-Rule 62    toperador -> IGUAL
-Rule 63    toperador -> DIFERENTE
-Rule 64    toperador -> MAYORQ
-Rule 65    toperador -> MENORQ
-Rule 66    toperador -> MAYORIQ
-Rule 67    toperador -> MENORIQ
-Rule 68    while -> <empty>
-Rule 69    expression -> expression PLUS term
-Rule 70    expression -> expression MINUS term
-Rule 71    expression -> term
-Rule 72    term -> term TIMES factor
-Rule 73    term -> term DIVIDE factor
-Rule 74    term -> factor
-Rule 75    factor -> NUMBER
-Rule 76    factor -> DECIMAL
-Rule 77    start -> initial
+Rule 3     seleccionardb -> USAR ID
+Rule 4     produccion -> create PCOMA
+Rule 5     produccion -> createdb PCOMA
+Rule 6     produccion -> insert PCOMA
+Rule 7     produccion -> update PCOMA
+Rule 8     produccion -> select PCOMA
+Rule 9     produccion -> alter PCOMA
+Rule 10    produccion -> seleccionardb PCOMA
+Rule 11    createdb -> CREATE DATA BASE ID
+Rule 12    create -> CREATE TABLE ID LPAREN defcreate RPAREN
+Rule 13    defcreate -> campo COMA defcreate
+Rule 14    defcreate -> campo
+Rule 15    campo -> ID tipodato restriccion
+Rule 16    campo -> ID tipodato
+Rule 17    restriccion -> NOT NULL
+Rule 18    restriccion -> PRIMARY KEY
+Rule 19    restriccion -> foranea
+Rule 20    foranea -> REFERENCES ID LPAREN ID RPAREN
+Rule 21    tipodato -> INT
+Rule 22    tipodato -> DECIMAL
+Rule 23    tipodato -> BOOL
+Rule 24    tipodato -> NVARCHAR LPAREN NUMBER RPAREN
+Rule 25    tipodato -> NCHAR LPAREN NUMBER RPAREN
+Rule 26    select -> selectbasico
+Rule 27    select -> selectdefinidos
+Rule 28    select -> selectasignacion
+Rule 29    selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN
+Rule 30    selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+Rule 31    selectdefinidos -> SELECT HOY LPAREN RPAREN
+Rule 32    selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
+Rule 33    selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
+Rule 34    selectdefinidos -> SELECT CAST
+Rule 35    selectbasico -> SELECT TIMES FROM ID
+Rule 36    selectasignacion -> SELECT
+Rule 37    alter -> ALTER TABLE ID ADD ID tipodato
+Rule 38    alter -> ALTER TABLE ID drop
+Rule 39    truncate -> TRUNCATE TABLE ID
+Rule 40    drop -> DROP TABLE ID
+Rule 41    drop -> DROP COLUMN ID
+Rule 42    insert -> INSERT INTO ID parametrosi VALUES entradas
+Rule 43    parametrosi -> LPAREN valores RPAREN
+Rule 44    entradas -> LPAREN valentradas RPAREN
+Rule 45    valentradas -> expression COMA valentradas
+Rule 46    valentradas -> expression
+Rule 47    valores -> ID COMA valores
+Rule 48    valores -> ID
+Rule 49    update -> UPDATE ID SET cambios WHERE ID EQUALS expression
+Rule 50    cambios -> campocambios COMA cambios
+Rule 51    cambios -> campocambios
+Rule 52    campocambios -> ID EQUALS expression
+Rule 53    delete -> DELETE FROM ID WHERE ID EQUALS expression
+Rule 54    acciones -> variable PCOMA
+Rule 55    acciones -> select PCOMA
+Rule 56    acciones -> if
+Rule 57    variable -> DECLARE ARROBA ID tipodato
+Rule 58    funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN END
+Rule 59    parametros -> ARROBA ID tipodato COMA parametros
+Rule 60    parametros -> ARROBA ID tipodato
+Rule 61    accionesfuncion -> <empty>
+Rule 62    if -> IF LPAREN condicion RPAREN
+Rule 63    condicion -> expression toperador expression
+Rule 64    toperador -> IGUAL
+Rule 65    toperador -> DIFERENTE
+Rule 66    toperador -> MAYORQ
+Rule 67    toperador -> MENORQ
+Rule 68    toperador -> MAYORIQ
+Rule 69    toperador -> MENORIQ
+Rule 70    while -> <empty>
+Rule 71    expression -> expression PLUS term
+Rule 72    expression -> expression MINUS term
+Rule 73    expression -> term
+Rule 74    term -> term TIMES factor
+Rule 75    term -> term DIVIDE factor
+Rule 76    term -> factor
+Rule 77    factor -> NUMBER
+Rule 78    factor -> DECIMAL
+Rule 79    start -> initial
 
 Terminals, with rules where they appear
 
-ADD                  : 35
-ALTER                : 35 36
+ADD                  : 37
+ALTER                : 37 38
 AND                  : 
-ARROBA               : 55 57 58
-AS                   : 56
-BASE                 : 9
-BEGIN                : 56
+ARROBA               : 57 59 60
+AS                   : 58
+BASE                 : 11
+BEGIN                : 58
 BIT                  : 
-BOOL                 : 21
-CADENA               : 27 27 28
-CAST                 : 32
-COLUMN               : 39
-COMA                 : 11 27 28 28 43 45 48 57
-CONCATENAR           : 27
-CONTAR               : 30
-CREATE               : 9 10 56
-DATA                 : 9
+BOOL                 : 23
+CADENA               : 29 29 30
+CAST                 : 34
+COLUMN               : 41
+COMA                 : 13 29 30 30 45 47 50 59
+CONCATENAR           : 29
+CONTAR               : 32
+CREATE               : 11 12 58
+DATA                 : 11
 DATE                 : 
 DATETIME             : 
-DECIMAL              : 20 76
+DECIMAL              : 22 78
 DECIMAL1             : 
-DECLARE              : 55
-DELETE               : 51
-DIFERENTE            : 63
-DIVIDE               : 73
-DROP                 : 38 39
-END                  : 56
-EQUALS               : 47 50 51
+DECLARE              : 57
+DELETE               : 53
+DIFERENTE            : 65
+DIVIDE               : 75
+DROP                 : 40 41
+END                  : 58
+EQUALS               : 49 52 53
 EXEC                 : 
 FIREIGN              : 
-FROM                 : 30 31 33 51
-FUNCTION             : 56
-HOY                  : 29
-ID                   : 9 10 13 14 18 18 30 31 31 33 35 35 36 37 38 39 40 45 46 47 47 50 51 51 55 56 57 58
-IF                   : 60
-IGUAL                : 62
-INSERT               : 40
-INT                  : 19
-INTO                 : 40
-KEY                  : 16
-LPAREN               : 10 18 22 23 27 28 29 30 31 41 42 56 60
-MAYORIQ              : 66
-MAYORQ               : 64
-MENORIQ              : 67
-MENORQ               : 65
-MINUS                : 70
-NCHAR                : 23
-NOT                  : 15
+FROM                 : 32 33 35 53
+FUNCTION             : 58
+HOY                  : 31
+ID                   : 3 11 12 15 16 20 20 32 33 33 35 37 37 38 39 40 41 42 47 48 49 49 52 53 53 57 58 59 60
+IF                   : 62
+IGUAL                : 64
+INSERT               : 42
+INT                  : 21
+INTO                 : 42
+KEY                  : 18
+LPAREN               : 12 20 24 25 29 30 31 32 33 43 44 58 62
+MAYORIQ              : 68
+MAYORQ               : 66
+MENORIQ              : 69
+MENORQ               : 67
+MINUS                : 72
+NCHAR                : 25
+NOT                  : 17
 NOT1                 : 
-NULL                 : 15
-NUMBER               : 22 23 28 28 75
-NVARCHAR             : 22
+NULL                 : 17
+NUMBER               : 24 25 30 30 77
+NVARCHAR             : 24
 OR                   : 
-PCOMA                : 3 4 5 6 7 8 52 53
-PLUS                 : 69
-PRIMARY              : 16
+PCOMA                : 4 5 6 7 8 9 10 54 55
+PLUS                 : 71
+PRIMARY              : 18
 PROCEDURE            : 
 PUNTO                : 
-REFERENCES           : 18
-RETURN               : 56
+REFERENCES           : 20
+RETURN               : 58
 RETURNS              : 
-RPAREN               : 10 18 22 23 27 29 30 31 41 42 56 60
-SELECT               : 27 28 29 30 31 32 33 34
-SET                  : 47
-SUBSTRAER            : 28
-SUMA                 : 31
-TABLE                : 10 35 36 37 38
-TIMES                : 30 33 72
-TRUNCATE             : 37
-UPDATE               : 47
-VALUES               : 40
-WHERE                : 30 31 47 51
+RPAREN               : 12 20 24 25 29 31 32 33 43 44 58 62
+SELECT               : 29 30 31 32 33 34 35 36
+SET                  : 49
+SUBSTRAER            : 30
+SUMA                 : 33
+TABLE                : 12 37 38 39 40
+TIMES                : 32 35 74
+TRUNCATE             : 39
+UPDATE               : 49
+USAR                 : 3
+VALUES               : 42
+WHERE                : 32 33 49 53
 error                : 
 
 Nonterminals, with rules where they appear
 
 acciones             : 
 accionesfuncion      : 
-alter                : 8
-cambios              : 47 48
-campo                : 11 12
-campocambios         : 30 31 48 49
-condicion            : 60
-create               : 3
-createdb             : 4
-defcreate            : 10 11
+alter                : 9
+cambios              : 49 50
+campo                : 13 14
+campocambios         : 32 33 50 51
+condicion            : 62
+create               : 4
+createdb             : 5
+defcreate            : 12 13
 delete               : 
-drop                 : 36
-entradas             : 40
-expression           : 43 44 47 50 51 61 61 69 70
-factor               : 72 73 74
-foranea              : 17
+drop                 : 38
+entradas             : 42
+expression           : 45 46 49 52 53 63 63 71 72
+factor               : 74 75 76
+foranea              : 19
 funcion              : 
-if                   : 54
-initial              : 1 77 0
-insert               : 5
-parametros           : 56 57
-parametrosi          : 40
+if                   : 56
+initial              : 1 79 0
+insert               : 6
+parametros           : 58 59
+parametrosi          : 42
 produccion           : 1 2
-restriccion          : 13
-select               : 7 53
-selectasignacion     : 26
-selectbasico         : 24
-selectdefinidos      : 25
+restriccion          : 15
+seleccionardb        : 10
+select               : 8 55
+selectasignacion     : 28
+selectbasico         : 26
+selectdefinidos      : 27
 start                : 
-term                 : 69 70 71 72 73
-tipodato             : 13 14 35 55 56 57 58
-toperador            : 61
+term                 : 71 72 73 74 75
+tipodato             : 15 16 37 57 58 59 60
+toperador            : 63
 truncate             : 
-update               : 6
-valentradas          : 42 43
-valores              : 41 45
-variable             : 52
+update               : 7
+valentradas          : 44 45
+valores              : 43 47
+variable             : 54
 while                : 
 
 Parsing method: LALR
@@ -220,35 +224,38 @@ state 0
     (0) S' -> . initial
     (1) initial -> . produccion initial
     (2) initial -> . produccion
-    (3) produccion -> . create PCOMA
-    (4) produccion -> . createdb PCOMA
-    (5) produccion -> . insert PCOMA
-    (6) produccion -> . update PCOMA
-    (7) produccion -> . select PCOMA
-    (8) produccion -> . alter PCOMA
-    (10) create -> . CREATE TABLE ID LPAREN defcreate RPAREN
-    (9) createdb -> . CREATE DATA BASE ID
-    (40) insert -> . INSERT INTO ID parametrosi VALUES entradas
-    (47) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (24) select -> . selectbasico
-    (25) select -> . selectdefinidos
-    (26) select -> . selectasignacion
-    (35) alter -> . ALTER TABLE ID ADD ID tipodato
-    (36) alter -> . ALTER TABLE ID drop
-    (33) selectbasico -> . SELECT TIMES FROM ID
-    (27) selectdefinidos -> . SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN
-    (28) selectdefinidos -> . SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
-    (29) selectdefinidos -> . SELECT HOY LPAREN RPAREN
-    (30) selectdefinidos -> . SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
-    (31) selectdefinidos -> . SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
-    (32) selectdefinidos -> . SELECT CAST
-    (34) selectasignacion -> . SELECT
+    (4) produccion -> . create PCOMA
+    (5) produccion -> . createdb PCOMA
+    (6) produccion -> . insert PCOMA
+    (7) produccion -> . update PCOMA
+    (8) produccion -> . select PCOMA
+    (9) produccion -> . alter PCOMA
+    (10) produccion -> . seleccionardb PCOMA
+    (12) create -> . CREATE TABLE ID LPAREN defcreate RPAREN
+    (11) createdb -> . CREATE DATA BASE ID
+    (42) insert -> . INSERT INTO ID parametrosi VALUES entradas
+    (49) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
+    (26) select -> . selectbasico
+    (27) select -> . selectdefinidos
+    (28) select -> . selectasignacion
+    (37) alter -> . ALTER TABLE ID ADD ID tipodato
+    (38) alter -> . ALTER TABLE ID drop
+    (3) seleccionardb -> . USAR ID
+    (35) selectbasico -> . SELECT TIMES FROM ID
+    (29) selectdefinidos -> . SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN
+    (30) selectdefinidos -> . SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+    (31) selectdefinidos -> . SELECT HOY LPAREN RPAREN
+    (32) selectdefinidos -> . SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
+    (33) selectdefinidos -> . SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
+    (34) selectdefinidos -> . SELECT CAST
+    (36) selectasignacion -> . SELECT
 
-    CREATE          shift and go to state 9
-    INSERT          shift and go to state 10
-    UPDATE          shift and go to state 11
-    ALTER           shift and go to state 15
-    SELECT          shift and go to state 16
+    CREATE          shift and go to state 10
+    INSERT          shift and go to state 11
+    UPDATE          shift and go to state 12
+    ALTER           shift and go to state 16
+    USAR            shift and go to state 17
+    SELECT          shift and go to state 18
 
     initial                        shift and go to state 1
     produccion                     shift and go to state 2
@@ -258,9 +265,10 @@ state 0
     update                         shift and go to state 6
     select                         shift and go to state 7
     alter                          shift and go to state 8
-    selectbasico                   shift and go to state 12
-    selectdefinidos                shift and go to state 13
-    selectasignacion               shift and go to state 14
+    seleccionardb                  shift and go to state 9
+    selectbasico                   shift and go to state 13
+    selectdefinidos                shift and go to state 14
+    selectasignacion               shift and go to state 15
 
 state 1
 
@@ -274,1375 +282,1419 @@ state 2
     (2) initial -> produccion .
     (1) initial -> . produccion initial
     (2) initial -> . produccion
-    (3) produccion -> . create PCOMA
-    (4) produccion -> . createdb PCOMA
-    (5) produccion -> . insert PCOMA
-    (6) produccion -> . update PCOMA
-    (7) produccion -> . select PCOMA
-    (8) produccion -> . alter PCOMA
-    (10) create -> . CREATE TABLE ID LPAREN defcreate RPAREN
-    (9) createdb -> . CREATE DATA BASE ID
-    (40) insert -> . INSERT INTO ID parametrosi VALUES entradas
-    (47) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (24) select -> . selectbasico
-    (25) select -> . selectdefinidos
-    (26) select -> . selectasignacion
-    (35) alter -> . ALTER TABLE ID ADD ID tipodato
-    (36) alter -> . ALTER TABLE ID drop
-    (33) selectbasico -> . SELECT TIMES FROM ID
-    (27) selectdefinidos -> . SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN
-    (28) selectdefinidos -> . SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
-    (29) selectdefinidos -> . SELECT HOY LPAREN RPAREN
-    (30) selectdefinidos -> . SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
-    (31) selectdefinidos -> . SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
-    (32) selectdefinidos -> . SELECT CAST
-    (34) selectasignacion -> . SELECT
+    (4) produccion -> . create PCOMA
+    (5) produccion -> . createdb PCOMA
+    (6) produccion -> . insert PCOMA
+    (7) produccion -> . update PCOMA
+    (8) produccion -> . select PCOMA
+    (9) produccion -> . alter PCOMA
+    (10) produccion -> . seleccionardb PCOMA
+    (12) create -> . CREATE TABLE ID LPAREN defcreate RPAREN
+    (11) createdb -> . CREATE DATA BASE ID
+    (42) insert -> . INSERT INTO ID parametrosi VALUES entradas
+    (49) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
+    (26) select -> . selectbasico
+    (27) select -> . selectdefinidos
+    (28) select -> . selectasignacion
+    (37) alter -> . ALTER TABLE ID ADD ID tipodato
+    (38) alter -> . ALTER TABLE ID drop
+    (3) seleccionardb -> . USAR ID
+    (35) selectbasico -> . SELECT TIMES FROM ID
+    (29) selectdefinidos -> . SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN
+    (30) selectdefinidos -> . SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+    (31) selectdefinidos -> . SELECT HOY LPAREN RPAREN
+    (32) selectdefinidos -> . SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
+    (33) selectdefinidos -> . SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
+    (34) selectdefinidos -> . SELECT CAST
+    (36) selectasignacion -> . SELECT
 
     $end            reduce using rule 2 (initial -> produccion .)
-    CREATE          shift and go to state 9
-    INSERT          shift and go to state 10
-    UPDATE          shift and go to state 11
-    ALTER           shift and go to state 15
-    SELECT          shift and go to state 16
+    CREATE          shift and go to state 10
+    INSERT          shift and go to state 11
+    UPDATE          shift and go to state 12
+    ALTER           shift and go to state 16
+    USAR            shift and go to state 17
+    SELECT          shift and go to state 18
 
     produccion                     shift and go to state 2
-    initial                        shift and go to state 17
+    initial                        shift and go to state 19
     create                         shift and go to state 3
     createdb                       shift and go to state 4
     insert                         shift and go to state 5
     update                         shift and go to state 6
     select                         shift and go to state 7
     alter                          shift and go to state 8
-    selectbasico                   shift and go to state 12
-    selectdefinidos                shift and go to state 13
-    selectasignacion               shift and go to state 14
+    seleccionardb                  shift and go to state 9
+    selectbasico                   shift and go to state 13
+    selectdefinidos                shift and go to state 14
+    selectasignacion               shift and go to state 15
 
 state 3
 
-    (3) produccion -> create . PCOMA
-
-    PCOMA           shift and go to state 18
-
-
-state 4
-
-    (4) produccion -> createdb . PCOMA
-
-    PCOMA           shift and go to state 19
-
-
-state 5
-
-    (5) produccion -> insert . PCOMA
+    (4) produccion -> create . PCOMA
 
     PCOMA           shift and go to state 20
 
 
-state 6
+state 4
 
-    (6) produccion -> update . PCOMA
+    (5) produccion -> createdb . PCOMA
 
     PCOMA           shift and go to state 21
 
 
-state 7
+state 5
 
-    (7) produccion -> select . PCOMA
+    (6) produccion -> insert . PCOMA
 
     PCOMA           shift and go to state 22
 
 
-state 8
+state 6
 
-    (8) produccion -> alter . PCOMA
+    (7) produccion -> update . PCOMA
 
     PCOMA           shift and go to state 23
 
 
+state 7
+
+    (8) produccion -> select . PCOMA
+
+    PCOMA           shift and go to state 24
+
+
+state 8
+
+    (9) produccion -> alter . PCOMA
+
+    PCOMA           shift and go to state 25
+
+
 state 9
 
-    (10) create -> CREATE . TABLE ID LPAREN defcreate RPAREN
-    (9) createdb -> CREATE . DATA BASE ID
+    (10) produccion -> seleccionardb . PCOMA
 
-    TABLE           shift and go to state 24
-    DATA            shift and go to state 25
+    PCOMA           shift and go to state 26
 
 
 state 10
 
-    (40) insert -> INSERT . INTO ID parametrosi VALUES entradas
+    (12) create -> CREATE . TABLE ID LPAREN defcreate RPAREN
+    (11) createdb -> CREATE . DATA BASE ID
 
-    INTO            shift and go to state 26
+    TABLE           shift and go to state 27
+    DATA            shift and go to state 28
 
 
 state 11
 
-    (47) update -> UPDATE . ID SET cambios WHERE ID EQUALS expression
+    (42) insert -> INSERT . INTO ID parametrosi VALUES entradas
 
-    ID              shift and go to state 27
+    INTO            shift and go to state 29
 
 
 state 12
 
-    (24) select -> selectbasico .
+    (49) update -> UPDATE . ID SET cambios WHERE ID EQUALS expression
 
-    PCOMA           reduce using rule 24 (select -> selectbasico .)
+    ID              shift and go to state 30
 
 
 state 13
 
-    (25) select -> selectdefinidos .
+    (26) select -> selectbasico .
 
-    PCOMA           reduce using rule 25 (select -> selectdefinidos .)
+    PCOMA           reduce using rule 26 (select -> selectbasico .)
 
 
 state 14
 
-    (26) select -> selectasignacion .
+    (27) select -> selectdefinidos .
 
-    PCOMA           reduce using rule 26 (select -> selectasignacion .)
+    PCOMA           reduce using rule 27 (select -> selectdefinidos .)
 
 
 state 15
 
-    (35) alter -> ALTER . TABLE ID ADD ID tipodato
-    (36) alter -> ALTER . TABLE ID drop
+    (28) select -> selectasignacion .
 
-    TABLE           shift and go to state 28
+    PCOMA           reduce using rule 28 (select -> selectasignacion .)
 
 
 state 16
 
-    (33) selectbasico -> SELECT . TIMES FROM ID
-    (27) selectdefinidos -> SELECT . CONCATENAR LPAREN CADENA COMA CADENA RPAREN
-    (28) selectdefinidos -> SELECT . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
-    (29) selectdefinidos -> SELECT . HOY LPAREN RPAREN
-    (30) selectdefinidos -> SELECT . CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
-    (31) selectdefinidos -> SELECT . SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
-    (32) selectdefinidos -> SELECT . CAST
-    (34) selectasignacion -> SELECT .
+    (37) alter -> ALTER . TABLE ID ADD ID tipodato
+    (38) alter -> ALTER . TABLE ID drop
 
-    TIMES           shift and go to state 29
-    CONCATENAR      shift and go to state 30
-    SUBSTRAER       shift and go to state 31
-    HOY             shift and go to state 32
-    CONTAR          shift and go to state 33
-    SUMA            shift and go to state 34
-    CAST            shift and go to state 35
-    PCOMA           reduce using rule 34 (selectasignacion -> SELECT .)
+    TABLE           shift and go to state 31
 
 
 state 17
+
+    (3) seleccionardb -> USAR . ID
+
+    ID              shift and go to state 32
+
+
+state 18
+
+    (35) selectbasico -> SELECT . TIMES FROM ID
+    (29) selectdefinidos -> SELECT . CONCATENAR LPAREN CADENA COMA CADENA RPAREN
+    (30) selectdefinidos -> SELECT . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+    (31) selectdefinidos -> SELECT . HOY LPAREN RPAREN
+    (32) selectdefinidos -> SELECT . CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
+    (33) selectdefinidos -> SELECT . SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
+    (34) selectdefinidos -> SELECT . CAST
+    (36) selectasignacion -> SELECT .
+
+    TIMES           shift and go to state 33
+    CONCATENAR      shift and go to state 34
+    SUBSTRAER       shift and go to state 35
+    HOY             shift and go to state 36
+    CONTAR          shift and go to state 37
+    SUMA            shift and go to state 38
+    CAST            shift and go to state 39
+    PCOMA           reduce using rule 36 (selectasignacion -> SELECT .)
+
+
+state 19
 
     (1) initial -> produccion initial .
 
     $end            reduce using rule 1 (initial -> produccion initial .)
 
 
-state 18
-
-    (3) produccion -> create PCOMA .
-
-    CREATE          reduce using rule 3 (produccion -> create PCOMA .)
-    INSERT          reduce using rule 3 (produccion -> create PCOMA .)
-    UPDATE          reduce using rule 3 (produccion -> create PCOMA .)
-    ALTER           reduce using rule 3 (produccion -> create PCOMA .)
-    SELECT          reduce using rule 3 (produccion -> create PCOMA .)
-    $end            reduce using rule 3 (produccion -> create PCOMA .)
-
-
-state 19
-
-    (4) produccion -> createdb PCOMA .
-
-    CREATE          reduce using rule 4 (produccion -> createdb PCOMA .)
-    INSERT          reduce using rule 4 (produccion -> createdb PCOMA .)
-    UPDATE          reduce using rule 4 (produccion -> createdb PCOMA .)
-    ALTER           reduce using rule 4 (produccion -> createdb PCOMA .)
-    SELECT          reduce using rule 4 (produccion -> createdb PCOMA .)
-    $end            reduce using rule 4 (produccion -> createdb PCOMA .)
-
-
 state 20
 
-    (5) produccion -> insert PCOMA .
+    (4) produccion -> create PCOMA .
 
-    CREATE          reduce using rule 5 (produccion -> insert PCOMA .)
-    INSERT          reduce using rule 5 (produccion -> insert PCOMA .)
-    UPDATE          reduce using rule 5 (produccion -> insert PCOMA .)
-    ALTER           reduce using rule 5 (produccion -> insert PCOMA .)
-    SELECT          reduce using rule 5 (produccion -> insert PCOMA .)
-    $end            reduce using rule 5 (produccion -> insert PCOMA .)
+    CREATE          reduce using rule 4 (produccion -> create PCOMA .)
+    INSERT          reduce using rule 4 (produccion -> create PCOMA .)
+    UPDATE          reduce using rule 4 (produccion -> create PCOMA .)
+    ALTER           reduce using rule 4 (produccion -> create PCOMA .)
+    USAR            reduce using rule 4 (produccion -> create PCOMA .)
+    SELECT          reduce using rule 4 (produccion -> create PCOMA .)
+    $end            reduce using rule 4 (produccion -> create PCOMA .)
 
 
 state 21
 
-    (6) produccion -> update PCOMA .
+    (5) produccion -> createdb PCOMA .
 
-    CREATE          reduce using rule 6 (produccion -> update PCOMA .)
-    INSERT          reduce using rule 6 (produccion -> update PCOMA .)
-    UPDATE          reduce using rule 6 (produccion -> update PCOMA .)
-    ALTER           reduce using rule 6 (produccion -> update PCOMA .)
-    SELECT          reduce using rule 6 (produccion -> update PCOMA .)
-    $end            reduce using rule 6 (produccion -> update PCOMA .)
+    CREATE          reduce using rule 5 (produccion -> createdb PCOMA .)
+    INSERT          reduce using rule 5 (produccion -> createdb PCOMA .)
+    UPDATE          reduce using rule 5 (produccion -> createdb PCOMA .)
+    ALTER           reduce using rule 5 (produccion -> createdb PCOMA .)
+    USAR            reduce using rule 5 (produccion -> createdb PCOMA .)
+    SELECT          reduce using rule 5 (produccion -> createdb PCOMA .)
+    $end            reduce using rule 5 (produccion -> createdb PCOMA .)
 
 
 state 22
 
-    (7) produccion -> select PCOMA .
+    (6) produccion -> insert PCOMA .
 
-    CREATE          reduce using rule 7 (produccion -> select PCOMA .)
-    INSERT          reduce using rule 7 (produccion -> select PCOMA .)
-    UPDATE          reduce using rule 7 (produccion -> select PCOMA .)
-    ALTER           reduce using rule 7 (produccion -> select PCOMA .)
-    SELECT          reduce using rule 7 (produccion -> select PCOMA .)
-    $end            reduce using rule 7 (produccion -> select PCOMA .)
+    CREATE          reduce using rule 6 (produccion -> insert PCOMA .)
+    INSERT          reduce using rule 6 (produccion -> insert PCOMA .)
+    UPDATE          reduce using rule 6 (produccion -> insert PCOMA .)
+    ALTER           reduce using rule 6 (produccion -> insert PCOMA .)
+    USAR            reduce using rule 6 (produccion -> insert PCOMA .)
+    SELECT          reduce using rule 6 (produccion -> insert PCOMA .)
+    $end            reduce using rule 6 (produccion -> insert PCOMA .)
 
 
 state 23
 
-    (8) produccion -> alter PCOMA .
+    (7) produccion -> update PCOMA .
 
-    CREATE          reduce using rule 8 (produccion -> alter PCOMA .)
-    INSERT          reduce using rule 8 (produccion -> alter PCOMA .)
-    UPDATE          reduce using rule 8 (produccion -> alter PCOMA .)
-    ALTER           reduce using rule 8 (produccion -> alter PCOMA .)
-    SELECT          reduce using rule 8 (produccion -> alter PCOMA .)
-    $end            reduce using rule 8 (produccion -> alter PCOMA .)
+    CREATE          reduce using rule 7 (produccion -> update PCOMA .)
+    INSERT          reduce using rule 7 (produccion -> update PCOMA .)
+    UPDATE          reduce using rule 7 (produccion -> update PCOMA .)
+    ALTER           reduce using rule 7 (produccion -> update PCOMA .)
+    USAR            reduce using rule 7 (produccion -> update PCOMA .)
+    SELECT          reduce using rule 7 (produccion -> update PCOMA .)
+    $end            reduce using rule 7 (produccion -> update PCOMA .)
 
 
 state 24
 
-    (10) create -> CREATE TABLE . ID LPAREN defcreate RPAREN
+    (8) produccion -> select PCOMA .
 
-    ID              shift and go to state 36
+    CREATE          reduce using rule 8 (produccion -> select PCOMA .)
+    INSERT          reduce using rule 8 (produccion -> select PCOMA .)
+    UPDATE          reduce using rule 8 (produccion -> select PCOMA .)
+    ALTER           reduce using rule 8 (produccion -> select PCOMA .)
+    USAR            reduce using rule 8 (produccion -> select PCOMA .)
+    SELECT          reduce using rule 8 (produccion -> select PCOMA .)
+    $end            reduce using rule 8 (produccion -> select PCOMA .)
 
 
 state 25
 
-    (9) createdb -> CREATE DATA . BASE ID
+    (9) produccion -> alter PCOMA .
 
-    BASE            shift and go to state 37
+    CREATE          reduce using rule 9 (produccion -> alter PCOMA .)
+    INSERT          reduce using rule 9 (produccion -> alter PCOMA .)
+    UPDATE          reduce using rule 9 (produccion -> alter PCOMA .)
+    ALTER           reduce using rule 9 (produccion -> alter PCOMA .)
+    USAR            reduce using rule 9 (produccion -> alter PCOMA .)
+    SELECT          reduce using rule 9 (produccion -> alter PCOMA .)
+    $end            reduce using rule 9 (produccion -> alter PCOMA .)
 
 
 state 26
 
-    (40) insert -> INSERT INTO . ID parametrosi VALUES entradas
+    (10) produccion -> seleccionardb PCOMA .
 
-    ID              shift and go to state 38
+    CREATE          reduce using rule 10 (produccion -> seleccionardb PCOMA .)
+    INSERT          reduce using rule 10 (produccion -> seleccionardb PCOMA .)
+    UPDATE          reduce using rule 10 (produccion -> seleccionardb PCOMA .)
+    ALTER           reduce using rule 10 (produccion -> seleccionardb PCOMA .)
+    USAR            reduce using rule 10 (produccion -> seleccionardb PCOMA .)
+    SELECT          reduce using rule 10 (produccion -> seleccionardb PCOMA .)
+    $end            reduce using rule 10 (produccion -> seleccionardb PCOMA .)
 
 
 state 27
 
-    (47) update -> UPDATE ID . SET cambios WHERE ID EQUALS expression
-
-    SET             shift and go to state 39
-
-
-state 28
-
-    (35) alter -> ALTER TABLE . ID ADD ID tipodato
-    (36) alter -> ALTER TABLE . ID drop
+    (12) create -> CREATE TABLE . ID LPAREN defcreate RPAREN
 
     ID              shift and go to state 40
 
 
+state 28
+
+    (11) createdb -> CREATE DATA . BASE ID
+
+    BASE            shift and go to state 41
+
+
 state 29
 
-    (33) selectbasico -> SELECT TIMES . FROM ID
+    (42) insert -> INSERT INTO . ID parametrosi VALUES entradas
 
-    FROM            shift and go to state 41
+    ID              shift and go to state 42
 
 
 state 30
 
-    (27) selectdefinidos -> SELECT CONCATENAR . LPAREN CADENA COMA CADENA RPAREN
+    (49) update -> UPDATE ID . SET cambios WHERE ID EQUALS expression
 
-    LPAREN          shift and go to state 42
+    SET             shift and go to state 43
 
 
 state 31
 
-    (28) selectdefinidos -> SELECT SUBSTRAER . LPAREN CADENA COMA NUMBER COMA NUMBER
+    (37) alter -> ALTER TABLE . ID ADD ID tipodato
+    (38) alter -> ALTER TABLE . ID drop
 
-    LPAREN          shift and go to state 43
+    ID              shift and go to state 44
 
 
 state 32
 
-    (29) selectdefinidos -> SELECT HOY . LPAREN RPAREN
+    (3) seleccionardb -> USAR ID .
 
-    LPAREN          shift and go to state 44
+    PCOMA           reduce using rule 3 (seleccionardb -> USAR ID .)
 
 
 state 33
 
-    (30) selectdefinidos -> SELECT CONTAR . LPAREN TIMES RPAREN FROM ID WHERE campocambios
+    (35) selectbasico -> SELECT TIMES . FROM ID
 
-    LPAREN          shift and go to state 45
+    FROM            shift and go to state 45
 
 
 state 34
 
-    (31) selectdefinidos -> SELECT SUMA . LPAREN ID RPAREN FROM ID WHERE campocambios
+    (29) selectdefinidos -> SELECT CONCATENAR . LPAREN CADENA COMA CADENA RPAREN
 
     LPAREN          shift and go to state 46
 
 
 state 35
 
-    (32) selectdefinidos -> SELECT CAST .
-
-    PCOMA           reduce using rule 32 (selectdefinidos -> SELECT CAST .)
-
-
-state 36
-
-    (10) create -> CREATE TABLE ID . LPAREN defcreate RPAREN
+    (30) selectdefinidos -> SELECT SUBSTRAER . LPAREN CADENA COMA NUMBER COMA NUMBER
 
     LPAREN          shift and go to state 47
 
 
+state 36
+
+    (31) selectdefinidos -> SELECT HOY . LPAREN RPAREN
+
+    LPAREN          shift and go to state 48
+
+
 state 37
 
-    (9) createdb -> CREATE DATA BASE . ID
+    (32) selectdefinidos -> SELECT CONTAR . LPAREN TIMES RPAREN FROM ID WHERE campocambios
 
-    ID              shift and go to state 48
+    LPAREN          shift and go to state 49
 
 
 state 38
 
-    (40) insert -> INSERT INTO ID . parametrosi VALUES entradas
-    (41) parametrosi -> . LPAREN valores RPAREN
+    (33) selectdefinidos -> SELECT SUMA . LPAREN ID RPAREN FROM ID WHERE campocambios
 
     LPAREN          shift and go to state 50
 
-    parametrosi                    shift and go to state 49
 
 state 39
 
-    (47) update -> UPDATE ID SET . cambios WHERE ID EQUALS expression
-    (48) cambios -> . campocambios COMA cambios
-    (49) cambios -> . campocambios
-    (50) campocambios -> . ID EQUALS expression
+    (34) selectdefinidos -> SELECT CAST .
 
-    ID              shift and go to state 51
+    PCOMA           reduce using rule 34 (selectdefinidos -> SELECT CAST .)
 
-    cambios                        shift and go to state 52
-    campocambios                   shift and go to state 53
 
 state 40
 
-    (35) alter -> ALTER TABLE ID . ADD ID tipodato
-    (36) alter -> ALTER TABLE ID . drop
-    (38) drop -> . DROP TABLE ID
-    (39) drop -> . DROP COLUMN ID
+    (12) create -> CREATE TABLE ID . LPAREN defcreate RPAREN
 
-    ADD             shift and go to state 54
-    DROP            shift and go to state 56
+    LPAREN          shift and go to state 51
 
-    drop                           shift and go to state 55
 
 state 41
 
-    (33) selectbasico -> SELECT TIMES FROM . ID
+    (11) createdb -> CREATE DATA BASE . ID
 
-    ID              shift and go to state 57
+    ID              shift and go to state 52
 
 
 state 42
 
-    (27) selectdefinidos -> SELECT CONCATENAR LPAREN . CADENA COMA CADENA RPAREN
+    (42) insert -> INSERT INTO ID . parametrosi VALUES entradas
+    (43) parametrosi -> . LPAREN valores RPAREN
 
-    CADENA          shift and go to state 58
+    LPAREN          shift and go to state 54
 
+    parametrosi                    shift and go to state 53
 
 state 43
 
-    (28) selectdefinidos -> SELECT SUBSTRAER LPAREN . CADENA COMA NUMBER COMA NUMBER
+    (49) update -> UPDATE ID SET . cambios WHERE ID EQUALS expression
+    (50) cambios -> . campocambios COMA cambios
+    (51) cambios -> . campocambios
+    (52) campocambios -> . ID EQUALS expression
 
-    CADENA          shift and go to state 59
+    ID              shift and go to state 55
 
+    cambios                        shift and go to state 56
+    campocambios                   shift and go to state 57
 
 state 44
 
-    (29) selectdefinidos -> SELECT HOY LPAREN . RPAREN
+    (37) alter -> ALTER TABLE ID . ADD ID tipodato
+    (38) alter -> ALTER TABLE ID . drop
+    (40) drop -> . DROP TABLE ID
+    (41) drop -> . DROP COLUMN ID
 
-    RPAREN          shift and go to state 60
+    ADD             shift and go to state 58
+    DROP            shift and go to state 60
 
+    drop                           shift and go to state 59
 
 state 45
 
-    (30) selectdefinidos -> SELECT CONTAR LPAREN . TIMES RPAREN FROM ID WHERE campocambios
+    (35) selectbasico -> SELECT TIMES FROM . ID
 
-    TIMES           shift and go to state 61
+    ID              shift and go to state 61
 
 
 state 46
 
-    (31) selectdefinidos -> SELECT SUMA LPAREN . ID RPAREN FROM ID WHERE campocambios
+    (29) selectdefinidos -> SELECT CONCATENAR LPAREN . CADENA COMA CADENA RPAREN
 
-    ID              shift and go to state 62
+    CADENA          shift and go to state 62
 
 
 state 47
 
-    (10) create -> CREATE TABLE ID LPAREN . defcreate RPAREN
-    (11) defcreate -> . campo COMA defcreate
-    (12) defcreate -> . campo
-    (13) campo -> . ID tipodato restriccion
-    (14) campo -> . ID tipodato
+    (30) selectdefinidos -> SELECT SUBSTRAER LPAREN . CADENA COMA NUMBER COMA NUMBER
 
-    ID              shift and go to state 63
+    CADENA          shift and go to state 63
 
-    defcreate                      shift and go to state 64
-    campo                          shift and go to state 65
 
 state 48
 
-    (9) createdb -> CREATE DATA BASE ID .
+    (31) selectdefinidos -> SELECT HOY LPAREN . RPAREN
 
-    PCOMA           reduce using rule 9 (createdb -> CREATE DATA BASE ID .)
+    RPAREN          shift and go to state 64
 
 
 state 49
 
-    (40) insert -> INSERT INTO ID parametrosi . VALUES entradas
+    (32) selectdefinidos -> SELECT CONTAR LPAREN . TIMES RPAREN FROM ID WHERE campocambios
 
-    VALUES          shift and go to state 66
+    TIMES           shift and go to state 65
 
 
 state 50
 
-    (41) parametrosi -> LPAREN . valores RPAREN
-    (45) valores -> . ID COMA valores
-    (46) valores -> . ID
+    (33) selectdefinidos -> SELECT SUMA LPAREN . ID RPAREN FROM ID WHERE campocambios
 
-    ID              shift and go to state 68
+    ID              shift and go to state 66
 
-    valores                        shift and go to state 67
 
 state 51
 
-    (50) campocambios -> ID . EQUALS expression
+    (12) create -> CREATE TABLE ID LPAREN . defcreate RPAREN
+    (13) defcreate -> . campo COMA defcreate
+    (14) defcreate -> . campo
+    (15) campo -> . ID tipodato restriccion
+    (16) campo -> . ID tipodato
 
-    EQUALS          shift and go to state 69
+    ID              shift and go to state 67
 
+    defcreate                      shift and go to state 68
+    campo                          shift and go to state 69
 
 state 52
 
-    (47) update -> UPDATE ID SET cambios . WHERE ID EQUALS expression
+    (11) createdb -> CREATE DATA BASE ID .
 
-    WHERE           shift and go to state 70
+    PCOMA           reduce using rule 11 (createdb -> CREATE DATA BASE ID .)
 
 
 state 53
 
-    (48) cambios -> campocambios . COMA cambios
-    (49) cambios -> campocambios .
+    (42) insert -> INSERT INTO ID parametrosi . VALUES entradas
 
-    COMA            shift and go to state 71
-    WHERE           reduce using rule 49 (cambios -> campocambios .)
+    VALUES          shift and go to state 70
 
 
 state 54
 
-    (35) alter -> ALTER TABLE ID ADD . ID tipodato
+    (43) parametrosi -> LPAREN . valores RPAREN
+    (47) valores -> . ID COMA valores
+    (48) valores -> . ID
 
     ID              shift and go to state 72
 
+    valores                        shift and go to state 71
 
 state 55
 
-    (36) alter -> ALTER TABLE ID drop .
+    (52) campocambios -> ID . EQUALS expression
 
-    PCOMA           reduce using rule 36 (alter -> ALTER TABLE ID drop .)
+    EQUALS          shift and go to state 73
 
 
 state 56
 
-    (38) drop -> DROP . TABLE ID
-    (39) drop -> DROP . COLUMN ID
+    (49) update -> UPDATE ID SET cambios . WHERE ID EQUALS expression
 
-    TABLE           shift and go to state 73
-    COLUMN          shift and go to state 74
+    WHERE           shift and go to state 74
 
 
 state 57
 
-    (33) selectbasico -> SELECT TIMES FROM ID .
+    (50) cambios -> campocambios . COMA cambios
+    (51) cambios -> campocambios .
 
-    PCOMA           reduce using rule 33 (selectbasico -> SELECT TIMES FROM ID .)
+    COMA            shift and go to state 75
+    WHERE           reduce using rule 51 (cambios -> campocambios .)
 
 
 state 58
 
-    (27) selectdefinidos -> SELECT CONCATENAR LPAREN CADENA . COMA CADENA RPAREN
+    (37) alter -> ALTER TABLE ID ADD . ID tipodato
 
-    COMA            shift and go to state 75
+    ID              shift and go to state 76
 
 
 state 59
 
-    (28) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA . COMA NUMBER COMA NUMBER
+    (38) alter -> ALTER TABLE ID drop .
 
-    COMA            shift and go to state 76
+    PCOMA           reduce using rule 38 (alter -> ALTER TABLE ID drop .)
 
 
 state 60
 
-    (29) selectdefinidos -> SELECT HOY LPAREN RPAREN .
+    (40) drop -> DROP . TABLE ID
+    (41) drop -> DROP . COLUMN ID
 
-    PCOMA           reduce using rule 29 (selectdefinidos -> SELECT HOY LPAREN RPAREN .)
+    TABLE           shift and go to state 77
+    COLUMN          shift and go to state 78
 
 
 state 61
 
-    (30) selectdefinidos -> SELECT CONTAR LPAREN TIMES . RPAREN FROM ID WHERE campocambios
+    (35) selectbasico -> SELECT TIMES FROM ID .
 
-    RPAREN          shift and go to state 77
+    PCOMA           reduce using rule 35 (selectbasico -> SELECT TIMES FROM ID .)
 
 
 state 62
 
-    (31) selectdefinidos -> SELECT SUMA LPAREN ID . RPAREN FROM ID WHERE campocambios
+    (29) selectdefinidos -> SELECT CONCATENAR LPAREN CADENA . COMA CADENA RPAREN
 
-    RPAREN          shift and go to state 78
+    COMA            shift and go to state 79
 
 
 state 63
 
-    (13) campo -> ID . tipodato restriccion
-    (14) campo -> ID . tipodato
-    (19) tipodato -> . INT
-    (20) tipodato -> . DECIMAL
-    (21) tipodato -> . BOOL
-    (22) tipodato -> . NVARCHAR LPAREN NUMBER RPAREN
-    (23) tipodato -> . NCHAR LPAREN NUMBER RPAREN
+    (30) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA . COMA NUMBER COMA NUMBER
 
-    INT             shift and go to state 80
-    DECIMAL         shift and go to state 81
-    BOOL            shift and go to state 82
-    NVARCHAR        shift and go to state 83
-    NCHAR           shift and go to state 84
+    COMA            shift and go to state 80
 
-    tipodato                       shift and go to state 79
 
 state 64
 
-    (10) create -> CREATE TABLE ID LPAREN defcreate . RPAREN
+    (31) selectdefinidos -> SELECT HOY LPAREN RPAREN .
 
-    RPAREN          shift and go to state 85
+    PCOMA           reduce using rule 31 (selectdefinidos -> SELECT HOY LPAREN RPAREN .)
 
 
 state 65
 
-    (11) defcreate -> campo . COMA defcreate
-    (12) defcreate -> campo .
+    (32) selectdefinidos -> SELECT CONTAR LPAREN TIMES . RPAREN FROM ID WHERE campocambios
 
-    COMA            shift and go to state 86
-    RPAREN          reduce using rule 12 (defcreate -> campo .)
+    RPAREN          shift and go to state 81
 
 
 state 66
 
-    (40) insert -> INSERT INTO ID parametrosi VALUES . entradas
-    (42) entradas -> . LPAREN valentradas RPAREN
+    (33) selectdefinidos -> SELECT SUMA LPAREN ID . RPAREN FROM ID WHERE campocambios
 
-    LPAREN          shift and go to state 88
+    RPAREN          shift and go to state 82
 
-    entradas                       shift and go to state 87
 
 state 67
 
-    (41) parametrosi -> LPAREN valores . RPAREN
+    (15) campo -> ID . tipodato restriccion
+    (16) campo -> ID . tipodato
+    (21) tipodato -> . INT
+    (22) tipodato -> . DECIMAL
+    (23) tipodato -> . BOOL
+    (24) tipodato -> . NVARCHAR LPAREN NUMBER RPAREN
+    (25) tipodato -> . NCHAR LPAREN NUMBER RPAREN
+
+    INT             shift and go to state 84
+    DECIMAL         shift and go to state 85
+    BOOL            shift and go to state 86
+    NVARCHAR        shift and go to state 87
+    NCHAR           shift and go to state 88
+
+    tipodato                       shift and go to state 83
+
+state 68
+
+    (12) create -> CREATE TABLE ID LPAREN defcreate . RPAREN
 
     RPAREN          shift and go to state 89
 
 
-state 68
-
-    (45) valores -> ID . COMA valores
-    (46) valores -> ID .
-
-    COMA            shift and go to state 90
-    RPAREN          reduce using rule 46 (valores -> ID .)
-
-
 state 69
 
-    (50) campocambios -> ID EQUALS . expression
-    (69) expression -> . expression PLUS term
-    (70) expression -> . expression MINUS term
-    (71) expression -> . term
-    (72) term -> . term TIMES factor
-    (73) term -> . term DIVIDE factor
-    (74) term -> . factor
-    (75) factor -> . NUMBER
-    (76) factor -> . DECIMAL
+    (13) defcreate -> campo . COMA defcreate
+    (14) defcreate -> campo .
 
-    NUMBER          shift and go to state 94
-    DECIMAL         shift and go to state 95
+    COMA            shift and go to state 90
+    RPAREN          reduce using rule 14 (defcreate -> campo .)
 
-    expression                     shift and go to state 91
-    term                           shift and go to state 92
-    factor                         shift and go to state 93
 
 state 70
 
-    (47) update -> UPDATE ID SET cambios WHERE . ID EQUALS expression
+    (42) insert -> INSERT INTO ID parametrosi VALUES . entradas
+    (44) entradas -> . LPAREN valentradas RPAREN
 
-    ID              shift and go to state 96
+    LPAREN          shift and go to state 92
 
+    entradas                       shift and go to state 91
 
 state 71
 
-    (48) cambios -> campocambios COMA . cambios
-    (48) cambios -> . campocambios COMA cambios
-    (49) cambios -> . campocambios
-    (50) campocambios -> . ID EQUALS expression
+    (43) parametrosi -> LPAREN valores . RPAREN
 
-    ID              shift and go to state 51
+    RPAREN          shift and go to state 93
 
-    campocambios                   shift and go to state 53
-    cambios                        shift and go to state 97
 
 state 72
 
-    (35) alter -> ALTER TABLE ID ADD ID . tipodato
-    (19) tipodato -> . INT
-    (20) tipodato -> . DECIMAL
-    (21) tipodato -> . BOOL
-    (22) tipodato -> . NVARCHAR LPAREN NUMBER RPAREN
-    (23) tipodato -> . NCHAR LPAREN NUMBER RPAREN
+    (47) valores -> ID . COMA valores
+    (48) valores -> ID .
 
-    INT             shift and go to state 80
-    DECIMAL         shift and go to state 81
-    BOOL            shift and go to state 82
-    NVARCHAR        shift and go to state 83
-    NCHAR           shift and go to state 84
+    COMA            shift and go to state 94
+    RPAREN          reduce using rule 48 (valores -> ID .)
 
-    tipodato                       shift and go to state 98
 
 state 73
 
-    (38) drop -> DROP TABLE . ID
+    (52) campocambios -> ID EQUALS . expression
+    (71) expression -> . expression PLUS term
+    (72) expression -> . expression MINUS term
+    (73) expression -> . term
+    (74) term -> . term TIMES factor
+    (75) term -> . term DIVIDE factor
+    (76) term -> . factor
+    (77) factor -> . NUMBER
+    (78) factor -> . DECIMAL
 
-    ID              shift and go to state 99
+    NUMBER          shift and go to state 98
+    DECIMAL         shift and go to state 99
 
+    expression                     shift and go to state 95
+    term                           shift and go to state 96
+    factor                         shift and go to state 97
 
 state 74
 
-    (39) drop -> DROP COLUMN . ID
+    (49) update -> UPDATE ID SET cambios WHERE . ID EQUALS expression
 
     ID              shift and go to state 100
 
 
 state 75
 
-    (27) selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA . CADENA RPAREN
+    (50) cambios -> campocambios COMA . cambios
+    (50) cambios -> . campocambios COMA cambios
+    (51) cambios -> . campocambios
+    (52) campocambios -> . ID EQUALS expression
 
-    CADENA          shift and go to state 101
+    ID              shift and go to state 55
 
+    campocambios                   shift and go to state 57
+    cambios                        shift and go to state 101
 
 state 76
 
-    (28) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA . NUMBER COMA NUMBER
+    (37) alter -> ALTER TABLE ID ADD ID . tipodato
+    (21) tipodato -> . INT
+    (22) tipodato -> . DECIMAL
+    (23) tipodato -> . BOOL
+    (24) tipodato -> . NVARCHAR LPAREN NUMBER RPAREN
+    (25) tipodato -> . NCHAR LPAREN NUMBER RPAREN
 
-    NUMBER          shift and go to state 102
+    INT             shift and go to state 84
+    DECIMAL         shift and go to state 85
+    BOOL            shift and go to state 86
+    NVARCHAR        shift and go to state 87
+    NCHAR           shift and go to state 88
 
+    tipodato                       shift and go to state 102
 
 state 77
 
-    (30) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN . FROM ID WHERE campocambios
+    (40) drop -> DROP TABLE . ID
 
-    FROM            shift and go to state 103
+    ID              shift and go to state 103
 
 
 state 78
 
-    (31) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN . FROM ID WHERE campocambios
+    (41) drop -> DROP COLUMN . ID
 
-    FROM            shift and go to state 104
+    ID              shift and go to state 104
 
 
 state 79
 
-    (13) campo -> ID tipodato . restriccion
-    (14) campo -> ID tipodato .
-    (15) restriccion -> . NOT NULL
-    (16) restriccion -> . PRIMARY KEY
-    (17) restriccion -> . foranea
-    (18) foranea -> . REFERENCES ID LPAREN ID RPAREN
+    (29) selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA . CADENA RPAREN
 
-    COMA            reduce using rule 14 (campo -> ID tipodato .)
-    RPAREN          reduce using rule 14 (campo -> ID tipodato .)
-    NOT             shift and go to state 106
-    PRIMARY         shift and go to state 107
-    REFERENCES      shift and go to state 109
+    CADENA          shift and go to state 105
 
-    restriccion                    shift and go to state 105
-    foranea                        shift and go to state 108
 
 state 80
 
-    (19) tipodato -> INT .
+    (30) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA . NUMBER COMA NUMBER
 
-    NOT             reduce using rule 19 (tipodato -> INT .)
-    PRIMARY         reduce using rule 19 (tipodato -> INT .)
-    REFERENCES      reduce using rule 19 (tipodato -> INT .)
-    COMA            reduce using rule 19 (tipodato -> INT .)
-    RPAREN          reduce using rule 19 (tipodato -> INT .)
-    PCOMA           reduce using rule 19 (tipodato -> INT .)
+    NUMBER          shift and go to state 106
 
 
 state 81
 
-    (20) tipodato -> DECIMAL .
+    (32) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN . FROM ID WHERE campocambios
 
-    NOT             reduce using rule 20 (tipodato -> DECIMAL .)
-    PRIMARY         reduce using rule 20 (tipodato -> DECIMAL .)
-    REFERENCES      reduce using rule 20 (tipodato -> DECIMAL .)
-    COMA            reduce using rule 20 (tipodato -> DECIMAL .)
-    RPAREN          reduce using rule 20 (tipodato -> DECIMAL .)
-    PCOMA           reduce using rule 20 (tipodato -> DECIMAL .)
+    FROM            shift and go to state 107
 
 
 state 82
 
-    (21) tipodato -> BOOL .
+    (33) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN . FROM ID WHERE campocambios
 
-    NOT             reduce using rule 21 (tipodato -> BOOL .)
-    PRIMARY         reduce using rule 21 (tipodato -> BOOL .)
-    REFERENCES      reduce using rule 21 (tipodato -> BOOL .)
-    COMA            reduce using rule 21 (tipodato -> BOOL .)
-    RPAREN          reduce using rule 21 (tipodato -> BOOL .)
-    PCOMA           reduce using rule 21 (tipodato -> BOOL .)
+    FROM            shift and go to state 108
 
 
 state 83
 
-    (22) tipodato -> NVARCHAR . LPAREN NUMBER RPAREN
+    (15) campo -> ID tipodato . restriccion
+    (16) campo -> ID tipodato .
+    (17) restriccion -> . NOT NULL
+    (18) restriccion -> . PRIMARY KEY
+    (19) restriccion -> . foranea
+    (20) foranea -> . REFERENCES ID LPAREN ID RPAREN
 
-    LPAREN          shift and go to state 110
+    COMA            reduce using rule 16 (campo -> ID tipodato .)
+    RPAREN          reduce using rule 16 (campo -> ID tipodato .)
+    NOT             shift and go to state 110
+    PRIMARY         shift and go to state 111
+    REFERENCES      shift and go to state 113
 
+    restriccion                    shift and go to state 109
+    foranea                        shift and go to state 112
 
 state 84
 
-    (23) tipodato -> NCHAR . LPAREN NUMBER RPAREN
+    (21) tipodato -> INT .
 
-    LPAREN          shift and go to state 111
+    NOT             reduce using rule 21 (tipodato -> INT .)
+    PRIMARY         reduce using rule 21 (tipodato -> INT .)
+    REFERENCES      reduce using rule 21 (tipodato -> INT .)
+    COMA            reduce using rule 21 (tipodato -> INT .)
+    RPAREN          reduce using rule 21 (tipodato -> INT .)
+    PCOMA           reduce using rule 21 (tipodato -> INT .)
 
 
 state 85
 
-    (10) create -> CREATE TABLE ID LPAREN defcreate RPAREN .
+    (22) tipodato -> DECIMAL .
 
-    PCOMA           reduce using rule 10 (create -> CREATE TABLE ID LPAREN defcreate RPAREN .)
+    NOT             reduce using rule 22 (tipodato -> DECIMAL .)
+    PRIMARY         reduce using rule 22 (tipodato -> DECIMAL .)
+    REFERENCES      reduce using rule 22 (tipodato -> DECIMAL .)
+    COMA            reduce using rule 22 (tipodato -> DECIMAL .)
+    RPAREN          reduce using rule 22 (tipodato -> DECIMAL .)
+    PCOMA           reduce using rule 22 (tipodato -> DECIMAL .)
 
 
 state 86
 
-    (11) defcreate -> campo COMA . defcreate
-    (11) defcreate -> . campo COMA defcreate
-    (12) defcreate -> . campo
-    (13) campo -> . ID tipodato restriccion
-    (14) campo -> . ID tipodato
+    (23) tipodato -> BOOL .
 
-    ID              shift and go to state 63
+    NOT             reduce using rule 23 (tipodato -> BOOL .)
+    PRIMARY         reduce using rule 23 (tipodato -> BOOL .)
+    REFERENCES      reduce using rule 23 (tipodato -> BOOL .)
+    COMA            reduce using rule 23 (tipodato -> BOOL .)
+    RPAREN          reduce using rule 23 (tipodato -> BOOL .)
+    PCOMA           reduce using rule 23 (tipodato -> BOOL .)
 
-    campo                          shift and go to state 65
-    defcreate                      shift and go to state 112
 
 state 87
 
-    (40) insert -> INSERT INTO ID parametrosi VALUES entradas .
+    (24) tipodato -> NVARCHAR . LPAREN NUMBER RPAREN
 
-    PCOMA           reduce using rule 40 (insert -> INSERT INTO ID parametrosi VALUES entradas .)
+    LPAREN          shift and go to state 114
 
 
 state 88
 
-    (42) entradas -> LPAREN . valentradas RPAREN
-    (43) valentradas -> . expression COMA valentradas
-    (44) valentradas -> . expression
-    (69) expression -> . expression PLUS term
-    (70) expression -> . expression MINUS term
-    (71) expression -> . term
-    (72) term -> . term TIMES factor
-    (73) term -> . term DIVIDE factor
-    (74) term -> . factor
-    (75) factor -> . NUMBER
-    (76) factor -> . DECIMAL
+    (25) tipodato -> NCHAR . LPAREN NUMBER RPAREN
 
-    NUMBER          shift and go to state 94
-    DECIMAL         shift and go to state 95
+    LPAREN          shift and go to state 115
 
-    valentradas                    shift and go to state 113
-    expression                     shift and go to state 114
-    term                           shift and go to state 92
-    factor                         shift and go to state 93
 
 state 89
 
-    (41) parametrosi -> LPAREN valores RPAREN .
+    (12) create -> CREATE TABLE ID LPAREN defcreate RPAREN .
 
-    VALUES          reduce using rule 41 (parametrosi -> LPAREN valores RPAREN .)
+    PCOMA           reduce using rule 12 (create -> CREATE TABLE ID LPAREN defcreate RPAREN .)
 
 
 state 90
 
-    (45) valores -> ID COMA . valores
-    (45) valores -> . ID COMA valores
-    (46) valores -> . ID
+    (13) defcreate -> campo COMA . defcreate
+    (13) defcreate -> . campo COMA defcreate
+    (14) defcreate -> . campo
+    (15) campo -> . ID tipodato restriccion
+    (16) campo -> . ID tipodato
 
-    ID              shift and go to state 68
+    ID              shift and go to state 67
 
-    valores                        shift and go to state 115
+    campo                          shift and go to state 69
+    defcreate                      shift and go to state 116
 
 state 91
 
-    (50) campocambios -> ID EQUALS expression .
-    (69) expression -> expression . PLUS term
-    (70) expression -> expression . MINUS term
+    (42) insert -> INSERT INTO ID parametrosi VALUES entradas .
 
-    COMA            reduce using rule 50 (campocambios -> ID EQUALS expression .)
-    WHERE           reduce using rule 50 (campocambios -> ID EQUALS expression .)
-    PCOMA           reduce using rule 50 (campocambios -> ID EQUALS expression .)
-    PLUS            shift and go to state 116
-    MINUS           shift and go to state 117
+    PCOMA           reduce using rule 42 (insert -> INSERT INTO ID parametrosi VALUES entradas .)
 
 
 state 92
 
-    (71) expression -> term .
-    (72) term -> term . TIMES factor
-    (73) term -> term . DIVIDE factor
+    (44) entradas -> LPAREN . valentradas RPAREN
+    (45) valentradas -> . expression COMA valentradas
+    (46) valentradas -> . expression
+    (71) expression -> . expression PLUS term
+    (72) expression -> . expression MINUS term
+    (73) expression -> . term
+    (74) term -> . term TIMES factor
+    (75) term -> . term DIVIDE factor
+    (76) term -> . factor
+    (77) factor -> . NUMBER
+    (78) factor -> . DECIMAL
 
-    PLUS            reduce using rule 71 (expression -> term .)
-    MINUS           reduce using rule 71 (expression -> term .)
-    COMA            reduce using rule 71 (expression -> term .)
-    WHERE           reduce using rule 71 (expression -> term .)
-    PCOMA           reduce using rule 71 (expression -> term .)
-    RPAREN          reduce using rule 71 (expression -> term .)
-    TIMES           shift and go to state 118
-    DIVIDE          shift and go to state 119
+    NUMBER          shift and go to state 98
+    DECIMAL         shift and go to state 99
 
+    valentradas                    shift and go to state 117
+    expression                     shift and go to state 118
+    term                           shift and go to state 96
+    factor                         shift and go to state 97
 
 state 93
 
-    (74) term -> factor .
+    (43) parametrosi -> LPAREN valores RPAREN .
 
-    TIMES           reduce using rule 74 (term -> factor .)
-    DIVIDE          reduce using rule 74 (term -> factor .)
-    PLUS            reduce using rule 74 (term -> factor .)
-    MINUS           reduce using rule 74 (term -> factor .)
-    COMA            reduce using rule 74 (term -> factor .)
-    WHERE           reduce using rule 74 (term -> factor .)
-    PCOMA           reduce using rule 74 (term -> factor .)
-    RPAREN          reduce using rule 74 (term -> factor .)
+    VALUES          reduce using rule 43 (parametrosi -> LPAREN valores RPAREN .)
 
 
 state 94
 
-    (75) factor -> NUMBER .
+    (47) valores -> ID COMA . valores
+    (47) valores -> . ID COMA valores
+    (48) valores -> . ID
 
-    TIMES           reduce using rule 75 (factor -> NUMBER .)
-    DIVIDE          reduce using rule 75 (factor -> NUMBER .)
-    PLUS            reduce using rule 75 (factor -> NUMBER .)
-    MINUS           reduce using rule 75 (factor -> NUMBER .)
-    COMA            reduce using rule 75 (factor -> NUMBER .)
-    WHERE           reduce using rule 75 (factor -> NUMBER .)
-    PCOMA           reduce using rule 75 (factor -> NUMBER .)
-    RPAREN          reduce using rule 75 (factor -> NUMBER .)
+    ID              shift and go to state 72
 
+    valores                        shift and go to state 119
 
 state 95
 
-    (76) factor -> DECIMAL .
+    (52) campocambios -> ID EQUALS expression .
+    (71) expression -> expression . PLUS term
+    (72) expression -> expression . MINUS term
 
-    TIMES           reduce using rule 76 (factor -> DECIMAL .)
-    DIVIDE          reduce using rule 76 (factor -> DECIMAL .)
-    PLUS            reduce using rule 76 (factor -> DECIMAL .)
-    MINUS           reduce using rule 76 (factor -> DECIMAL .)
-    COMA            reduce using rule 76 (factor -> DECIMAL .)
-    WHERE           reduce using rule 76 (factor -> DECIMAL .)
-    PCOMA           reduce using rule 76 (factor -> DECIMAL .)
-    RPAREN          reduce using rule 76 (factor -> DECIMAL .)
+    COMA            reduce using rule 52 (campocambios -> ID EQUALS expression .)
+    WHERE           reduce using rule 52 (campocambios -> ID EQUALS expression .)
+    PCOMA           reduce using rule 52 (campocambios -> ID EQUALS expression .)
+    PLUS            shift and go to state 120
+    MINUS           shift and go to state 121
 
 
 state 96
 
-    (47) update -> UPDATE ID SET cambios WHERE ID . EQUALS expression
+    (73) expression -> term .
+    (74) term -> term . TIMES factor
+    (75) term -> term . DIVIDE factor
 
-    EQUALS          shift and go to state 120
+    PLUS            reduce using rule 73 (expression -> term .)
+    MINUS           reduce using rule 73 (expression -> term .)
+    COMA            reduce using rule 73 (expression -> term .)
+    WHERE           reduce using rule 73 (expression -> term .)
+    PCOMA           reduce using rule 73 (expression -> term .)
+    RPAREN          reduce using rule 73 (expression -> term .)
+    TIMES           shift and go to state 122
+    DIVIDE          shift and go to state 123
 
 
 state 97
 
-    (48) cambios -> campocambios COMA cambios .
+    (76) term -> factor .
 
-    WHERE           reduce using rule 48 (cambios -> campocambios COMA cambios .)
+    TIMES           reduce using rule 76 (term -> factor .)
+    DIVIDE          reduce using rule 76 (term -> factor .)
+    PLUS            reduce using rule 76 (term -> factor .)
+    MINUS           reduce using rule 76 (term -> factor .)
+    COMA            reduce using rule 76 (term -> factor .)
+    WHERE           reduce using rule 76 (term -> factor .)
+    PCOMA           reduce using rule 76 (term -> factor .)
+    RPAREN          reduce using rule 76 (term -> factor .)
 
 
 state 98
 
-    (35) alter -> ALTER TABLE ID ADD ID tipodato .
+    (77) factor -> NUMBER .
 
-    PCOMA           reduce using rule 35 (alter -> ALTER TABLE ID ADD ID tipodato .)
+    TIMES           reduce using rule 77 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 77 (factor -> NUMBER .)
+    PLUS            reduce using rule 77 (factor -> NUMBER .)
+    MINUS           reduce using rule 77 (factor -> NUMBER .)
+    COMA            reduce using rule 77 (factor -> NUMBER .)
+    WHERE           reduce using rule 77 (factor -> NUMBER .)
+    PCOMA           reduce using rule 77 (factor -> NUMBER .)
+    RPAREN          reduce using rule 77 (factor -> NUMBER .)
 
 
 state 99
 
-    (38) drop -> DROP TABLE ID .
+    (78) factor -> DECIMAL .
 
-    PCOMA           reduce using rule 38 (drop -> DROP TABLE ID .)
+    TIMES           reduce using rule 78 (factor -> DECIMAL .)
+    DIVIDE          reduce using rule 78 (factor -> DECIMAL .)
+    PLUS            reduce using rule 78 (factor -> DECIMAL .)
+    MINUS           reduce using rule 78 (factor -> DECIMAL .)
+    COMA            reduce using rule 78 (factor -> DECIMAL .)
+    WHERE           reduce using rule 78 (factor -> DECIMAL .)
+    PCOMA           reduce using rule 78 (factor -> DECIMAL .)
+    RPAREN          reduce using rule 78 (factor -> DECIMAL .)
 
 
 state 100
 
-    (39) drop -> DROP COLUMN ID .
+    (49) update -> UPDATE ID SET cambios WHERE ID . EQUALS expression
 
-    PCOMA           reduce using rule 39 (drop -> DROP COLUMN ID .)
+    EQUALS          shift and go to state 124
 
 
 state 101
 
-    (27) selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA . RPAREN
+    (50) cambios -> campocambios COMA cambios .
 
-    RPAREN          shift and go to state 121
+    WHERE           reduce using rule 50 (cambios -> campocambios COMA cambios .)
 
 
 state 102
 
-    (28) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER . COMA NUMBER
+    (37) alter -> ALTER TABLE ID ADD ID tipodato .
 
-    COMA            shift and go to state 122
+    PCOMA           reduce using rule 37 (alter -> ALTER TABLE ID ADD ID tipodato .)
 
 
 state 103
 
-    (30) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM . ID WHERE campocambios
+    (40) drop -> DROP TABLE ID .
 
-    ID              shift and go to state 123
+    PCOMA           reduce using rule 40 (drop -> DROP TABLE ID .)
 
 
 state 104
 
-    (31) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM . ID WHERE campocambios
+    (41) drop -> DROP COLUMN ID .
 
-    ID              shift and go to state 124
+    PCOMA           reduce using rule 41 (drop -> DROP COLUMN ID .)
 
 
 state 105
 
-    (13) campo -> ID tipodato restriccion .
+    (29) selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA . RPAREN
 
-    COMA            reduce using rule 13 (campo -> ID tipodato restriccion .)
-    RPAREN          reduce using rule 13 (campo -> ID tipodato restriccion .)
+    RPAREN          shift and go to state 125
 
 
 state 106
 
-    (15) restriccion -> NOT . NULL
+    (30) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER . COMA NUMBER
 
-    NULL            shift and go to state 125
+    COMA            shift and go to state 126
 
 
 state 107
 
-    (16) restriccion -> PRIMARY . KEY
-
-    KEY             shift and go to state 126
-
-
-state 108
-
-    (17) restriccion -> foranea .
-
-    COMA            reduce using rule 17 (restriccion -> foranea .)
-    RPAREN          reduce using rule 17 (restriccion -> foranea .)
-
-
-state 109
-
-    (18) foranea -> REFERENCES . ID LPAREN ID RPAREN
+    (32) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM . ID WHERE campocambios
 
     ID              shift and go to state 127
 
 
+state 108
+
+    (33) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM . ID WHERE campocambios
+
+    ID              shift and go to state 128
+
+
+state 109
+
+    (15) campo -> ID tipodato restriccion .
+
+    COMA            reduce using rule 15 (campo -> ID tipodato restriccion .)
+    RPAREN          reduce using rule 15 (campo -> ID tipodato restriccion .)
+
+
 state 110
 
-    (22) tipodato -> NVARCHAR LPAREN . NUMBER RPAREN
+    (17) restriccion -> NOT . NULL
 
-    NUMBER          shift and go to state 128
+    NULL            shift and go to state 129
 
 
 state 111
 
-    (23) tipodato -> NCHAR LPAREN . NUMBER RPAREN
+    (18) restriccion -> PRIMARY . KEY
 
-    NUMBER          shift and go to state 129
+    KEY             shift and go to state 130
 
 
 state 112
 
-    (11) defcreate -> campo COMA defcreate .
+    (19) restriccion -> foranea .
 
-    RPAREN          reduce using rule 11 (defcreate -> campo COMA defcreate .)
+    COMA            reduce using rule 19 (restriccion -> foranea .)
+    RPAREN          reduce using rule 19 (restriccion -> foranea .)
 
 
 state 113
 
-    (42) entradas -> LPAREN valentradas . RPAREN
+    (20) foranea -> REFERENCES . ID LPAREN ID RPAREN
 
-    RPAREN          shift and go to state 130
+    ID              shift and go to state 131
 
 
 state 114
 
-    (43) valentradas -> expression . COMA valentradas
-    (44) valentradas -> expression .
-    (69) expression -> expression . PLUS term
-    (70) expression -> expression . MINUS term
+    (24) tipodato -> NVARCHAR LPAREN . NUMBER RPAREN
 
-    COMA            shift and go to state 131
-    RPAREN          reduce using rule 44 (valentradas -> expression .)
-    PLUS            shift and go to state 116
-    MINUS           shift and go to state 117
+    NUMBER          shift and go to state 132
 
 
 state 115
 
-    (45) valores -> ID COMA valores .
+    (25) tipodato -> NCHAR LPAREN . NUMBER RPAREN
 
-    RPAREN          reduce using rule 45 (valores -> ID COMA valores .)
+    NUMBER          shift and go to state 133
 
 
 state 116
 
-    (69) expression -> expression PLUS . term
-    (72) term -> . term TIMES factor
-    (73) term -> . term DIVIDE factor
-    (74) term -> . factor
-    (75) factor -> . NUMBER
-    (76) factor -> . DECIMAL
+    (13) defcreate -> campo COMA defcreate .
 
-    NUMBER          shift and go to state 94
-    DECIMAL         shift and go to state 95
+    RPAREN          reduce using rule 13 (defcreate -> campo COMA defcreate .)
 
-    term                           shift and go to state 132
-    factor                         shift and go to state 93
 
 state 117
 
-    (70) expression -> expression MINUS . term
-    (72) term -> . term TIMES factor
-    (73) term -> . term DIVIDE factor
-    (74) term -> . factor
-    (75) factor -> . NUMBER
-    (76) factor -> . DECIMAL
+    (44) entradas -> LPAREN valentradas . RPAREN
 
-    NUMBER          shift and go to state 94
-    DECIMAL         shift and go to state 95
+    RPAREN          shift and go to state 134
 
-    term                           shift and go to state 133
-    factor                         shift and go to state 93
 
 state 118
 
-    (72) term -> term TIMES . factor
-    (75) factor -> . NUMBER
-    (76) factor -> . DECIMAL
+    (45) valentradas -> expression . COMA valentradas
+    (46) valentradas -> expression .
+    (71) expression -> expression . PLUS term
+    (72) expression -> expression . MINUS term
 
-    NUMBER          shift and go to state 94
-    DECIMAL         shift and go to state 95
+    COMA            shift and go to state 135
+    RPAREN          reduce using rule 46 (valentradas -> expression .)
+    PLUS            shift and go to state 120
+    MINUS           shift and go to state 121
 
-    factor                         shift and go to state 134
 
 state 119
 
-    (73) term -> term DIVIDE . factor
-    (75) factor -> . NUMBER
-    (76) factor -> . DECIMAL
+    (47) valores -> ID COMA valores .
 
-    NUMBER          shift and go to state 94
-    DECIMAL         shift and go to state 95
+    RPAREN          reduce using rule 47 (valores -> ID COMA valores .)
 
-    factor                         shift and go to state 135
 
 state 120
 
-    (47) update -> UPDATE ID SET cambios WHERE ID EQUALS . expression
-    (69) expression -> . expression PLUS term
-    (70) expression -> . expression MINUS term
-    (71) expression -> . term
-    (72) term -> . term TIMES factor
-    (73) term -> . term DIVIDE factor
-    (74) term -> . factor
-    (75) factor -> . NUMBER
-    (76) factor -> . DECIMAL
+    (71) expression -> expression PLUS . term
+    (74) term -> . term TIMES factor
+    (75) term -> . term DIVIDE factor
+    (76) term -> . factor
+    (77) factor -> . NUMBER
+    (78) factor -> . DECIMAL
 
-    NUMBER          shift and go to state 94
-    DECIMAL         shift and go to state 95
+    NUMBER          shift and go to state 98
+    DECIMAL         shift and go to state 99
 
-    expression                     shift and go to state 136
-    term                           shift and go to state 92
-    factor                         shift and go to state 93
+    term                           shift and go to state 136
+    factor                         shift and go to state 97
 
 state 121
 
-    (27) selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN .
+    (72) expression -> expression MINUS . term
+    (74) term -> . term TIMES factor
+    (75) term -> . term DIVIDE factor
+    (76) term -> . factor
+    (77) factor -> . NUMBER
+    (78) factor -> . DECIMAL
 
-    PCOMA           reduce using rule 27 (selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN .)
+    NUMBER          shift and go to state 98
+    DECIMAL         shift and go to state 99
 
+    term                           shift and go to state 137
+    factor                         shift and go to state 97
 
 state 122
 
-    (28) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA . NUMBER
+    (74) term -> term TIMES . factor
+    (77) factor -> . NUMBER
+    (78) factor -> . DECIMAL
 
-    NUMBER          shift and go to state 137
+    NUMBER          shift and go to state 98
+    DECIMAL         shift and go to state 99
 
+    factor                         shift and go to state 138
 
 state 123
 
-    (30) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID . WHERE campocambios
+    (75) term -> term DIVIDE . factor
+    (77) factor -> . NUMBER
+    (78) factor -> . DECIMAL
 
-    WHERE           shift and go to state 138
+    NUMBER          shift and go to state 98
+    DECIMAL         shift and go to state 99
 
+    factor                         shift and go to state 139
 
 state 124
 
-    (31) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID . WHERE campocambios
+    (49) update -> UPDATE ID SET cambios WHERE ID EQUALS . expression
+    (71) expression -> . expression PLUS term
+    (72) expression -> . expression MINUS term
+    (73) expression -> . term
+    (74) term -> . term TIMES factor
+    (75) term -> . term DIVIDE factor
+    (76) term -> . factor
+    (77) factor -> . NUMBER
+    (78) factor -> . DECIMAL
 
-    WHERE           shift and go to state 139
+    NUMBER          shift and go to state 98
+    DECIMAL         shift and go to state 99
 
+    expression                     shift and go to state 140
+    term                           shift and go to state 96
+    factor                         shift and go to state 97
 
 state 125
 
-    (15) restriccion -> NOT NULL .
+    (29) selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN .
 
-    COMA            reduce using rule 15 (restriccion -> NOT NULL .)
-    RPAREN          reduce using rule 15 (restriccion -> NOT NULL .)
+    PCOMA           reduce using rule 29 (selectdefinidos -> SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN .)
 
 
 state 126
 
-    (16) restriccion -> PRIMARY KEY .
+    (30) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA . NUMBER
 
-    COMA            reduce using rule 16 (restriccion -> PRIMARY KEY .)
-    RPAREN          reduce using rule 16 (restriccion -> PRIMARY KEY .)
+    NUMBER          shift and go to state 141
 
 
 state 127
 
-    (18) foranea -> REFERENCES ID . LPAREN ID RPAREN
+    (32) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID . WHERE campocambios
 
-    LPAREN          shift and go to state 140
+    WHERE           shift and go to state 142
 
 
 state 128
 
-    (22) tipodato -> NVARCHAR LPAREN NUMBER . RPAREN
+    (33) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID . WHERE campocambios
 
-    RPAREN          shift and go to state 141
+    WHERE           shift and go to state 143
 
 
 state 129
 
-    (23) tipodato -> NCHAR LPAREN NUMBER . RPAREN
+    (17) restriccion -> NOT NULL .
 
-    RPAREN          shift and go to state 142
+    COMA            reduce using rule 17 (restriccion -> NOT NULL .)
+    RPAREN          reduce using rule 17 (restriccion -> NOT NULL .)
 
 
 state 130
 
-    (42) entradas -> LPAREN valentradas RPAREN .
+    (18) restriccion -> PRIMARY KEY .
 
-    PCOMA           reduce using rule 42 (entradas -> LPAREN valentradas RPAREN .)
+    COMA            reduce using rule 18 (restriccion -> PRIMARY KEY .)
+    RPAREN          reduce using rule 18 (restriccion -> PRIMARY KEY .)
 
 
 state 131
 
-    (43) valentradas -> expression COMA . valentradas
-    (43) valentradas -> . expression COMA valentradas
-    (44) valentradas -> . expression
-    (69) expression -> . expression PLUS term
-    (70) expression -> . expression MINUS term
-    (71) expression -> . term
-    (72) term -> . term TIMES factor
-    (73) term -> . term DIVIDE factor
-    (74) term -> . factor
-    (75) factor -> . NUMBER
-    (76) factor -> . DECIMAL
+    (20) foranea -> REFERENCES ID . LPAREN ID RPAREN
 
-    NUMBER          shift and go to state 94
-    DECIMAL         shift and go to state 95
+    LPAREN          shift and go to state 144
 
-    expression                     shift and go to state 114
-    valentradas                    shift and go to state 143
-    term                           shift and go to state 92
-    factor                         shift and go to state 93
 
 state 132
 
-    (69) expression -> expression PLUS term .
-    (72) term -> term . TIMES factor
-    (73) term -> term . DIVIDE factor
+    (24) tipodato -> NVARCHAR LPAREN NUMBER . RPAREN
 
-    PLUS            reduce using rule 69 (expression -> expression PLUS term .)
-    MINUS           reduce using rule 69 (expression -> expression PLUS term .)
-    COMA            reduce using rule 69 (expression -> expression PLUS term .)
-    WHERE           reduce using rule 69 (expression -> expression PLUS term .)
-    PCOMA           reduce using rule 69 (expression -> expression PLUS term .)
-    RPAREN          reduce using rule 69 (expression -> expression PLUS term .)
-    TIMES           shift and go to state 118
-    DIVIDE          shift and go to state 119
+    RPAREN          shift and go to state 145
 
 
 state 133
 
-    (70) expression -> expression MINUS term .
-    (72) term -> term . TIMES factor
-    (73) term -> term . DIVIDE factor
+    (25) tipodato -> NCHAR LPAREN NUMBER . RPAREN
 
-    PLUS            reduce using rule 70 (expression -> expression MINUS term .)
-    MINUS           reduce using rule 70 (expression -> expression MINUS term .)
-    COMA            reduce using rule 70 (expression -> expression MINUS term .)
-    WHERE           reduce using rule 70 (expression -> expression MINUS term .)
-    PCOMA           reduce using rule 70 (expression -> expression MINUS term .)
-    RPAREN          reduce using rule 70 (expression -> expression MINUS term .)
-    TIMES           shift and go to state 118
-    DIVIDE          shift and go to state 119
+    RPAREN          shift and go to state 146
 
 
 state 134
 
-    (72) term -> term TIMES factor .
+    (44) entradas -> LPAREN valentradas RPAREN .
 
-    TIMES           reduce using rule 72 (term -> term TIMES factor .)
-    DIVIDE          reduce using rule 72 (term -> term TIMES factor .)
-    PLUS            reduce using rule 72 (term -> term TIMES factor .)
-    MINUS           reduce using rule 72 (term -> term TIMES factor .)
-    COMA            reduce using rule 72 (term -> term TIMES factor .)
-    WHERE           reduce using rule 72 (term -> term TIMES factor .)
-    PCOMA           reduce using rule 72 (term -> term TIMES factor .)
-    RPAREN          reduce using rule 72 (term -> term TIMES factor .)
+    PCOMA           reduce using rule 44 (entradas -> LPAREN valentradas RPAREN .)
 
 
 state 135
 
-    (73) term -> term DIVIDE factor .
+    (45) valentradas -> expression COMA . valentradas
+    (45) valentradas -> . expression COMA valentradas
+    (46) valentradas -> . expression
+    (71) expression -> . expression PLUS term
+    (72) expression -> . expression MINUS term
+    (73) expression -> . term
+    (74) term -> . term TIMES factor
+    (75) term -> . term DIVIDE factor
+    (76) term -> . factor
+    (77) factor -> . NUMBER
+    (78) factor -> . DECIMAL
 
-    TIMES           reduce using rule 73 (term -> term DIVIDE factor .)
-    DIVIDE          reduce using rule 73 (term -> term DIVIDE factor .)
-    PLUS            reduce using rule 73 (term -> term DIVIDE factor .)
-    MINUS           reduce using rule 73 (term -> term DIVIDE factor .)
-    COMA            reduce using rule 73 (term -> term DIVIDE factor .)
-    WHERE           reduce using rule 73 (term -> term DIVIDE factor .)
-    PCOMA           reduce using rule 73 (term -> term DIVIDE factor .)
-    RPAREN          reduce using rule 73 (term -> term DIVIDE factor .)
+    NUMBER          shift and go to state 98
+    DECIMAL         shift and go to state 99
 
+    expression                     shift and go to state 118
+    valentradas                    shift and go to state 147
+    term                           shift and go to state 96
+    factor                         shift and go to state 97
 
 state 136
 
-    (47) update -> UPDATE ID SET cambios WHERE ID EQUALS expression .
-    (69) expression -> expression . PLUS term
-    (70) expression -> expression . MINUS term
+    (71) expression -> expression PLUS term .
+    (74) term -> term . TIMES factor
+    (75) term -> term . DIVIDE factor
 
-    PCOMA           reduce using rule 47 (update -> UPDATE ID SET cambios WHERE ID EQUALS expression .)
-    PLUS            shift and go to state 116
-    MINUS           shift and go to state 117
+    PLUS            reduce using rule 71 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 71 (expression -> expression PLUS term .)
+    COMA            reduce using rule 71 (expression -> expression PLUS term .)
+    WHERE           reduce using rule 71 (expression -> expression PLUS term .)
+    PCOMA           reduce using rule 71 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 71 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 122
+    DIVIDE          shift and go to state 123
 
 
 state 137
 
-    (28) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .
+    (72) expression -> expression MINUS term .
+    (74) term -> term . TIMES factor
+    (75) term -> term . DIVIDE factor
 
-    PCOMA           reduce using rule 28 (selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .)
+    PLUS            reduce using rule 72 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 72 (expression -> expression MINUS term .)
+    COMA            reduce using rule 72 (expression -> expression MINUS term .)
+    WHERE           reduce using rule 72 (expression -> expression MINUS term .)
+    PCOMA           reduce using rule 72 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 72 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 122
+    DIVIDE          shift and go to state 123
 
 
 state 138
 
-    (30) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE . campocambios
-    (50) campocambios -> . ID EQUALS expression
+    (74) term -> term TIMES factor .
 
-    ID              shift and go to state 51
+    TIMES           reduce using rule 74 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 74 (term -> term TIMES factor .)
+    PLUS            reduce using rule 74 (term -> term TIMES factor .)
+    MINUS           reduce using rule 74 (term -> term TIMES factor .)
+    COMA            reduce using rule 74 (term -> term TIMES factor .)
+    WHERE           reduce using rule 74 (term -> term TIMES factor .)
+    PCOMA           reduce using rule 74 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 74 (term -> term TIMES factor .)
 
-    campocambios                   shift and go to state 144
 
 state 139
 
-    (31) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE . campocambios
-    (50) campocambios -> . ID EQUALS expression
+    (75) term -> term DIVIDE factor .
 
-    ID              shift and go to state 51
+    TIMES           reduce using rule 75 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 75 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 75 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 75 (term -> term DIVIDE factor .)
+    COMA            reduce using rule 75 (term -> term DIVIDE factor .)
+    WHERE           reduce using rule 75 (term -> term DIVIDE factor .)
+    PCOMA           reduce using rule 75 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 75 (term -> term DIVIDE factor .)
 
-    campocambios                   shift and go to state 145
 
 state 140
 
-    (18) foranea -> REFERENCES ID LPAREN . ID RPAREN
+    (49) update -> UPDATE ID SET cambios WHERE ID EQUALS expression .
+    (71) expression -> expression . PLUS term
+    (72) expression -> expression . MINUS term
 
-    ID              shift and go to state 146
+    PCOMA           reduce using rule 49 (update -> UPDATE ID SET cambios WHERE ID EQUALS expression .)
+    PLUS            shift and go to state 120
+    MINUS           shift and go to state 121
 
 
 state 141
 
-    (22) tipodato -> NVARCHAR LPAREN NUMBER RPAREN .
+    (30) selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .
 
-    NOT             reduce using rule 22 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
-    PRIMARY         reduce using rule 22 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
-    REFERENCES      reduce using rule 22 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
-    COMA            reduce using rule 22 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
-    RPAREN          reduce using rule 22 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
-    PCOMA           reduce using rule 22 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
+    PCOMA           reduce using rule 30 (selectdefinidos -> SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .)
 
 
 state 142
 
-    (23) tipodato -> NCHAR LPAREN NUMBER RPAREN .
+    (32) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE . campocambios
+    (52) campocambios -> . ID EQUALS expression
 
-    NOT             reduce using rule 23 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
-    PRIMARY         reduce using rule 23 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
-    REFERENCES      reduce using rule 23 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
-    COMA            reduce using rule 23 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
-    RPAREN          reduce using rule 23 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
-    PCOMA           reduce using rule 23 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
+    ID              shift and go to state 55
 
+    campocambios                   shift and go to state 148
 
 state 143
 
-    (43) valentradas -> expression COMA valentradas .
+    (33) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE . campocambios
+    (52) campocambios -> . ID EQUALS expression
 
-    RPAREN          reduce using rule 43 (valentradas -> expression COMA valentradas .)
+    ID              shift and go to state 55
 
+    campocambios                   shift and go to state 149
 
 state 144
 
-    (30) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios .
+    (20) foranea -> REFERENCES ID LPAREN . ID RPAREN
 
-    PCOMA           reduce using rule 30 (selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios .)
+    ID              shift and go to state 150
 
 
 state 145
 
-    (31) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios .
+    (24) tipodato -> NVARCHAR LPAREN NUMBER RPAREN .
 
-    PCOMA           reduce using rule 31 (selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios .)
+    NOT             reduce using rule 24 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
+    PRIMARY         reduce using rule 24 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
+    REFERENCES      reduce using rule 24 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
+    COMA            reduce using rule 24 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
+    RPAREN          reduce using rule 24 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
+    PCOMA           reduce using rule 24 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
 
 
 state 146
 
-    (18) foranea -> REFERENCES ID LPAREN ID . RPAREN
+    (25) tipodato -> NCHAR LPAREN NUMBER RPAREN .
 
-    RPAREN          shift and go to state 147
+    NOT             reduce using rule 25 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
+    PRIMARY         reduce using rule 25 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
+    REFERENCES      reduce using rule 25 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
+    COMA            reduce using rule 25 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
+    RPAREN          reduce using rule 25 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
+    PCOMA           reduce using rule 25 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
 
 
 state 147
 
-    (18) foranea -> REFERENCES ID LPAREN ID RPAREN .
+    (45) valentradas -> expression COMA valentradas .
 
-    COMA            reduce using rule 18 (foranea -> REFERENCES ID LPAREN ID RPAREN .)
-    RPAREN          reduce using rule 18 (foranea -> REFERENCES ID LPAREN ID RPAREN .)
+    RPAREN          reduce using rule 45 (valentradas -> expression COMA valentradas .)
+
+
+state 148
+
+    (32) selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios .
+
+    PCOMA           reduce using rule 32 (selectdefinidos -> SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios .)
+
+
+state 149
+
+    (33) selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios .
+
+    PCOMA           reduce using rule 33 (selectdefinidos -> SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios .)
+
+
+state 150
+
+    (20) foranea -> REFERENCES ID LPAREN ID . RPAREN
+
+    RPAREN          shift and go to state 151
+
+
+state 151
+
+    (20) foranea -> REFERENCES ID LPAREN ID RPAREN .
+
+    COMA            reduce using rule 20 (foranea -> REFERENCES ID LPAREN ID RPAREN .)
+    RPAREN          reduce using rule 20 (foranea -> REFERENCES ID LPAREN ID RPAREN .)
 
