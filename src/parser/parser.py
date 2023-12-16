@@ -2,6 +2,7 @@ import ply.yacc as yacc
 from .lexer import tokens
 from ..aplicacion.querys.CreateDB import CreateDB
 from ..aplicacion.querys.CreateTable import CreateTable
+from ..aplicacion.querys.Insert import Insert
 from ..aplicacion.querys.Operacion import Operacion
 from ..aplicacion.querys.Parametrostabla import Parametrostabla
 
@@ -16,6 +17,12 @@ def p_initial(p):
             | produccion      
     '''
 
+def p_seleccionardb(p):
+    '''
+    seleccionardb : USAR ID
+    '''
+    p[0] = p[2]
+
 def p_produccion(p):
     '''
     produccion  : create PCOMA
@@ -24,6 +31,7 @@ def p_produccion(p):
                 | update PCOMA
                 | select PCOMA
                 | alter PCOMA
+                | seleccionardb PCOMA
     '''
 
 #CREAR BASE DE DATOS
@@ -164,19 +172,53 @@ def p_drop(p):
 #INSERT
 def p_insert(p):
     '''
-    insert      : INSERT INTO ID parametros     
+    insert      : INSERT INTO ID parametrosi VALUES entradas
     '''
+    accion = Insert(p[4],p[6],p[3],'None')
+    listado.append(accion)
+    print('produccion insert')
 
-def p_parametros(p):
+def p_parametrosi(p):
     '''
-    parametros  : LPAREN valores RPAREN     
+    parametrosi  : LPAREN valores RPAREN
     '''
+    p[0] = p[2]
+
+def p_entradas(p):
+    '''
+    entradas  : LPAREN valentradas RPAREN
+    '''
+    p[0] = p[2]
+
+def p_valentradas(p):
+    '''
+    valentradas  : expression COMA valentradas
+                 | expression
+    '''
+    if len(p) == 4:
+        valentrada = p[3]
+        valentrada.append(p[1])
+        p[0] = valentrada
+    else:
+        valentrada = []
+        valentrada.append(p[1])
+        p[0] = valentrada
 
 def p_valores(p):
     '''
     valores : ID COMA valores
             | ID     
     '''
+
+    if len(p) == 4:
+        valores = p[3]
+        valores.append(p[1])
+        p[0] = valores
+    else:
+        valores = []
+        valores.append(p[1])
+        p[0] = valores
+
     
 #UPDATE    
 def p_update(p):

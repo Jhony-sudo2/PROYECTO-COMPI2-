@@ -24,21 +24,24 @@ class CreateTable:
         data2 = {'Primaria': [atributo.nombre] for atributo in self.atributos
                  if atributo.condicion is not None and atributo.condicion == 2
                  }
+        data5 = {'NOTNULL': [atributo.nombre] for atributo in self.atributos
+                 if atributo.condicion is not None and atributo.condicion == 1
+                 }
 
         data3 = [{'nombre': atributo.nombre, 'tabla': atributo.foranea[0], 'referencia': atributo.foranea[1]}
                  for atributo in self.atributos
                  if atributo.foranea is not None]
-
         data4 = {'Foranea': data3}
-
-        data.update(data2)
-        data.update(data4)
-
+        if  bool(data2['Primaria']):
+            data.update(data2)
+        if  bool(data4['Foranea']):
+            data.update(data4)
+        if bool(data5['NOTNULL']):
+            data.update(data5)
+        print(data)
         df = pd.DataFrame(data)
 
         xml_cadena = df.to_xml(index=False, root_name='Tabla', row_name='Estructura')
-
-        print(xml_cadena)
 
         with open(ruta + self.nombre+'.xml', 'w') as archivo:
             archivo.write(xml_cadena)

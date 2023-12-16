@@ -2,6 +2,7 @@ import ply.lex as lex
 
 reservadas = {
     #BASE DE DATOS DDL
+    'USAR':'USAR',
     'CREATE':'CREATE',
     'DATA':'DATA',
     'BASE':'BASE',
