@@ -1,4 +1,4 @@
 class Operacion:
-    def ejecutar(self):
+    def ejecutar(self,db):
         print('ejecutando desde principal')
 

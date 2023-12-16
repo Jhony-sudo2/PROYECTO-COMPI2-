@@ -7,17 +7,17 @@ class CreateTable:
         self.atributos= atributos
 
 
-    def ejecutar(self):
+    def ejecutar(self, db):
         print('ingresando nueva tabla')
-        self.crearXml()
+        self.crearXml(db)
     def crearTable(self):
         pass
         '''Aqui debemos crear un archivo con el nombre de la tabla'''
 
 
-    def crearXml(self):
+    def crearXml(self,db):
         ruta_actual = os.getcwd()
-        ruta = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/'
+        ruta = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/'+str(db)+'/Tables/'
         print('creando archivo XML en: ' + ruta)
         data = {atributo.nombre: [atributo.tipo] for atributo in self.atributos}
 
@@ -29,8 +29,9 @@ class CreateTable:
                  }
 
         data3 = [{'nombre': atributo.nombre, 'tabla': atributo.foranea[0], 'referencia': atributo.foranea[1]}
-                 for atributo in self.atributos
-                 if atributo.foranea is not None]
+
+                 for atributo in self.atributos if atributo.foranea is not None]
+
         data4 = {'Foranea': data3}
         if  bool(data2['Primaria']):
             data.update(data2)

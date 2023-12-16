@@ -1,3 +1,4 @@
+import os
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
@@ -10,7 +11,6 @@ from src.parser.parser import listado
 from Analizador import Analizador
 
 
-
 def ejecutar_consulta():
     analizador = Analizador("parser")
     analizador.escribir()
@@ -19,19 +19,18 @@ def ejecutar_consulta():
      # Obtener el texto del campo
     print(texto)
     consola.insert(END, texto)
-
+    print("**********la db select es "+db)
     try:
         s = texto
         result = parser.parse(s, lexer=lexer)
         print(result)
 
         for elemento in listado:
-            elemento.ejecutar()
+            elemento.ejecutar(db)
+        cargar_carpetas()
+        cargarArbol(db)
     except EOFError:
         print("Error")
-
-
-
 
 def abrir_archivo():
     # Abre el cuadro de diálogo para seleccionar un archivo
@@ -50,6 +49,39 @@ def abrir_archivo():
 
         # Muestra la ruta del archivo seleccionado en la etiqueta
         etiqueta_archivo.config(text="Archivo seleccionado: " + archivo)
+
+def cargar_carpetas():
+    # Especifica la ruta del directorio que contiene las carpetas
+    ruta_directorio = os.path.abspath(os.path.join(os.getcwd(), '..', '..', 'databases'))
+    carpetas = [nombre for nombre in os.listdir(ruta_directorio) if
+                os.path.isdir(os.path.join(ruta_directorio, nombre))]
+
+    # Añade las carpetas al menú desplegable
+    menu_desplegable['values'] = tuple(carpetas)
+
+def seleccionar_carpeta( event):
+    global db
+    carpeta_seleccionada = menu_desplegable.get()
+    db = carpeta_seleccionada
+
+    print(f"Se seleccionó la carpeta: {carpeta_seleccionada} y es {db}")
+    cargarArbol(carpeta_seleccionada)
+
+def cargarArbol(carpeta_seleccionada):
+    arbol.delete(*arbol.get_children())
+    db2 = arbol.insert("", "end", text=carpeta_seleccionada)
+    ruta_directorio = os.path.abspath(os.path.join(os.getcwd(), '..', '..', 'databases', carpeta_seleccionada))
+    carpetas = [nombre for nombre in os.listdir(ruta_directorio) if
+                os.path.isdir(os.path.join(ruta_directorio, nombre))]
+    for carpeta in carpetas:
+        sub = arbol.insert(db2, "end", text=carpeta)
+        ruta_carpeta = ruta_directorio + "/" + carpeta
+        archivos = [nombre for nombre in os.listdir(ruta_carpeta) if os.path.isfile(os.path.join(ruta_carpeta, nombre))]
+        # Añadir los archivos al Treeview
+        for archivo in archivos:
+            ruta_archivo = os.path.join(ruta_carpeta, archivo)
+            tamaño = os.path.getsize(ruta_archivo)
+            arbol.insert(sub, "end", text=archivo, values=("Archivo", f"{tamaño} bytes"))
 
 
 #imortamos una ventana
@@ -85,21 +117,23 @@ barra_menu.add_cascade(label="Herramientas", menu=archivo_menu)
 aplicacion.config(menu=barra_menu)
 #-------------------------------------------
 #panele izquierdo Arbol
-panel_izquierdo= Frame(aplicacion, bd=1, relief=FLAT)
+panel_izquierdo= Frame(aplicacion, bd=1, relief=FLAT, width=18, height=2)
 panel_izquierdo.pack(side=LEFT)
+
+# Crear un menú desplegable para seleccionar db
+db_label = Label(panel_izquierdo, text="Base de datos: ",width=18)
+db_label.pack()
+menu_desplegable = ttk.Combobox(panel_izquierdo, state="readonly", width=18)
+menu_desplegable.pack(pady=10)
+cargar_carpetas()
+menu_desplegable.bind("<<ComboboxSelected>>", seleccionar_carpeta)
+db=menu_desplegable.get()
 
 # Crear el árbol de bases de datos
 arbol = ttk.Treeview(panel_izquierdo)
 arbol.pack(side=LEFT, fill=Y)
 
-# Agregar algunas bases de datos y tablas al árbol
-db1 = arbol.insert("", "end", text="Base de datos 1")
-arbol.insert(db1, "end", text="Tabla 1")
-arbol.insert(db1, "end", text="Tabla 2")
 
-db2 = arbol.insert("", "end", text="Base de datos 2")
-arbol.insert(db2, "end", text="Tabla 3")
-arbol.insert(db2, "end", text="Tabla 4")
 #----------------------------------------------------------------------------------------
 #panele central
 panel_central= Frame(aplicacion, bd=1, relief=FLAT)

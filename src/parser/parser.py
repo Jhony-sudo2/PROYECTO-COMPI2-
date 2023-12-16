@@ -8,7 +8,6 @@ from ..aplicacion.querys.Parametrostabla import Parametrostabla
 
 lista = []
 
-
 def getLista():
     return lista
 def p_initial(p):
@@ -52,6 +51,7 @@ def p_create(p):
     nuevatabla = CreateTable(str(p[3]),p[5])
     p[0] = nuevatabla
     lista.append(nuevatabla)
+
 
 def p_defcreate(p):
     '''
