@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <otra>1</otra>
+    <nombre>4</nombre>
+    <id>1</id>
+    <Primaria_3>id</Primaria_3>
+    <Foranea_1>{'nombre': 'otra', 'tipo': 1, 'tabla': 'alumno', 'referencia': 'id'}</Foranea_1>
+    <NOTNULL_2>nombre</NOTNULL_2>
+  </Estructura>
+</Tabla>

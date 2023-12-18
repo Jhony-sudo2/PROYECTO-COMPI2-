@@ -27,6 +27,7 @@ def ejecutar_consulta():
 
         for elemento in listado:
             elemento.ejecutar(db)
+        listado.clear()
         cargar_carpetas()
         cargarArbol(db)
     except EOFError:

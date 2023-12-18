@@ -110,17 +110,21 @@ def p_tipodato(p):
                 | BOOL
                 | NVARCHAR LPAREN NUMBER RPAREN
                 | NCHAR LPAREN NUMBER RPAREN
+                | DATE
+                | DATETIME
     '''
     if p[1] == 'INTEGER':
         p[0] = 1
     elif p[1] == 'DECIMAL':
         p[0] = 2
-    elif p[1] == 'BOOL':
-        p[0] = 3
     elif p[1] == 'NVARCHAR':
         p[0] = 4
     elif p[1] == 'NCHAR':
+        p[0] = 4
+    elif p[1] == 'DATE':
         p[0] = 5
+    elif p[1] == 'DATETIME':
+        p[0] = 6
 
 #SELECT
 def p_select(p):
@@ -174,7 +178,7 @@ def p_insert(p):
     '''
     insert      : INSERT INTO ID parametrosi VALUES entradas
     '''
-    accion = Insert(p[4],p[6],p[3],'None')
+    accion = Insert(p[4],p[6],p[3])
     listado.append(accion)
     print('produccion insert')
 
@@ -338,7 +342,8 @@ def p_term(p):
 def p_factor(p):
     '''
     factor : NUMBER
-           | DECIMAL
+           | DECIMAL1
+           | CADENA
     '''
     p[0] = p[1]
 

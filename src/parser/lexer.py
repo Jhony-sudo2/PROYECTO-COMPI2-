@@ -121,7 +121,7 @@ t_RPAREN = r'\)'
 
 
 def t_DECIMAL1(t):
-    r'^-?\d+(\.\d+)?$'
+    r'-?\d+\.\d+'
     t.value = float(t.value)
     return t
 
