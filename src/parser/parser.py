@@ -7,6 +7,7 @@ from ..aplicacion.querys.Parametrostabla import Parametrostabla
 from ..aplicacion.querys.Select import Select
 from src.aplicacion.querys.bucles.Si import Si
 from src.parser.lexer import tokens
+from ..aplicacion.querys.Usar import Usar
 from ..aplicacion.querys.funciones.Variable import Variable
 from ..aplicacion.querys.funciones.funcion import funcion
 
@@ -24,7 +25,8 @@ def p_seleccionardb(p):
     '''
     seleccionardb : USAR ID
     '''
-    p[0] = p[2]
+    fn = Usar(p[2])
+    p[0] = fn
 
 def p_produccion(p):
     '''

@@ -4,6 +4,11 @@ def getrutatablas(db):
     ruta3 = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/'
     return ruta3
 
+def getrutabase(db):
+    ruta_actual = os.getcwd()
+    ruta3 = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/' + db
+    return ruta3
+
 def existetabla(ruta):
     return os.path.exists(ruta)
 

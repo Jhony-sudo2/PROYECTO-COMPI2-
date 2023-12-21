@@ -2,17 +2,22 @@ import os
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+
+from src.aplicacion.querys import Usar
 from src.parser.lexer import lexer
 from src.parser.parser import parser
 from Analizador import Analizador
 
-
 def ejecutar_consulta():
+    global db
+    global db2
+    db2 = ''
+    db = db2
     analizador = Analizador("parser")
     analizador.escribir()
     consola.delete("1.0", END)
     texto = campo_texto.get("1.0", END).strip()
-    print("**********la db select es "+db)
+    print("**********la db select es " + db)
     try:
         s = texto
         result = parser.parse(s, lexer=lexer)
@@ -25,6 +30,9 @@ def ejecutar_consulta():
             if hasattr(elemento,'resultado'):
                 if len(elemento.resultado) !=0:
                     salida += str(elemento.resultado)
+            if hasattr(elemento,'nueva'):
+                db = elemento.nueva
+        print('la nueva db es',db)
         consola.insert(END,salida)
         cargar_carpetas()
         cargarArbol(db)
@@ -59,28 +67,23 @@ def cargar_carpetas():
     menu_desplegable['values'] = tuple(carpetas)
 
 def seleccionar_carpeta( event):
-    global db
     carpeta_seleccionada = menu_desplegable.get()
-    db = carpeta_seleccionada
-
-    print(f"Se seleccionó la carpeta: {carpeta_seleccionada} y es {db}")
+    db2 = carpeta_seleccionada
+    print(f"Se seleccionó la carpeta: {carpeta_seleccionada} y es {db2}")
     cargarArbol(carpeta_seleccionada)
 
 def cargarArbol(carpeta_seleccionada):
     arbol.delete(*arbol.get_children())
-    db2 = arbol.insert("", "end", text=carpeta_seleccionada)
-    ruta_directorio = os.path.abspath(os.path.join(os.getcwd(), '..', '..', 'databases', carpeta_seleccionada))
+    db3 = arbol.insert("", "end", text=carpeta_seleccionada)
+    ruta_directorio = os.path.abspath(os.path.join(os.getcwd(), '..', '..', 'databases', carpeta_seleccionada + '/Tables'))
     carpetas = [nombre for nombre in os.listdir(ruta_directorio) if
                 os.path.isdir(os.path.join(ruta_directorio, nombre))]
     for carpeta in carpetas:
-        sub = arbol.insert(db2, "end", text=carpeta)
+        sub = arbol.insert(db3, "end", text=carpeta)
         ruta_carpeta = ruta_directorio + "/" + carpeta
         archivos = [nombre for nombre in os.listdir(ruta_carpeta) if os.path.isfile(os.path.join(ruta_carpeta, nombre))]
         # Añadir los archivos al Treeview
-        for archivo in archivos:
-            ruta_archivo = os.path.join(ruta_carpeta, archivo)
-            tamaño = os.path.getsize(ruta_archivo)
-            arbol.insert(sub, "end", text=archivo, values=("Archivo", f"{tamaño} bytes"))
+        
 
 
 #imortamos una ventana
