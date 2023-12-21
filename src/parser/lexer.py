@@ -9,11 +9,11 @@ reservadas = {
     'ALTER':'ALTER',
     'TABLE':'TABLE',
     'TRUNCATE':'TRUNCATE',
-    'NOT':'NOT',
-    'NULL':'NULL',
+    'not':'NOT',
+    'null':'NULL',
     'DELETE':'DELETE',
     'FROM':'FROM',
-    'SET':'SET',
+    'set':'SET',
 
     #DML
     'UPDATE':'UPDATE',
@@ -23,16 +23,14 @@ reservadas = {
     'VALUES':'VALUES',
     'PRIMARY':'PRIMARY',
     'KEY':'KEY',
-    'FOREING':'FIREIGN',
     'REFERENCE':'REFERENCES',
-    'DATE':'DATE',
-    'DATETIME':'DATETIME',
-    'BIT':'BIT',
-    'INTEGER':'INT',
-    'DECIMAL':'DECIMAL',
-    'BOOLEAN':'BOOL',
-    'NVARCHAR':'NVARCHAR',
-    'NCHAR':'NCHAR',
+    'date':'DATE',
+    'datetime':'DATETIME',
+    'int':'INT',
+    'decimal':'DECIMAL',
+    'boolean':'BOOL',
+    'nvarchar':'NVARCHAR',
+    'nchar':'NCHAR',
 
     #FUNCIONES DEL SISTEMA:
     'CONTATENA':'CONCATENAR',
@@ -52,15 +50,16 @@ reservadas = {
 
     #SSL
     'IF':'IF',
+    'ELSE':'ELSE',
     'AS':'AS',
     'PROCEDURE':'PROCEDURE',
     'WHERE':'WHERE',
-    'EXEC':'EXEC',
+    'WHILE':'WHILE',
+    'exec':'EXEC',
 
     #FUNCIONES
     'FUNCTION':'FUNCTION',
-    'RETURNS':'RETURNS',
-    'RETURN':'RETURN',
+    'return':'RETURN',
     'BEGIN':'BEGIN',
     'END':'END',
     'DECLARE':'DECLARE',

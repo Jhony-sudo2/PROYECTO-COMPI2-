@@ -7,7 +7,7 @@ class CreateDB(Operacion):
     pass
     def __init__(self, nombreTable):
         self.nombreTable= nombreTable
-
+        self.errores = ''
 
 
     def ejecutar(self, db):
@@ -31,7 +31,7 @@ class CreateDB(Operacion):
             os.makedirs(ruta_carpeta + '/Funciones')
             os.makedirs(ruta_carpeta + '/Procedimientos')
         else:
-            print(f"---------Error -------\nLa carpeta {ruta_carpeta} ya existe.")
-        '''Aqui debemos crear unA carpeta con el nombre de la tabla'''
+            self.errores += f"---------Error -------\nLa Base de datos {self.nombreTable} ya existe. \n"
+
 
 

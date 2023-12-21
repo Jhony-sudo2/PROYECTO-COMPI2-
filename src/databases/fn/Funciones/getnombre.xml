@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<funcion>
+    <nombre>fn_retornaalturamora</nombre>
+    <variable>
+        <nombre>DECLARE</nombre>
+        <tipo>4</tipo>
+    </variable>
+    <insert>
+        <tabla>persona</tabla>
+        <Titulo>edad</Titulo>
+        <Titulo>nombre</Titulo>
+        <Valor>30</Valor>
+        <Valor>nombre</Valor>
+    </insert>
+</funcion>

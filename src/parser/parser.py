@@ -1,21 +1,25 @@
 import ply.yacc as yacc
-from .lexer import tokens
 from ..aplicacion.querys.CreateDB import CreateDB
 from ..aplicacion.querys.CreateTable import CreateTable
 from ..aplicacion.querys.Insert import Insert
-from ..aplicacion.querys.Operacion import Operacion
+from src.aplicacion.querys.bucles.Mientras import Mientras
 from ..aplicacion.querys.Parametrostabla import Parametrostabla
+from ..aplicacion.querys.Select import Select
+from src.aplicacion.querys.bucles.Si import Si
+from src.parser.lexer import tokens
+from ..aplicacion.querys.funciones.Variable import Variable
+from ..aplicacion.querys.funciones.funcion import funcion
 
-lista = []
 
-def getLista():
-    return lista
 def p_initial(p):
     '''
     initial : produccion initial
             | produccion      
     '''
-
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[2]
 def p_seleccionardb(p):
     '''
     seleccionardb : USAR ID
@@ -26,12 +30,25 @@ def p_produccion(p):
     '''
     produccion  : create PCOMA
                 | createdb PCOMA
-                | insert PCOMA
-                | update PCOMA
-                | select PCOMA
-                | alter PCOMA
+                | compartidas PCOMA
                 | seleccionardb PCOMA
+                | funcion PCOMA
+                | procedure PCOMA
+                | llamado PCOMA
     '''
+    p[0] = p[1]
+
+def p_compartidas(p):
+    '''
+    compartidas : insert
+                | select
+                | update
+                | truncate
+                | drop
+                | alter
+                | delete
+    '''
+    p[0] = p[1]
 
 #CREAR BASE DE DATOS
 
@@ -40,17 +57,16 @@ def p_createdb(p):
     createdb : CREATE DATA BASE ID      
     '''
     deb = CreateDB(str(p[4]))
-    lista.append(deb)
-    print(p[0])
+    p[0] = deb
 
 #CREAR TABLA
 def p_create(p):
     '''
     create      : CREATE TABLE ID LPAREN  defcreate RPAREN      
     '''
-    nuevatabla = CreateTable(str(p[3]),p[5])
+    new = p[5][::-1]
+    nuevatabla = CreateTable(str(p[3]),new)
     p[0] = nuevatabla
-    lista.append(nuevatabla)
 
 
 def p_defcreate(p):
@@ -113,59 +129,63 @@ def p_tipodato(p):
                 | DATE
                 | DATETIME
     '''
-    if p[1] == 'INTEGER':
+    if p[1] == 'int':
         p[0] = 1
-    elif p[1] == 'DECIMAL':
+    elif p[1] == 'decimal':
         p[0] = 2
-    elif p[1] == 'NVARCHAR':
+    elif p[1] == 'nvarchar':
         p[0] = 4
-    elif p[1] == 'NCHAR':
+    elif p[1] == 'nchar':
         p[0] = 4
-    elif p[1] == 'DATE':
+    elif p[1] == 'date':
         p[0] = 5
-    elif p[1] == 'DATETIME':
+    elif p[1] == 'datetime':
         p[0] = 6
 
-#SELECT
+#****SELECT*********************************************************************
 def p_select(p):
     '''
-    select  : selectbasico 
-            | selectdefinidos 
+    select  : selectbasico
+            | SELECT funcionesdefinidas
             | selectasignacion
     '''
+    p[0] = p[1]
 
-def p_selectdefinidos(p):
+def p_funcionesefinidas(p):
     '''
-    selectdefinidos : SELECT CONCATENAR LPAREN CADENA COMA CADENA RPAREN 
-                    | SELECT SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
-                    | SELECT HOY LPAREN RPAREN
-                    | SELECT CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios 
-                    | SELECT SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
-                    | SELECT CAST
+    funcionesdefinidas :  CONCATENAR LPAREN CADENA COMA CADENA RPAREN
+                    |  SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+                    |  HOY LPAREN RPAREN
+                    |  CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
+                    |  SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
+                    |  CAST
     '''
+
 
 def p_selectbasico(p):
     '''
     selectbasico  : SELECT TIMES FROM ID 
     '''
+    basico = Select(p[4])
+    p[0] = basico
 def p_selectasignacion(p):
     '''
     selectasignacion    : SELECT  
     '''
 
-#ALTER TABLE
+#****************ALTER TABLE
 def p_alter(p):
     '''
     alter   : ALTER TABLE ID ADD ID tipodato
             | ALTER TABLE ID drop
     '''
 
-#TRUNCATE
+#**************TRUNCATE
 def p_truncate(p):
     '''
     truncate    : TRUNCATE TABLE ID 
     '''
-#DROP TABLE
+#****************DROP TABLE
 def p_drop(p):
     '''
     drop : DROP TABLE ID
@@ -179,8 +199,7 @@ def p_insert(p):
     insert      : INSERT INTO ID parametrosi VALUES entradas
     '''
     accion = Insert(p[4],p[6],p[3])
-    listado.append(accion)
-    print('produccion insert')
+    p[0] = accion
 
 def p_parametrosi(p):
     '''
@@ -250,24 +269,49 @@ def p_delete(p):
     '''
 
 
-def p_acciones(p):
-    '''
-    acciones    : variable PCOMA
-                | select PCOMA
-                | if
-    '''
+#DECLARACION------VARIABLES
 
-#VARIABLES
-def p_variables(p):
+def p_variable(p):
     '''
         variable : DECLARE ARROBA ID tipodato
+                | SET ARROBA ID EQUALS valorvar
+    '''
+    var = Variable(p[1],p[4])
+    p[0] = var
+
+def p_valorvar(p):
+    '''
+    valorvar : expression
+            | funcionesdefinidas
     '''
 
-#FUNCIONES
+#****************FUNCIONES y PROCEDURE *************
+
+def p_initial2(p):
+    '''
+    initial2 : opespeciales initial2
+            | opespeciales
+    '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[2]
+def p_opespeciales(p):
+    '''
+    opespeciales : if PCOMA
+                | variable PCOMA
+                | mientras PCOMA
+                | compartidas PCOMA
+    '''
+    p[0]=p[1]
+
+
 def p_funcion(p):
     '''
-    funcion  : CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN END
+    funcion  : CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
     '''
+    fn = funcion(p[3],p[5],p[11],p[8])
+    p[0] = fn
     
 def p_parametros(p):
     '''
@@ -275,23 +319,52 @@ def p_parametros(p):
                 | ARROBA ID tipodato
     '''
 
-def p_accionesfuncion(p):
+def p_procedure(p):
     '''
-    accionesfuncion :
+    procedure  : CREATE PROCEDURE ID LPAREN parametros RPAREN  AS BEGIN initial2 END
     '''
 
-#BUCLES
+def p_llamado(p):
+    '''
+    llamado : EXEC ID entradas
+    '''
+#****************BUCLES IF WHILE************************
 
 #IF
 def p_if(p):
     '''
-    if  : IF LPAREN condicion RPAREN
+    if  : IF LPAREN condiciones RPAREN BEGIN initial2 END
+        | IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
     '''
+    if len(p) ==  8:
+        accion = Si(p[3],p[6])
+        p[0] = accion
+    else:
+        accion = Si(p[3], p[6],acciones2=p[10])
+        p[0] = accion
+
+
+def p_condiciones(p):
+    '''
+    condiciones : condicion
+                | condicion explogicas condiciones
+    '''
+    if len(p) == 2:
+        arr = []
+        arr.append(p[1])
+        p[0] = arr
+    elif len(p) == 4:
+        arr = p[3]
+        condicionexp = (p[1],p[2],p[3])
+        arr.append(condicionexp)
+        p[0] = arr
 
 def p_condicion(p):
     '''
     condicion : expression toperador expression
     '''
+    p[0] = (p[1],p[2],p[3])
+
 
 def p_toperador(p):
     '''
@@ -302,14 +375,46 @@ def p_toperador(p):
                 | MAYORIQ
                 | MENORIQ
     '''
+    if p[0] == '=':
+        p[0] = 1
+    elif p[0] == '!=':
+        p[0] = 2
+    elif p[0] == '>':
+        p[0] = 3
+    elif p[0] == '<':
+        p[0] = 4
+    elif p[0] == '>=':
+        p[0] = 5
+    else:
+        p[0] = 6
 
-#WHILE
-
-def p_while(p):
+def p_explogicas(p):
     '''
-    while   : 
+    explogicas  : AND
+                | OR
+                | NOT1
     '''
+    if p[1] == '&&':
+        p[0] = 1
+    elif p[1] == '||':
+        p[0] = 2
+    else:
+        p[0] = 3
 
+
+#**************WHILE
+def p_mientras(p):
+    '''
+    mientras   : WHILE LPAREN condiciones RPAREN BEGIN initial2 END
+    '''
+    mientras = Mientras(p[6],p[3])
+    p[0] = mientras
+
+#**************CASE
+def p_case(p):
+    '''
+    case :
+    '''
 
 def p_expression(p):
     '''
@@ -327,9 +432,9 @@ def p_expression(p):
 
 def p_term(p):
     '''
-    term : term TIMES factor
-         | term DIVIDE factor
-         | factor
+    term : term TIMES factor2
+         | term DIVIDE factor2
+         | factor2
     '''
     if len(p) == 2:
         p[0] = p[1]
@@ -339,18 +444,29 @@ def p_term(p):
         elif p[2] == '/':
             p[0] = p[1] / p[3]
 
+
+def p_factor2(p):
+    '''
+    factor2 : LPAREN expression RPAREN
+            | factor
+    '''
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = p[2]
+
 def p_factor(p):
     '''
     factor : NUMBER
            | DECIMAL1
            | CADENA
+           | ARROBA ID
     '''
-    p[0] = p[1]
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = p[2]
 
-def p_start(p):
-    '''
-    start : initial
-    '''
 
 def t_error(t):
     print("Carácter no válido '%s'" % t.value[0])
@@ -364,4 +480,3 @@ def find_column(input, token):
     return (token.lexpos - line_start) + 1
 
 parser = yacc.yacc()
-listado = getLista()

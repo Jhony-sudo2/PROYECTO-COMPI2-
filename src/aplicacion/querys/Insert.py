@@ -7,7 +7,7 @@ import pandas as pd
 from lxml import etree
 import  json
 class Insert:
-    def __init__(self, titulos, valores,tabla):
+    def __init__(self, titulos, valores,tabla,tablasimbolos=None):
         self.errores = ''
         self.titulos=titulos
         self.valores= valores
@@ -16,6 +16,7 @@ class Insert:
         self.ruta2 = ''
         self.ruta3 = ''
         self.combinado = []
+        self.tablasimbolos = tablasimbolos
     def ejecutar(self,db):
         ruta_actual = os.getcwd()
         self.ruta3 = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/'
@@ -26,14 +27,14 @@ class Insert:
             if len(self.valores) == len(self.titulos) and len(self.titulos) == len(set(self.titulos)):
                 if self.verificar():
                     self.insertar()
-                else:
-                    self.errores += 'ocurrio un error\n'
+
             else:
                 self.errores += 'error en envio de parametros en insert\n'
         else:
             self.errores += f' La tabla {self.tabla} no existe\n'
 
         print(self.errores)
+        self.obtenerxml()
 
     def existe(self):
         return os.path.exists(self.ruta)
@@ -46,6 +47,8 @@ class Insert:
         nuevo_elemento = etree.Element("elemento")
         for clave, valor in data.items():
             subelemento = etree.Element(clave)
+            if isinstance(valor,str) and valor[0] =="'" and valor[-1] =="'":
+                valor = valor[1:-1]
             subelemento.text = str(valor)
             nuevo_elemento.append(subelemento)
 
@@ -207,4 +210,16 @@ class Insert:
         except Exception as e:
             return True
 
+    def obtenerxml(self):
+        print('generando xml de la instruccion')
+        insert = ET.Element('insert')
+        tabla = ET.SubElement(insert,'tabla')
+        tabla.text =self.tabla
+        for tmp in self.titulos:
+            titulo = ET.SubElement(insert,'Titulo')
+            titulo.text = tmp
+        for tmp in self.valores:
+            valor = ET.SubElement(insert,'Valor')
+            valor.text = str(tmp)
 
+        return insert

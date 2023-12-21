@@ -2,12 +2,8 @@ import os
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
-
 from src.parser.lexer import lexer
 from src.parser.parser import parser
-
-from src.parser.parser import listado
-
 from Analizador import Analizador
 
 
@@ -16,18 +12,20 @@ def ejecutar_consulta():
     analizador.escribir()
     consola.delete("1.0", END)
     texto = campo_texto.get("1.0", END).strip()
-     # Obtener el texto del campo
-    print(texto)
-    consola.insert(END, texto)
     print("**********la db select es "+db)
     try:
         s = texto
         result = parser.parse(s, lexer=lexer)
         print(result)
-
-        for elemento in listado:
+        salida = ''
+        for elemento in result:
             elemento.ejecutar(db)
-        listado.clear()
+            if len(elemento.errores) != 0:
+                salida += elemento.errores
+            if hasattr(elemento,'resultado'):
+                if len(elemento.resultado) !=0:
+                    salida += str(elemento.resultado)
+        consola.insert(END,salida)
         cargar_carpetas()
         cargarArbol(db)
     except EOFError:
