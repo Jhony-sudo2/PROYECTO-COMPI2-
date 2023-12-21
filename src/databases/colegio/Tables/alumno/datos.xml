@@ -20,4 +20,8 @@
 		<nombre>'NUEVO'</nombre>
 		<id>10</id>
 	</elemento>
+	<elemento>
+		<id>30</id>
+		<nombre>NUEVO</nombre>
+	</elemento>
 </datos>

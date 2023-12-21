@@ -33,7 +33,7 @@ reservadas = {
     'nchar':'NCHAR',
 
     #FUNCIONES DEL SISTEMA:
-    'CONTATENA':'CONCATENAR',
+    'CONCATENA':'CONCATENA',
     'SUBSTRAER':'SUBSTRAER',
     'HOY':'HOY',
     'CONTAR':'CONTAR',
@@ -53,7 +53,7 @@ reservadas = {
     'ELSE':'ELSE',
     'AS':'AS',
     'PROCEDURE':'PROCEDURE',
-    'WHERE':'WHERE',
+    'where':'WHERE',
     'WHILE':'WHILE',
     'exec':'EXEC',
 

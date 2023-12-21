@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <ididentificacion>1</ididentificacion>
+    <codigocliente>4</codigocliente>
+    <identificacion>4</identificacion>
+    <ididentificaciontipo>1</ididentificaciontipo>
+    <Primaria_1>ididentificacion</Primaria_1>
+    <Primaria_2>codigocliente</Primaria_2>
+    <Foranea_1>{'nombre': 'codigocliente', 'tipo': 4, 'tabla': 'tbcliente', 'referencia': 'codigocliente'}</Foranea_1>
+    <Foranea_2>{'nombre': 'ididentificaciontipo', 'tipo': 1, 'tabla': 'tbidentificaciontipo', 'referencia': 'ididentificaciontipo'}</Foranea_2>
+    <NOTNULL_3>identificacion</NOTNULL_3>
+  </Estructura>
+</Tabla>

@@ -34,7 +34,7 @@ class Insert:
             self.errores += f' La tabla {self.tabla} no existe\n'
 
         print(self.errores)
-        self.obtenerxml()
+
 
     def existe(self):
         return os.path.exists(self.ruta)

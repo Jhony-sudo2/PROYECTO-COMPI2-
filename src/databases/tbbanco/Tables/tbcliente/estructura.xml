@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <codigocliente>4</codigocliente>
+    <primer_nombre>4</primer_nombre>
+    <segundo_nombre>4</segundo_nombre>
+    <primer_apellido>4</primer_apellido>
+    <segundo_apellido>4</segundo_apellido>
+    <fecha_nacimiento>5</fecha_nacimiento>
+    <genero>4</genero>
+    <idestado>1</idestado>
+    <Primaria_1>codigocliente</Primaria_1>
+    <Foranea_1>{'nombre': 'idestado', 'tipo': 1, 'tabla': 'tbestado', 'referencia': 'idestado'}</Foranea_1>
+    <NOTNULL_2>primer_nombre</NOTNULL_2>
+    <NOTNULL_4>primer_apellido</NOTNULL_4>
+    <NOTNULL_6>fecha_nacimiento</NOTNULL_6>
+  </Estructura>
+</Tabla>

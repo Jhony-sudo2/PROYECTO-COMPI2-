@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<estado>Activo</estado>
+		<idestado>1</idestado>
+	</elemento>
+	<elemento>
+		<estado>Inactivo</estado>
+		<idestado>2</idestado>
+	</elemento>
+	<elemento>
+		<estado>Eliminado</estado>
+		<idestado>3</idestado>
+	</elemento>
+</datos>

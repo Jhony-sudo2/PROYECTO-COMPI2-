@@ -12,10 +12,11 @@ from ..aplicacion.querys.funciones.Variable import Variable
 from ..aplicacion.querys.funciones.funcion import funcion
 
 
+listaerrores = []
 def p_initial(p):
     '''
     initial : produccion initial
-            | produccion      
+            | produccion
     '''
     if len(p) == 2:
         p[0] = [p[1]]
@@ -94,22 +95,27 @@ def p_campo(p):
         parametro = Parametrostabla(p[1],p[2])
         p[0] = parametro
     else:
-        if type (p[3]) is tuple:
+        if type (p[3]) is tuple and not type(p[3][1]) is tuple:
             parametro = Parametrostabla(p[1],p[2],foranea=p[3])
+        elif type (p[3]) is tuple and type(p[3][1]) is tuple:
+            parametro = Parametrostabla(p[1],p[2],foranea=p[3][1],condicion=p[3][0])
         else:
             parametro = Parametrostabla(p[1], p[2], condicion=p[3])
         p[0] = parametro
 def p_restriccion(p):
     '''
     restriccion   : NOT NULL
+            | PRIMARY KEY foranea
             | PRIMARY KEY
             | foranea      
     '''
 
-    if(p[1] == 'NOT'):
+    if(p[1] == 'not'):
         p[0] = 1
-    elif p[1] == 'PRIMARY':
+    elif len(p) == 3:
         p[0] = 2
+    elif len(p) == 4:
+        p[0] = (2,p[3])
     else:
         p[0] = p[1]
 
@@ -149,19 +155,52 @@ def p_select(p):
     '''
     select  : selectbasico
             | SELECT funcionesdefinidas
-            | selectasignacion
+            | SELECT selectasignacion
+            | SELECT selectmultiple
     '''
     p[0] = p[1]
 
+def p_selectmultiple(p):
+    '''
+    selectmultiple : listacolumn FROM valores WHERE condiciones
+    '''
+    print(p[1])
+
+def p_listacolumn(p):
+    '''
+    listacolumn : valorescolumna COMA listacolumn
+                | valorescolumna
+    '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[3]
+
+def p_valorescolumna(p):
+    '''
+    valorescolumna  : ID PUNTO ID
+                    | ID
+                    | funcionesdefinidas
+                    | llamado
+    '''
+    if len(p) == 4:
+        valor = p[1] + p[2] + p[3]
+        p[0] = valor
+    if len(p) == 2:
+        p[0] = p[1]
+
 def p_funcionesefinidas(p):
     '''
-    funcionesdefinidas :  CONCATENAR LPAREN CADENA COMA CADENA RPAREN
+    funcionesdefinidas :  CONCATENA LPAREN factor COMA factor RPAREN
                     |  SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
                     |  HOY LPAREN RPAREN
                     |  CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
                     |  SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
                     |  CAST
     '''
+    if len(p) == 7:
+        valor = p[1] + p[2] + p[3]
+        p[0] = valor
 
 
 def p_selectbasico(p):
@@ -329,6 +368,8 @@ def p_procedure(p):
 def p_llamado(p):
     '''
     llamado : EXEC ID entradas
+            | ID LPAREN parametros RPAREN
+            | ID LPAREN RPAREN
     '''
 #****************BUCLES IF WHILE************************
 
@@ -370,7 +411,7 @@ def p_condicion(p):
 
 def p_toperador(p):
     '''
-    toperador    : IGUAL
+    toperador    : EQUALS
                 | DIFERENTE
                 | MAYORQ
                 | MENORQ
@@ -463,6 +504,7 @@ def p_factor(p):
            | DECIMAL1
            | CADENA
            | ARROBA ID
+           | ID PUNTO ID
     '''
     if len(p) == 2:
         p[0] = p[1]
@@ -475,10 +517,16 @@ def t_error(t):
     t.lexer.skip(1)
     
 def p_error(t):
-    print(f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}')
+    errores = f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}'
+    listaerrores.append(errores)
+    print('valor errores despues: ',errores)
+def getErrores():
+    return listaerrores
+
 
 def find_column(input, token):
     line_start = input.rfind('\n', 0, token.lexpos) + 1
     return (token.lexpos - line_start) + 1
 
 parser = yacc.yacc()
+parsererror = getErrores()
