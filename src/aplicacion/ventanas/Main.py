@@ -22,7 +22,8 @@ def ejecutar_consulta():
         s = texto
         result = parser.parse(s, lexer=lexer)
         print(parser)
-        if len(parsererror[0]) != 0:
+        print(len(parsererror))
+        if len(parsererror) !=0 and len(parsererror[0]) != 0:
             consola.insert(END,parsererror[0])
             parsererror.clear()
         else:
@@ -91,23 +92,23 @@ def cargarArbol(carpeta_seleccionada):
 
 
 
-#imortamos una ventana
-aplicacion= Tk()
+# Importamos una ventana
+aplicacion = Tk()
 
 etiqueta_archivo = Label(aplicacion, text="Archivo seleccionado: ")
 etiqueta_archivo.pack(pady=10)
 
-#tamaño de la ventana
-aplicacion.geometry('1020x630+0+0')
+# Tamaño de la ventana
+aplicacion.geometry('1200x800+100+50')
 
-#evitar la maximizacib
-aplicacion.resizable(0,0)
+# Evitar la maximización
+aplicacion.resizable(0, 0)
 
-#def titulo
+# Definir título
 aplicacion.title("XSQL-IDE")
 
-#panele superior Barra
-panel_superior= Frame(aplicacion, bd=1, relief=FLAT)
+# Panel superior Barra
+panel_superior = Frame(aplicacion, bd=1, relief=FLAT)
 panel_superior.pack(side=TOP)
 
 # Crear la barra de menú
@@ -122,56 +123,54 @@ barra_menu.add_cascade(label="Archivo", menu=archivo_menu)
 
 barra_menu.add_cascade(label="Herramientas", menu=archivo_menu)
 aplicacion.config(menu=barra_menu)
-#-------------------------------------------
-#panele izquierdo Arbol
-panel_izquierdo= Frame(aplicacion, bd=1, relief=FLAT, width=18, height=2)
-panel_izquierdo.pack(side=LEFT)
+# -------------------------------------------
+# Panel izquierdo Arbol
+panel_izquierdo = Frame(aplicacion, bd=1, relief=FLAT, width=200, height=2)
+panel_izquierdo.pack(side=LEFT, fill=Y)
 
 # Crear un menú desplegable para seleccionar db
-db_label = Label(panel_izquierdo, text="Base de datos: ",width=18)
+db_label = Label(panel_izquierdo, text="Base de datos: ", width=18)
 db_label.pack()
 menu_desplegable = ttk.Combobox(panel_izquierdo, state="readonly", width=18)
 menu_desplegable.pack(pady=10)
 cargar_carpetas()
 menu_desplegable.bind("<<ComboboxSelected>>", seleccionar_carpeta)
-db=menu_desplegable.get()
+db = menu_desplegable.get()
 
 # Crear el árbol de bases de datos
 arbol = ttk.Treeview(panel_izquierdo)
-arbol.pack(side=LEFT, fill=Y)
+arbol.pack(side=LEFT, fill=Y, anchor=CENTER)
 
+# ----------------------------------------------------------------------------------------
+# Panel central
+panel_central = Frame(aplicacion, bd=1, relief=FLAT)
+panel_central.pack(side=TOP, fill=Y)
 
-#----------------------------------------------------------------------------------------
-#panele central
-panel_central= Frame(aplicacion, bd=1, relief=FLAT)
-panel_central.pack(side=RIGHT)
-
-#panele interno central- Querys
-panel_querys= Frame(panel_central, bd=1, relief=FLAT)
+# Panel interno central- Querys
+panel_querys = Frame(panel_central, bd=1, relief=FLAT)
 panel_querys.pack(side=TOP)
 
-#panele intreno central- editor
-panel_editor= Frame(panel_central, bd=1, relief=FLAT)
+# Panel interno central- editor
+panel_editor = Frame(panel_central, bd=1, relief=FLAT)
 panel_editor.pack()
 
 # Crear el campo de texto para la consulta
-campo_texto = Text(panel_editor)
+campo_texto = Text(panel_editor, height=20, width=90)
 campo_texto.pack()
 
-#panele interno central- button
-panel_buton= Frame(panel_central, bd=1, relief=FLAT)
+# Panel interno central- button
+panel_buton = Frame(panel_central, bd=1, relief=FLAT)
 panel_buton.pack()
 # Crear el botón para ejecutar la consulta
-boton = Button(panel_buton, text="Ejecutar consulta", command= ejecutar_consulta)
+boton = Button(panel_buton, text="Ejecutar consulta", command=ejecutar_consulta)
 boton.pack()
 
-#panele intreno central- consola
-panel_consola= Frame(panel_central, bd=1, relief=FLAT)
+# Panel interno central- consola
+panel_consola = Frame(panel_central, bd=1, relief=FLAT)
 panel_consola.pack(side=TOP)
 
 # Crear el campo de texto para la consola
-consola = Text(panel_consola)
+consola = Text(panel_consola,  height=10, width=90)
 consola.pack()
-
 
 aplicacion.mainloop()
