@@ -18,31 +18,34 @@ def ejecutar_consulta():
     consola.delete("1.0", END)
     texto = campo_texto.get("1.0", END).strip()
     print("**********la db select es " + db)
-    try:
-        s = texto
-        result = parser.parse(s, lexer=lexer)
-        print(parser)
-        print(len(parsererror))
-        if len(parsererror) !=0 and len(parsererror[0]) != 0:
-            consola.insert(END,parsererror[0])
-            parsererror.clear()
-        else:
-            salida = ''
-            for elemento in result:
-                elemento.ejecutar(db)
-                if len(elemento.errores) != 0:
-                    salida += elemento.errores
-                if hasattr(elemento,'resultado'):
-                    if len(elemento.resultado) !=0:
-                        salida += str(elemento.resultado)
-                if hasattr(elemento,'nueva'):
-                    db = elemento.nueva
-            print('la nueva db es',db)
-            consola.insert(END,salida)
-        cargar_carpetas()
-        cargarArbol(db)
-    except EOFError:
-        print("Error")
+    if db :
+        try:
+            s = texto
+            result = parser.parse(s, lexer=lexer)
+            print(parser)
+            print(len(parsererror))
+            if len(parsererror) !=0 and len(parsererror[0]) != 0:
+                consola.insert(END,parsererror[0])
+                parsererror.clear()
+            else:
+                salida = ''
+                for elemento in result:
+                    elemento.ejecutar(db)
+                    if len(elemento.errores) != 0:
+                        salida += elemento.errores
+                    if hasattr(elemento,'resultado'):
+                        if len(elemento.resultado) !=0:
+                            salida += str(elemento.resultado)
+                    if hasattr(elemento,'nueva'):
+                        db = elemento.nueva
+                print('la nueva db es',db)
+                consola.insert(END,salida)
+            cargar_carpetas()
+            cargarArbol(db)
+        except EOFError:
+            print("Error")
+    else:
+        consola.insert(END, 'NO HAY NINGUNA BASE DE DATOS SELECCIONADA')
 
 def abrir_archivo():
     # Abre el cuadro de diálogo para seleccionar un archivo

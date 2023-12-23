@@ -26,6 +26,7 @@ class Update:
             self.errores= "ErrOR la tabla no exiate en  la base de datos"
 
 
+    #Verifica que los atributos que  se quieran actualizar esten en la estructura de la tabla
     def getEstructura(self, ruta, select):
         existenAtributos= False
         archivo = open(ruta + select, "r")
@@ -54,6 +55,7 @@ class Update:
         #df_from_xml = pd.DataFrame(data)
         return  existenAtributos
 
+    #verfica que los atributos que estan de condicion existan enla tabla
     def verficarAtributos(self, ruta, select):
         existenAtributos = False
         archivo = open(ruta + select, "r")
@@ -125,6 +127,7 @@ class Update:
 
         return 0
 
+    #obtine el valor de atributo que se quiere actualizar
     def obtnervalorCambio(self, id):
         dic = {}
         dic= self.cambios
