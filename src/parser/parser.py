@@ -221,15 +221,14 @@ def p_selectasignacion(p):
 def p_alter(p):
     '''
     alter   : ALTER TABLE ID ADD ID tipodato
-            | ALTER TABLE ID drop
+            | ALTER TABLE ID DROP COLUMN ID
     '''
-    if len(p) == 7:
+    if p[4] == "add":
         alter = Alter(p[3], True, p[5],  p[6] )
         p[0]= alter
     else:
-        pass
-        #alter = Alter(p[3], p[4])
-        #p[0] = alter
+        alter = Alter(p[3], False, p[6],  p[6] )
+        p[0] = alter
 #**************TRUNCATE
 def p_truncate(p):
     '''
