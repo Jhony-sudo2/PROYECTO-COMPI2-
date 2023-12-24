@@ -1,4 +1,6 @@
 import ply.yacc as yacc
+
+from ..aplicacion.querys.Alter import Alter
 from ..aplicacion.querys.CreateDB import CreateDB
 from ..aplicacion.querys.CreateTable import CreateTable
 from ..aplicacion.querys.Insert import Insert
@@ -221,7 +223,13 @@ def p_alter(p):
     alter   : ALTER TABLE ID ADD ID tipodato
             | ALTER TABLE ID drop
     '''
-
+    if len(p) == 7:
+        alter = Alter(p[3], True, p[5],  p[6] )
+        p[0]= alter
+    else:
+        pass
+        #alter = Alter(p[3], p[4])
+        #p[0] = alter
 #**************TRUNCATE
 def p_truncate(p):
     '''
@@ -233,7 +241,7 @@ def p_drop(p):
     drop : DROP TABLE ID
          | DROP COLUMN ID  
     '''
-        
+    p[0]= {p[2]: p[3]}
 
 #INSERT
 def p_insert(p):
