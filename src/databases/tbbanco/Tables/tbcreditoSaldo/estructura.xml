@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <credito>1</credito>
+    <fechacorte>5</fechacorte>
+    <idmoneda>1</idmoneda>
+    <idcreditoestado>1</idcreditoestado>
+    <SaldoActual>2</SaldoActual>
+    <SaldoMora>2</SaldoMora>
+    <ValorCuota>2</ValorCuota>
+    <DiasMora>1</DiasMora>
+    <alturamora>1</alturamora>
+    <limite>2</limite>
+    <idcalificacion>1</idcalificacion>
+    <Primaria_1>credito</Primaria_1>
+    <Primaria_2>fechacorte</Primaria_2>
+    <Primaria_3>idmoneda</Primaria_3>
+    <Primaria_4>idcreditoestado</Primaria_4>
+    <NOTNULL_9>alturamora</NOTNULL_9>
+    <NOTNULL_10>limite</NOTNULL_10>
+    <NOTNULL_11>idcalificacion</NOTNULL_11>
+  </Estructura>
+</Tabla>

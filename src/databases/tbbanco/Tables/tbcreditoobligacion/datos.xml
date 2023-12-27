@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<codigocliente>GT-0001</codigocliente>
+		<credito>1</credito>
+		<idobligaciontipo>1</idobligaciontipo>
+	</elemento>
+	<elemento>
+		<codigocliente>GT-0002</codigocliente>
+		<credito>2</credito>
+		<idobligaciontipo>1</idobligaciontipo>
+	</elemento>
+</datos>

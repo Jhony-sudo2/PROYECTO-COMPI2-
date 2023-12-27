@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" ?>
 <datos>
- 
+	<elemento>
+		<ididentificacion>1</ididentificacion>
+		<codigocliente>GT-0001</codigocliente>
+		<identificacion>45784560101</identificacion>
+		<ididentificaciontipo>1</ididentificaciontipo>
+	</elemento>
+	<elemento>
+		<ididentificacion>3</ididentificacion>
+		<codigocliente>GT-0002</codigocliente>
+		<identificacion>4854560101</identificacion>
+		<ididentificaciontipo>1</ididentificaciontipo>
+	</elemento>
+	<elemento>
+		<ididentificacion>2</ididentificacion>
+		<codigocliente>GT-0001</codigocliente>
+		<identificacion>94675057</identificacion>
+		<ididentificaciontipo>2</ididentificaciontipo>
+	</elemento>
 </datos>

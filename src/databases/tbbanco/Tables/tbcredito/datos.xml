@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<credito>1</credito>
+		<nocuenta>45-5454</nocuenta>
+		<idcliente>1</idcliente>
+		<fechaultimocorte>2023-11-30</fechaultimocorte>
+		<idproducto>1</idproducto>
+	</elemento>
+	<elemento>
+		<credito>2</credito>
+		<nocuenta>AF4545D</nocuenta>
+		<idcliente>3</idcliente>
+		<fechaultimocorte>2023-11-30</fechaultimocorte>
+		<idproducto>1</idproducto>
+	</elemento>
+</datos>

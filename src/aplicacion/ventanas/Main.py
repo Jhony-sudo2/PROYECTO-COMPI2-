@@ -13,15 +13,11 @@ db = ''
 def ejecutar_consulta():
     global db
 
-    analizador = Analizador("parser")
-    analizador.escribir()
     consola.delete("1.0", END)
     texto = campo_texto.get("1.0", END).strip()
-    print("**********la db select es " + db)
     try:
         s = texto
         result = parser.parse(s, lexer=lexer)
-        print(parser)
         if len(parsererror[0]) != 0:
             consola.insert(END,parsererror[0])
             parsererror.clear()
@@ -36,7 +32,6 @@ def ejecutar_consulta():
                         salida += str(elemento.resultado)
                 if hasattr(elemento,'nueva'):
                     db = elemento.nueva
-            print('la nueva db es',db)
             consola.insert(END,salida)
         cargar_carpetas()
         cargarArbol(db)

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <alumno>1</alumno>
+    <curso>1</curso>
+    <Foranea_1>{'nombre': 'alumno', 'tipo': 1, 'tabla': 'estudiante', 'referencia': 'id'}</Foranea_1>
+    <Foranea_2>{'nombre': 'curso', 'tipo': 1, 'tabla': 'curso', 'referencia': 'codigo'}</Foranea_2>
+  </Estructura>
+</Tabla>

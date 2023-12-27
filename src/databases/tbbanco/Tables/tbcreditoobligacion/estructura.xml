@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <codigocliente>4</codigocliente>
+    <credito>1</credito>
+    <idobligaciontipo>1</idobligaciontipo>
+    <Primaria_1>codigocliente</Primaria_1>
+    <Primaria_2>credito</Primaria_2>
+    <Foranea_1>{'nombre': 'idobligaciontipo', 'tipo': 1, 'tabla': 'tbobligaciontipo', 'referencia': 'idobligaciontipo'}</Foranea_1>
+  </Estructura>
+</Tabla>

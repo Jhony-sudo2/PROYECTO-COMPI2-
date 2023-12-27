@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<id>1</id>
+		<nombre>JHONY</nombre>
+	</elemento>
+	<elemento>
+		<id>2</id>
+		<nombre>LUIS</nombre>
+	</elemento>
+</datos>

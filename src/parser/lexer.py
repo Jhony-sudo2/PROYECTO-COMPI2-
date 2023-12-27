@@ -9,11 +9,11 @@ reservadas = {
     'ALTER':'ALTER',
     'TABLE':'TABLE',
     'TRUNCATE':'TRUNCATE',
-    'not':'NOT',
-    'null':'NULL',
+    'NOT':'NOT',
+    'NULL':'NULL',
     'DELETE':'DELETE',
     'FROM':'FROM',
-    'set':'SET',
+    'SET':'SET',
 
     #DML
     'UPDATE':'UPDATE',
@@ -24,13 +24,13 @@ reservadas = {
     'PRIMARY':'PRIMARY',
     'KEY':'KEY',
     'REFERENCE':'REFERENCES',
-    'date':'DATE',
-    'datetime':'DATETIME',
-    'int':'INT',
-    'decimal':'DECIMAL',
-    'boolean':'BOOL',
-    'nvarchar':'NVARCHAR',
-    'nchar':'NCHAR',
+    'DATE':'DATE',
+    'DATETIME':'DATETIME',
+    'INT':'INT',
+    'DECIMAL':'DECIMAL',
+    'BOOLEAN':'BOOL',
+    'NVARCHAR':'NVARCHAR',
+    'NCHAR':'NCHAR',
 
     #FUNCIONES DEL SISTEMA:
     'CONCATENA':'CONCATENA',
@@ -41,9 +41,9 @@ reservadas = {
     'CAST':'CAST',
 
     #ALTER 
-    'add':'ADD',
-    'column':'COLUMN',
-    'drop':'DROP',
+    'ADD':'ADD',
+    'COLUMN':'COLUMN',
+    'DROP':'DROP',
 
     #TRUNCATE
     'TRUNCATE':'TRUNCATE',
@@ -53,13 +53,13 @@ reservadas = {
     'ELSE':'ELSE',
     'AS':'AS',
     'PROCEDURE':'PROCEDURE',
-    'where':'WHERE',
+    'WHERE':'WHERE',
     'WHILE':'WHILE',
-    'exec':'EXEC',
+    'EXEC':'EXEC',
 
     #FUNCIONES
     'FUNCTION':'FUNCTION',
-    'return':'RETURN',
+    'RETURN':'RETURN',
     'BEGIN':'BEGIN',
     'END':'END',
     'DECLARE':'DECLARE',
@@ -126,7 +126,7 @@ def t_DECIMAL1(t):
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reservadas.get(t.value, 'ID')
+    t.type = reservadas.get(t.value.upper(), 'ID')
     return t
 
 def t_NUMBER(t):

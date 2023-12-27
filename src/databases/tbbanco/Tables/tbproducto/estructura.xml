@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <idproducto>1</idproducto>
+    <producto>4</producto>
+    <idestado>1</idestado>
+    <Primaria_1>idproducto</Primaria_1>
+    <NOTNULL_2>producto</NOTNULL_2>
+    <NOTNULL_3>idestado</NOTNULL_3>
+  </Estructura>
+</Tabla>

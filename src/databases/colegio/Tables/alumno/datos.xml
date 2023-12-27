@@ -1,27 +1,15 @@
 <?xml version="1.0" ?>
 <datos>
 	<elemento>
-		<id>1</id>
-		<nombre>'LUIS'</nombre>
-	</elemento>
-	<elemento>
-		<nombre>'CARLOS'</nombre>
-		<id>2</id>
-	</elemento>
-	<elemento>
-		<nombre>'JHONY'</nombre>
-		<id>5</id>
-	</elemento>
-	<elemento>
-		<nombre>'JHONY'</nombre>
-		<id>4</id>
-	</elemento>
-	<elemento>
-		<nombre>'NUEVO'</nombre>
-		<id>10</id>
-	</elemento>
-	<elemento>
 		<id>30</id>
 		<nombre>NUEVO</nombre>
+	</elemento>
+	<elemento>
+		<nombre>COMIILAS</nombre>
+		<id>7</id>
+	</elemento>
+	<elemento>
+		<id>10</id>
+		<nombre>LUIS</nombre>
 	</elemento>
 </datos>
