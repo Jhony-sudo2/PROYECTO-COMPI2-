@@ -1,0 +1,11 @@
+<Tabla>
+ <Estructura>
+  <idpc>1</idpc>
+  <nombre_pc>4</nombre_pc>
+  <marca>4</marca>
+  <Primaria_1>idpc</Primaria_1>
+  <NOTNULL_2>nombre_pc</NOTNULL_2>
+  <NOTNULL_3>marca</NOTNULL_3>
+  <impuesto>2</impuesto>
+  <precio4>2</precio4></Estructura>
+</Tabla>

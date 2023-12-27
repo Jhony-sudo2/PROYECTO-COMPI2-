@@ -1,4 +1,6 @@
 import ply.yacc as yacc
+
+from ..aplicacion.querys.Alter import Alter
 from ..aplicacion.querys.CreateDB import CreateDB
 from ..aplicacion.querys.CreateTable import CreateTable
 from ..aplicacion.querys.Insert import Insert
@@ -7,6 +9,7 @@ from ..aplicacion.querys.Parametrostabla import Parametrostabla
 from ..aplicacion.querys.Select import Select
 from src.aplicacion.querys.bucles.Si import Si
 from src.parser.lexer import tokens
+from ..aplicacion.querys.Update import Update
 from ..aplicacion.querys.Usar import Usar
 from ..aplicacion.querys.funciones.Variable import Variable
 from ..aplicacion.querys.funciones.funcion import funcion
@@ -215,9 +218,14 @@ def p_funcionesefinidas(p):
 def p_alter(p):
     '''
     alter   : ALTER TABLE ID ADD ID tipodato
-            | ALTER TABLE ID drop
+            | ALTER TABLE ID DROP COLUMN ID
     '''
-
+    if p[4] == "add":
+        alter = Alter(p[3], True, p[5],  p[6] )
+        p[0]= alter
+    else:
+        alter = Alter(p[3], False, p[6],  p[6] )
+        p[0] = alter
 #**************TRUNCATE
 def p_truncate(p):
     '''
@@ -229,7 +237,7 @@ def p_drop(p):
     drop : DROP TABLE ID
          | DROP COLUMN ID  
     '''
-        
+    p[0]= {p[2]: p[3]}
 
 #INSERT
 def p_insert(p):
@@ -278,18 +286,30 @@ def p_update(p):
     '''
     update  : UPDATE ID SET cambios WHERE ID EQUALS expression   
     '''
+    dic= {p[6]:p[8]}
+    update = Update(p[2], p[4], dic )
+    p[0] = update
+
+
 
 def p_cambios(p):
     '''
     cambios : campocambios COMA cambios
             | campocambios    
     '''
+    if len(p) == 4:
+        cambios = p[3]
+        cambios.update(p[1])  # Utiliza update para agregar al diccionario existente
+        p[0] = cambios
+    else:
+        p[0] = {**p[1]}
 
 def p_campocambios(p):
     '''
     campocambios : ID EQUALS expression   
     '''
-    
+    dic = {p[1]: p[3]}
+    p[0] = dic
     
 
 #DELETE
