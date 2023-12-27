@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <credito>1</credito>
+    <nocuenta>4</nocuenta>
+    <idcliente>1</idcliente>
+    <fechaultimocorte>5</fechaultimocorte>
+    <idproducto>1</idproducto>
+    <Primaria_1>credito</Primaria_1>
+    <Foranea_1>{'nombre': 'idproducto', 'tipo': 1, 'tabla': 'tbproducto', 'referencia': 'idproducto'}</Foranea_1>
+    <NOTNULL_2>nocuenta</NOTNULL_2>
+    <NOTNULL_3>idcliente</NOTNULL_3>
+    <NOTNULL_4>fechaultimocorte</NOTNULL_4>
+  </Estructura>
+</Tabla>

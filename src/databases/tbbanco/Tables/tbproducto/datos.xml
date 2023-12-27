@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<idproducto>1</idproducto>
+		<producto>Credito Fiduiciario</producto>
+		<idestado>1</idestado>
+	</elemento>
+	<elemento>
+		<idproducto>2</idproducto>
+		<producto>Credito Hipotecario</producto>
+		<idestado>1</idestado>
+	</elemento>
+	<elemento>
+		<idproducto>3</idproducto>
+		<producto>Tarjeta de Credito Oro</producto>
+		<idestado>1</idestado>
+	</elemento>
+</datos>

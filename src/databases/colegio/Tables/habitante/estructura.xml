@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <id>1</id>
+    <nombre>4</nombre>
+    <edad>1</edad>
+    <ciudad>4</ciudad>
+    <Primaria_1>id</Primaria_1>
+    <NOTNULL_2>nombre</NOTNULL_2>
+    <NOTNULL_3>edad</NOTNULL_3>
+    <NOTNULL_4>ciudad</NOTNULL_4>
+  </Estructura>
+</Tabla>

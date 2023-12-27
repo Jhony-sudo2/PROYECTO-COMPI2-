@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<idobligaciontipo>1</idobligaciontipo>
+		<obligaciontipo>DIRECTO</obligaciontipo>
+	</elemento>
+	<elemento>
+		<idobligaciontipo>2</idobligaciontipo>
+		<obligaciontipo>INDIRECTO</obligaciontipo>
+	</elemento>
+</datos>

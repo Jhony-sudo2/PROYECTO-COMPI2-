@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" ?>
 <datos>
- 
+	<elemento>
+		<codigocliente>GT-0001</codigocliente>
+		<primer_nombre>PETER</primer_nombre>
+		<segundo_nombre>JUAN</segundo_nombre>
+		<primer_apellido>PARKER</primer_apellido>
+		<segundo_apellido>SEGUNDO</segundo_apellido>
+		<fecha_nacimiento>1990-01-01</fecha_nacimiento>
+		<genero>M</genero>
+		<idestado>1</idestado>
+	</elemento>
+	<elemento>
+		<codigocliente>GT-0002</codigocliente>
+		<primer_nombre>JULIO</primer_nombre>
+		<primer_apellido>PEREZ</primer_apellido>
+		<segundo_apellido>LOPEZ</segundo_apellido>
+		<fecha_nacimiento>1995-12-01</fecha_nacimiento>
+		<idestado>1</idestado>
+	</elemento>
 </datos>

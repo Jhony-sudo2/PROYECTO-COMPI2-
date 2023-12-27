@@ -13,8 +13,6 @@ db = ''
 def ejecutar_consulta():
     global db
 
-    analizador = Analizador("parser")
-    analizador.escribir()
     consola.delete("1.0", END)
     texto = campo_texto.get("1.0", END).strip()
     print("**********la db select es " + db)

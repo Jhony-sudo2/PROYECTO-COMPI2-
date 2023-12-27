@@ -4,4 +4,12 @@
 		<edad>30</edad>
 		<nombre>Jhony</nombre>
 	</elemento>
+	<elemento>
+		<nombre>LUIS</nombre>
+		<edad>40</edad>
+	</elemento>
+	<elemento>
+		<edad>50</edad>
+		<nombre>JHONY</nombre>
+	</elemento>
 </datos>

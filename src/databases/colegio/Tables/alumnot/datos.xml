@@ -5,4 +5,9 @@
 		<nombre>'Jhony'</nombre>
 		<id>1</id>
 	</elemento>
+	<elemento>
+		<otra>30</otra>
+		<nombre>COMBINADO</nombre>
+		<id>10</id>
+	</elemento>
 </datos>

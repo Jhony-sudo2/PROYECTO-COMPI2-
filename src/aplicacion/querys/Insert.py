@@ -33,7 +33,7 @@ class Insert:
         else:
             self.errores += f' La tabla {self.tabla} no existe\n'
 
-        print(self.errores)
+
 
 
     def existe(self):
@@ -108,10 +108,9 @@ class Insert:
             nombres = [tupla[0] for tupla in foraneas]
             resultado = all(elemento in self.titulos for elemento in nombres)
             if resultado:
-                print('viene la foranea')
                 for index,tupla in enumerate(self.combinado):
                     for index2,nombre in enumerate(nombres):
-                        if tupla[0] in nombre:
+                        if tupla[0] == nombre:
                             tabla = foraneas[index2][1]
                             idt = foraneas[index2][2]
                             valor = tupla[1]
@@ -161,39 +160,41 @@ class Insert:
     def verificartipos(self,atributos):
         self.combinado  = list(zip(self.titulos,self.valores))
         combinado = self.combinado
-        tmp = []
+
         for tupla in combinado:
             tipo = self.getTipo(tupla[1])
-            tmp2 = (tupla[0],tipo)
-            tmp.append(tmp2)
-        resultado =  all(tupla1 in atributos for tupla1 in tmp)
-        if resultado:
-            return True
-        else:
-            self.errores += 'los tipos de datos no coinciden con los atributos\n'
-            return False
-
+            esperado = self.getTipoesperado(tupla[0],atributos)
+            if esperado == 2 and tipo == 1:
+                tipo=2
+            if tipo != esperado:
+                self.errores += f'tipo de dato incorrecto para {tupla[0]}, se esperaba un tipo de dato {esperado} y se mando {tipo} \n'
+                return False
+        return True
+    def getTipoesperado(self,titulo,atributos):
+        for tmp in atributos:
+            if titulo in tmp:
+                return int(tmp[1])
 
     def getTipo(self,valor):
         if isinstance(valor, int):
-            return '1'
+            return 1
         elif isinstance(valor, float):
-            return '2'
+            return 2
         elif isinstance(valor, str) and valor.startswith("'") and valor.endswith("'"):
             if len(valor) == 22 and valor[1:11].replace('-', '').isdigit() and valor[12:22].replace(':', '').isdigit():
                 try:
-                    datetime.strptime(valor[1:-1], '%d-%m-%Y %H:%M')
-                    return '6'
+                    datetime.strptime(valor[1:-1], '%Y-%m-%d %H:%M')
+                    return 6
                 except ValueError:
-                    return '4'
+                    return 4
             elif len(valor) == 12 and valor[1:5].isdigit() and valor[6:8].isdigit() and valor[9:11].isdigit():
                 try:
-                    datetime.strptime(valor[1:-1], '%d-%m-%Y')
-                    return '5'
+                    datetime.strptime(valor[1:-1], '%Y-%m-%d')
+                    return 5
                 except ValueError:
-                    return '4'
+                    return 4
             else:
-                return '4'
+                return 4
         else:
             return 0
 
@@ -202,11 +203,17 @@ class Insert:
         archivo = open(self.ruta2, "r")
         try:
             df = pd.read_xml(archivo)
+            mensaje = ''
+            tmpresultado = False
             for tmp in combinado:
                 resultado = df.query(f"{tmp[0]} == {tmp[1]}")
                 if not resultado.empty:
-                    self.errores += f'ya hay un elemento {tmp[0]} = {tmp[1]} \n'
-            return resultado.empty
+                    mensaje += f'ya hay un elemento {tmp[0]} = {tmp[1]} \n'
+                else:
+                    tmpresultado = True
+            if not tmpresultado:
+                self.errores += mensaje
+            return tmpresultado
         except Exception as e:
             return True
 

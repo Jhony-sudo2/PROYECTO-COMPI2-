@@ -15,7 +15,7 @@ from ..aplicacion.querys.funciones.Variable import Variable
 from ..aplicacion.querys.funciones.funcion import funcion
 
 
-listaerrores = []
+listaerrores = ['']
 def p_initial(p):
     '''
     initial : produccion initial
@@ -156,28 +156,35 @@ def p_tipodato(p):
 #****SELECT*********************************************************************
 def p_select(p):
     '''
-    select  : selectbasico
-            | SELECT funcionesdefinidas
-            | SELECT selectasignacion
+    select  : SELECT funcionesdefinidas
             | SELECT selectmultiple
     '''
-    p[0] = p[1]
+    p[0] = p[2]
+
 
 def p_selectmultiple(p):
     '''
-    selectmultiple : listacolumn FROM valores WHERE condiciones
+    selectmultiple  : listacolumn FROM valores WHERE condiciones
+                    | listacolumn FROM valores
     '''
-    print(p[1])
-
+    if len(p) == 4:
+        fn = Select(p[3],p[1])
+        p[0] = fn
+    else:
+        fn = Select(p[3],p[1],condiciones=p[5])
+        p[0] = fn
 def p_listacolumn(p):
     '''
     listacolumn : valorescolumna COMA listacolumn
                 | valorescolumna
+                | TIMES
     '''
-    if len(p) == 2:
+    if len(p) == 2 and p[0] != '*':
         p[0] = [p[1]]
-    else:
+    elif len(p) == 4:
         p[0] = [p[1]] + p[3]
+    elif p[0] =='*':
+        p[0] = '*'
 
 def p_valorescolumna(p):
     '''
@@ -189,8 +196,9 @@ def p_valorescolumna(p):
     if len(p) == 4:
         valor = p[1] + p[2] + p[3]
         p[0] = valor
-    if len(p) == 2:
+    else:
         p[0] = p[1]
+
 
 def p_funcionesefinidas(p):
     '''
@@ -205,17 +213,6 @@ def p_funcionesefinidas(p):
         valor = p[1] + p[2] + p[3]
         p[0] = valor
 
-
-def p_selectbasico(p):
-    '''
-    selectbasico  : SELECT TIMES FROM ID 
-    '''
-    basico = Select(p[4])
-    p[0] = basico
-def p_selectasignacion(p):
-    '''
-    selectasignacion    : SELECT  
-    '''
 
 #****************ALTER TABLE
 def p_alter(p):
@@ -268,13 +265,9 @@ def p_valentradas(p):
                  | expression
     '''
     if len(p) == 4:
-        valentrada = p[3]
-        valentrada.append(p[1])
-        p[0] = valentrada
+        p[0] = [p[1]] + p[3]
     else:
-        valentrada = []
-        valentrada.append(p[1])
-        p[0] = valentrada
+        p[0] = [p[1]]
 
 def p_valores(p):
     '''
@@ -282,14 +275,10 @@ def p_valores(p):
             | ID     
     '''
 
-    if len(p) == 4:
-        valores = p[3]
-        valores.append(p[1])
-        p[0] = valores
+    if len(p) == 2:
+        p[0] = [p[1]]
     else:
-        valores = []
-        valores.append(p[1])
-        p[0] = valores
+        p[0] = [p[1]] + p[3]
 
     
 #UPDATE    
@@ -413,14 +402,9 @@ def p_condiciones(p):
                 | condicion explogicas condiciones
     '''
     if len(p) == 2:
-        arr = []
-        arr.append(p[1])
-        p[0] = arr
+        p[0] = [p[1]]
     elif len(p) == 4:
-        arr = p[3]
-        condicionexp = (p[1],p[2],p[3])
-        arr.append(condicionexp)
-        p[0] = arr
+        p[0] = [p[1]] + [p[2]] + p[3]
 
 def p_condicion(p):
     '''
@@ -438,18 +422,7 @@ def p_toperador(p):
                 | MAYORIQ
                 | MENORIQ
     '''
-    if p[0] == '=':
-        p[0] = 1
-    elif p[0] == '!=':
-        p[0] = 2
-    elif p[0] == '>':
-        p[0] = 3
-    elif p[0] == '<':
-        p[0] = 4
-    elif p[0] == '>=':
-        p[0] = 5
-    else:
-        p[0] = 6
+    p[0] = p[1]
 
 def p_explogicas(p):
     '''
@@ -457,12 +430,8 @@ def p_explogicas(p):
                 | OR
                 | NOT1
     '''
-    if p[1] == '&&':
-        p[0] = 1
-    elif p[1] == '||':
-        p[0] = 2
-    else:
-        p[0] = 3
+
+    p[0] = p[1]
 
 
 #**************WHILE
@@ -525,11 +494,14 @@ def p_factor(p):
            | CADENA
            | ARROBA ID
            | ID PUNTO ID
+           | ID
     '''
     if len(p) == 2:
         p[0] = p[1]
+    elif p[2] == '.':
+        p[0] = p[1] + p[2] + p[3]
     else:
-        p[0] = p[2]
+        p[0] = p[1]
 
 
 def t_error(t):
@@ -537,9 +509,9 @@ def t_error(t):
     t.lexer.skip(1)
     
 def p_error(t):
+    print(f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}')
     errores = f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}'
     listaerrores.append(errores)
-    print('valor errores despues: ',errores)
 def getErrores():
     return listaerrores
 

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <id>1</id>
+    <nombre>4</nombre>
+    <Primaria_1>id</Primaria_1>
+  </Estructura>
+</Tabla>

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<alumno>1</alumno>
+		<curso>1</curso>
+	</elemento>
+	<elemento>
+		<alumno>1</alumno>
+		<curso>2</curso>
+	</elemento>
+</datos>

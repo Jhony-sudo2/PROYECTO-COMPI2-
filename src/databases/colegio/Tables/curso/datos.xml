@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<codigo>1</codigo>
+		<nombre>MATE</nombre>
+	</elemento>
+	<elemento>
+		<codigo>2</codigo>
+		<nombre>PROGRA</nombre>
+	</elemento>
+</datos>

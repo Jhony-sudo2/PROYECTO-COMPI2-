@@ -1,15 +1,15 @@
 <?xml version="1.0" ?>
 <datos>
 	<elemento>
-		<identificaciontipo>DPI</identificaciontipo>
 		<ididentificaciontipo>1</ididentificaciontipo>
+		<identificaciontipo>DPI</identificaciontipo>
 	</elemento>
 	<elemento>
-		<identificaciontipo>NIT</identificaciontipo>
 		<ididentificaciontipo>2</ididentificaciontipo>
+		<identificaciontipo>NIT</identificaciontipo>
 	</elemento>
 	<elemento>
-		<identificaciontipo>PASAPORTE</identificaciontipo>
 		<ididentificaciontipo>3</ididentificaciontipo>
+		<identificaciontipo>PASAPORTE</identificaciontipo>
 	</elemento>
 </datos>
