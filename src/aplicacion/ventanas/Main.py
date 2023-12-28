@@ -10,33 +10,37 @@ from Analizador import Analizador
 from src.parser.parser import parsererror
 
 db = ''
+funciones = []
 def ejecutar_consulta():
     global db
-
+    global funciones
     consola.delete("1.0", END)
-    texto = campo_texto.get("1.0", END).strip()
-    print("**********la db select es " + db)
+    texto = campo_texto.get("1.0", "end-1c").strip()
     if db :
         try:
             s = texto
             result = parser.parse(s, lexer=lexer)
-            print(parser)
-            print(len(parsererror))
-            if len(parsererror) !=0 and len(parsererror[0]) != 0:
-                consola.insert(END,parsererror[0])
+            if parsererror:
+                errores = ''
+                for r in parsererror:
+                    errores += r +'\n'
+                consola.insert(END,errores)
                 parsererror.clear()
             else:
                 salida = ''
                 for elemento in result:
+                    if hasattr(elemento,'tablafunciones'):
+                        elemento.tablafunciones = funciones
                     elemento.ejecutar(db)
                     if len(elemento.errores) != 0:
                         salida += elemento.errores
+                    if hasattr(elemento,'tablafunciones'):
+                        elemento.tablafunciones = funciones
                     if hasattr(elemento,'resultado'):
                         if len(elemento.resultado) !=0:
                             salida += str(elemento.resultado)
                     if hasattr(elemento,'nueva'):
                         db = elemento.nueva
-                print('la nueva db es',db)
                 consola.insert(END,salida)
             cargar_carpetas()
             cargarArbol(db)

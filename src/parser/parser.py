@@ -1,21 +1,27 @@
+
 import ply.yacc as yacc
 
 from ..aplicacion.querys.Alter import Alter
 from ..aplicacion.querys.CreateDB import CreateDB
 from ..aplicacion.querys.CreateTable import CreateTable
 from ..aplicacion.querys.Insert import Insert
-from src.aplicacion.querys.bucles.Mientras import Mientras
 from ..aplicacion.querys.Parametrostabla import Parametrostabla
 from ..aplicacion.querys.Select import Select
 from src.aplicacion.querys.bucles.Si import Si
 from src.parser.lexer import tokens
 from ..aplicacion.querys.Update import Update
 from ..aplicacion.querys.Usar import Usar
+from ..aplicacion.querys.definidas.Concatena import Concatena
+from ..aplicacion.querys.definidas.Contar import Contar
+from ..aplicacion.querys.definidas.Hoy import Hoy
+from ..aplicacion.querys.definidas.Suma import Suma
+from ..aplicacion.querys.funciones.Ejecutar import Ejecutar
+from ..aplicacion.querys.funciones.OVariable import OVariable
 from ..aplicacion.querys.funciones.Variable import Variable
 from ..aplicacion.querys.funciones.funcion import funcion
 
 
-listaerrores = ['']
+listaerrores = []
 def p_initial(p):
     '''
     initial : produccion initial
@@ -38,7 +44,7 @@ def p_produccion(p):
                 | createdb PCOMA
                 | compartidas PCOMA
                 | seleccionardb PCOMA
-                | funcion PCOMA
+                | funcion
                 | procedure PCOMA
                 | llamado PCOMA
     '''
@@ -205,14 +211,22 @@ def p_funcionesefinidas(p):
     funcionesdefinidas :  CONCATENA LPAREN factor COMA factor RPAREN
                     |  SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
                     |  HOY LPAREN RPAREN
-                    |  CONTAR LPAREN TIMES RPAREN FROM ID WHERE campocambios
-                    |  SUMA LPAREN ID RPAREN FROM ID WHERE campocambios
+                    |  CONTAR LPAREN TIMES RPAREN FROM ID
+                    |  SUMA LPAREN ID RPAREN FROM ID
                     |  CAST
     '''
-    if len(p) == 7:
-        valor = p[1] + p[2] + p[3]
+    if p[1] == 'CONCATENA' or p[1] == 'concatena':
+        valor = Concatena((p[3]),(p[5]))
         p[0] = valor
-
+    elif len(p) == 4:
+        fn = Hoy()
+        p[0] = fn
+    elif p[3] == '*':
+        fn = Contar(p[6],columna=None)
+        p[0] = fn
+    elif p[1] == 'SUMA' or p[1] == 'suma':
+        fn = Suma(p[6],p[3])
+        p[0] = fn
 
 #****************ALTER TABLE
 def p_alter(p):
@@ -327,7 +341,8 @@ def p_variable(p):
                 | SET ARROBA ID EQUALS valorvar
     '''
     var = Variable(p[1],p[4])
-    p[0] = var
+    fn = OVariable(var)
+    p[0] = fn
 
 def p_valorvar(p):
     '''
@@ -350,7 +365,6 @@ def p_opespeciales(p):
     '''
     opespeciales : if PCOMA
                 | variable PCOMA
-                | mientras PCOMA
                 | compartidas PCOMA
     '''
     p[0]=p[1]
@@ -368,6 +382,10 @@ def p_parametros(p):
     parametros  : ARROBA ID tipodato COMA parametros
                 | ARROBA ID tipodato
     '''
+    if len(p) == 6:
+        p[0] = [(p[2],p[3])] + p[5]
+    else:
+        p[0] = [(p[2],p[3])]
 
 def p_procedure(p):
     '''
@@ -377,9 +395,16 @@ def p_procedure(p):
 def p_llamado(p):
     '''
     llamado : EXEC ID entradas
-            | ID LPAREN parametros RPAREN
+            | ID entradas
             | ID LPAREN RPAREN
     '''
+    linea = p.lineno(1)
+    if len(p) == 3:
+        fn = Ejecutar(p[1],linea,parametros=p[2])
+        p[0] = fn
+    elif len(p) == 4:
+        fn = Ejecutar(p[1],linea)
+        p[0] = fn
 #****************BUCLES IF WHILE************************
 
 #IF
@@ -432,15 +457,6 @@ def p_explogicas(p):
     '''
 
     p[0] = p[1]
-
-
-#**************WHILE
-def p_mientras(p):
-    '''
-    mientras   : WHILE LPAREN condiciones RPAREN BEGIN initial2 END
-    '''
-    mientras = Mientras(p[6],p[3])
-    p[0] = mientras
 
 #**************CASE
 def p_case(p):
@@ -509,7 +525,6 @@ def t_error(t):
     t.lexer.skip(1)
     
 def p_error(t):
-    print(f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}')
     errores = f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}'
     listaerrores.append(errores)
 def getErrores():
