@@ -48,15 +48,11 @@ class Alter():
         for fila in root.findall('Estructura'):
             row = {}
             for child in fila:
-
-                print(f'Columna {child.tag} == "{self.idColumna}"')
                 if child.tag == self.idColumna:
 
                     existenAtributos = True
                     break
                 else:
-                    print('no existe el atributo')
-
                     existenAtributos = False
             if existenAtributos is True:
                 self.errores = f'El la columna {self.idColumna} ya existe en la tabla'

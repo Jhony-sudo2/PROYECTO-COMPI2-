@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<datos>
+	<elemento>
+		<idalumno>1</idalumno>
+		<nombre>estuardo</nombre>
+		<seccion>A</seccion>
+	</elemento>
+	<elemento>
+		<idalumno>2</idalumno>
+		<nombre>nadie</nombre>
+		<seccion>B</seccion>
+	</elemento>
+	<elemento>
+		<idalumno>3</idalumno>
+		<nombre>maria</nombre>
+		<seccion>A</seccion>
+	</elemento>
+</datos>

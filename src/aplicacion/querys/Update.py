@@ -97,9 +97,12 @@ class Update:
 
             for etiqueta, valor in self.actualees.items():
                 valor_en_persona = persona.find(etiqueta).text if persona.find(etiqueta) is not None else None
-                valor = valor.strip('\'"') if valor is not None else valor
+                if isinstance(valor, str) and (
+                        valor.startswith("'") and valor.endswith("'") or valor.startswith('"') and valor.endswith('"')):
+                    valor = valor.strip('\'"')
 
-                if valor_en_persona == valor:
+                print(f'val {valor_en_persona} == {valor}')
+                if str(valor_en_persona) == str(valor):
                     coincidencia = True
                 else:
                     coincidencia = False

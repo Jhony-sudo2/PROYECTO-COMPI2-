@@ -8,6 +8,32 @@ from src.parser.lexer import lexer
 from src.parser.parser import parser
 from Analizador import Analizador
 from src.parser.parser import parsererror
+class CustomLexer:
+    def __init__(self):
+        self.keywords = set(reservadas.values())
+        #self.keywords_lower = set(keyword.lower() for keyword in self.keywords)
+
+    def lex(self, code):
+        for token, value in self.tokenize(code.upper()):
+            yield token, value
+
+    def tokenize(self, code):
+        start = 0
+        while start < len(code):
+            while start < len(code) and code[start].isspace():
+                start += 1
+            if start >= len(code):
+                break
+
+            end = start + 1
+            while end < len(code) and not code[end].isspace():
+                end += 1
+
+            value = code[start:end]
+            token = 'Token.Keyword' if value in  self.keywords else 'Token.Text'
+            yield token, value
+
+            start = end
 
 db = ''
 def ejecutar_consulta():
@@ -16,34 +42,34 @@ def ejecutar_consulta():
     consola.delete("1.0", END)
     texto = campo_texto.get("1.0", END).strip()
     print("**********la db select es " + db)
-    if db :
-        try:
-            s = texto
-            result = parser.parse(s, lexer=lexer)
-            print(parser)
-            print(len(parsererror))
-            if len(parsererror) !=0 and len(parsererror[0]) != 0:
-                consola.insert(END,parsererror[0])
-                parsererror.clear()
-            else:
-                salida = ''
-                for elemento in result:
-                    elemento.ejecutar(db)
-                    if len(elemento.errores) != 0:
-                        salida += elemento.errores
-                    if hasattr(elemento,'resultado'):
-                        if len(elemento.resultado) !=0:
-                            salida += str(elemento.resultado)
-                    if hasattr(elemento,'nueva'):
-                        db = elemento.nueva
-                print('la nueva db es',db)
-                consola.insert(END,salida)
-            cargar_carpetas()
-            cargarArbol(db)
-        except EOFError:
-            print("Error")
-    else:
-        consola.insert(END, 'NO HAY NINGUNA BASE DE DATOS SELECCIONADA')
+    #if db :
+    try:
+        s = texto
+        result = parser.parse(s, lexer=lexer)
+        print(parser)
+        print(len(parsererror))
+        if len(parsererror) !=0 and len(parsererror[0]) != 0:
+            consola.insert(END,parsererror[0])
+            parsererror.clear()
+        else:
+            salida = ''
+            for elemento in result:
+                elemento.ejecutar(db)
+                if len(elemento.errores) != 0:
+                    salida += elemento.errores
+                if hasattr(elemento,'resultado'):
+                    if len(elemento.resultado) !=0:
+                        salida += str(elemento.resultado)
+                if hasattr(elemento,'nueva'):
+                    db = elemento.nueva
+            print('la nueva db es',db)
+            consola.insert(END,salida)
+        cargar_carpetas()
+        cargarArbol(db)
+    except EOFError:
+        print("Error")
+    #else:
+     #   consola.insert(END, 'NO HAY NINGUNA BASE DE DATOS SELECCIONADA')
 
 def abrir_archivo():
     # Abre el cuadro de diálogo para seleccionar un archivo

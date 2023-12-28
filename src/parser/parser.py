@@ -9,6 +9,7 @@ from ..aplicacion.querys.Parametrostabla import Parametrostabla
 from ..aplicacion.querys.Select import Select
 from src.aplicacion.querys.bucles.Si import Si
 from src.parser.lexer import tokens
+from ..aplicacion.querys.Trucate import Trucate
 from ..aplicacion.querys.Update import Update
 from ..aplicacion.querys.Usar import Usar
 from ..aplicacion.querys.funciones.Variable import Variable
@@ -231,7 +232,10 @@ def p_truncate(p):
     '''
     truncate    : TRUNCATE TABLE ID 
     '''
+    fn = Trucate(p[3])
+    p[0]= fn
 #****************DROP TABLE
+
 def p_drop(p):
     '''
     drop : DROP TABLE ID
