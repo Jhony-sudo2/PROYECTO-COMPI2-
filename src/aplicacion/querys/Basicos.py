@@ -1,7 +1,8 @@
 import  os
 from datetime import datetime
-
-
+from src.parser.lexer2 import lexer2
+from src.parser.parser2 import parser2
+from src.parser.parser2 import tablasimbolos
 def getrutatablas(db):
     ruta_actual = os.getcwd()
     ruta3 = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/'
@@ -46,3 +47,12 @@ def getTipoDato(valor):
             return 4
     else:
         return 0
+
+
+def getvalores(texto,tablasimbolose):
+    try:
+        tablasimbolos = tablasimbolose
+        resultado = parser2.parse(texto, lexer=lexer2)
+        return resultado
+    except Exception as e:
+        print('ocurrio un error')

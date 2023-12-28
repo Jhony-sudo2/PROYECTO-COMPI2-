@@ -19,7 +19,7 @@ from ..aplicacion.querys.funciones.Ejecutar import Ejecutar
 from ..aplicacion.querys.funciones.OVariable import OVariable
 from ..aplicacion.querys.funciones.Variable import Variable
 from ..aplicacion.querys.funciones.funcion import funcion
-
+from ..aplicacion.querys.funciones.setVariable import SetVariable
 
 listaerrores = []
 def p_initial(p):
@@ -340,15 +340,19 @@ def p_variable(p):
         variable : DECLARE ARROBA ID tipodato
                 | SET ARROBA ID EQUALS valorvar
     '''
-    var = Variable(p[1],p[4])
-    fn = OVariable(var)
-    p[0] = fn
-
+    if len(p) == 5:
+        var = Variable(p[3],p[4])
+        fn = OVariable(var)
+        p[0] = fn
+    else:
+        fn = SetVariable(p[3],p[5])
+        p[0] = fn
 def p_valorvar(p):
     '''
     valorvar : expression
             | funcionesdefinidas
     '''
+    p[0] = p[1]
 
 #****************FUNCIONES y PROCEDURE *************
 
@@ -471,12 +475,13 @@ def p_expression(p):
                | term
     '''
     if len(p) == 2:
-        p[0] = p[1]
+        p[0] = str(p[1])
     else:
         if p[2] == '+':
-            p[0] = p[1] + p[3]
+            p[0] = f'{p[1]} + {p[3]}'
         elif p[2] == '-':
-            p[0] = p[1] - p[3]
+            p[0] = f'{p[1]} - {p[3]}'
+
 
 def p_term(p):
     '''
@@ -485,12 +490,12 @@ def p_term(p):
          | factor2
     '''
     if len(p) == 2:
-        p[0] = p[1]
+        p[0] = str(p[1])
     else:
         if p[2] == '*':
-            p[0] = p[1] * p[3]
+            p[0] = f'{str(p[1])} * {str(p[3])}'
         elif p[2] == '/':
-            p[0] = p[1] / p[3]
+            p[0] = f'{str(p[1])} / {str(p[3])}'
 
 
 def p_factor2(p):
@@ -499,9 +504,9 @@ def p_factor2(p):
             | factor
     '''
     if len(p) == 2:
-        p[0] = p[1]
+        p[0] = str(p[1])
     else:
-        p[0] = p[2]
+        p[0] = f'( + {str(p[2])} + )'
 
 def p_factor(p):
     '''
@@ -513,12 +518,11 @@ def p_factor(p):
            | ID
     '''
     if len(p) == 2:
-        p[0] = p[1]
+        p[0] = str(p[1])
     elif p[2] == '.':
         p[0] = p[1] + p[2] + p[3]
     else:
-        p[0] = p[1]
-
+        p[0] = p[1] + p[2]
 
 def t_error(t):
     print("Carácter no válido '%s'" % t.value[0])

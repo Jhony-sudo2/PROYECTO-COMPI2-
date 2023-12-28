@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <datos>
 	<elemento>
 		<id>30</id>
@@ -10,5 +11,13 @@
 	<elemento>
 		<id>10</id>
 		<nombre>nuevo</nombre>
+	</elemento>
+	<elemento>
+		<id>8</id>
+		<nombre>LUIS</nombre>
+	</elemento>
+	<elemento>
+		<id>5</id>
+		<nombre>ABCD</nombre>
 	</elemento>
 </datos>

@@ -54,7 +54,6 @@ reservadas = {
     'AS':'AS',
     'PROCEDURE':'PROCEDURE',
     'WHERE':'WHERE',
-    'WHILE':'WHILE',
     'EXEC':'EXEC',
 
     #FUNCIONES

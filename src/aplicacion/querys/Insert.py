@@ -6,6 +6,10 @@ from datetime import datetime
 import pandas as pd
 from lxml import etree
 import  json
+
+from src.aplicacion.querys.Basicos import getvalores
+
+
 class Insert:
     def __init__(self, titulos, valores,tabla,tablasimbolos=None):
         self.errores = ''
@@ -18,6 +22,7 @@ class Insert:
         self.combinado = []
         self.tablasimbolos = tablasimbolos
     def ejecutar(self,db):
+        self.valorescambiados()
         ruta_actual = os.getcwd()
         self.ruta3 = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/'
         ruta = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/' + self.tabla + '/estructura.xml'
@@ -34,8 +39,13 @@ class Insert:
             self.errores += f' La tabla {self.tabla} no existe\n'
 
 
-
-
+    # METODO PARA CONVERTIR LAS CADENAS A VALORES.
+    def valorescambiados(self):
+        print(self.valores)
+        for i in range(len(self.valores)):
+            self.valores[i] = getvalores(self.valores[i], self.tablasimbolos)
+        print('valores cambiados')
+        print(self.valores)
     def existe(self):
         return os.path.exists(self.ruta)
 

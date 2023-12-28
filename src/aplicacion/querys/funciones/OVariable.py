@@ -8,8 +8,15 @@ class OVariable:
 
 
     def ejecutar(self,db):
+        print(f'nombre variable: {self.variable.nombre}')
+        print(f'valor: {self.variable.valor}')
         pass
 
+    def ingresarvariable(self):
+        pass
+
+    def asignarvalor(self):
+        pass
     def obtenerxml(self):
         print('generando xml de una variable')
         variable = ET.Element('variable')
