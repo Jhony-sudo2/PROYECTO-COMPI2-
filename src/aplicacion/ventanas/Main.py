@@ -36,9 +36,10 @@ class CustomLexer:
             start = end
 
 db = ''
+funciones = []
 def ejecutar_consulta():
     global db
-
+    global funciones
     consola.delete("1.0", END)
     texto = campo_texto.get("1.0", END).strip()
     print("**********la db select es " + db)

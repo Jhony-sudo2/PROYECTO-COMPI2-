@@ -1,21 +1,32 @@
+from xml.dom import minidom
+
 from src.aplicacion.querys.Basicos import *
 import xml.etree.ElementTree as ET
 import os
 class funcion:
-    def __init__(self,nombre,parametros,acciones,tiporetorno):
+    def __init__(self,nombre,parametros,acciones,tiporetorno,tablafunciones=None,db = None):
         self.nombre = nombre
         self.parametros = parametros
         self.acciones = acciones
         self.errores = ''
         self.tiporetorno = tiporetorno
-
+        self.tablasimbolos = []
+        self.tablafunciones = tablafunciones
+        self.db = db
     def ejecutar(self,db):
-        print(f'creando funcion {self.nombre} EN LA BASE: {db}')
-        if not self.verificar(db):
-            print('generando xml')
-            self.generarxml()
-        else:
-            self.errores += f' la funcion: {self.nombre} ya existe en la base de datos: {db}'
+        if self.buscar(db):
+            print(f'Guardando funcion  {self.nombre} EN LA BASE: {db}')
+            fn = funcion(self.nombre,self.parametros,self.acciones,self.tiporetorno,db=db)
+            self.tablafunciones.append(fn)
+
+
+
+    def buscar(self,db):
+        for tmp in self.tablafunciones:
+            if tmp.nombre == self.nombre and tmp.db == db:
+                self.errores += f' la funcion: {self.nombre} ya existe en la base de datos: {db}'
+                return False
+        return True
 
     def verificar(self,db):
         ruta = getrutafunciones(db)
@@ -33,7 +44,10 @@ class funcion:
         tree = ET.ElementTree(funcion)
         root = tree.getroot()  # Accede al elemento raíz
         xml_string = ET.tostring(root, encoding='utf-8')  # Especifica el encoding
-        print(xml_string)
+        formatted_xml = minidom.parseString(xml_string).toprettyxml(indent="\t")
+        lines = formatted_xml.split('\n')
+        final = '\n'.join(line for line in lines if line.strip())
+        print(final)
 
 
 

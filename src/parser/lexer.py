@@ -54,7 +54,6 @@ reservadas = {
     'AS':'AS',
     'PROCEDURE':'PROCEDURE',
     'WHERE':'WHERE',
-    'WHILE':'WHILE',
     'EXEC':'EXEC',
 
     #FUNCIONES
@@ -118,7 +117,9 @@ t_RPAREN = r'\)'
 
 
 
-
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
 def t_DECIMAL1(t):
     r'-?\d+\.\d+'
     t.value = float(t.value)
@@ -140,8 +141,7 @@ def t_CADENA(t):
     return t
 
 
-
-t_ignore = ' \t\n'
+t_ignore = ' \t'
 
 def t_error(t):
     print(f"Illegal character '{t.value[0]}'")
