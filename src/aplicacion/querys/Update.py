@@ -6,15 +6,18 @@ from xml.etree.ElementTree import parse
 
 class Update:
     #recibinos los val de cambiios queson los nuevos valores
-    def __init__(self, tabla, cambios, actuales):
+    def __init__(self, tabla, cambios, actuales, tablasimbolos=None):
         self.errores = ''
         self.tabla= tabla
         self.cambios= cambios
         self.actualees=actuales
+        self.tablasimbolos=tablasimbolos
     def ejecutar(self, db):
         ruta_actual = os.getcwd()
         ruta_tabla = os.path.abspath( os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/' + self.tabla
         existeTb=existetabla(ruta_tabla)
+        self.actualees=self.convertirCadenas(self.actualees)
+        self.cambios=self.convertirCadenas(self.cambios)
         if existeTb :
             #Debemos verificar si existen los campos que se quieren actualizar
             estructura=self.getEstructura(ruta_tabla, '/estructura.xml')
@@ -135,4 +138,16 @@ class Update:
         dic = {}
         dic= self.cambios
         return  dic[id]
+    def convertirCadenas(self, cadenas):
+        for etiqueta, valor in cadenas.items():
+            valor= getvalores(valor, self.tablasimbolos)
+        return  cadenas;
 
+
+    def valorescambiados(self, valores):
+        print(valores)
+        for i in range(len(valores)):
+            valores[i] = getvalores(valores[i], self.tablasimbolos)
+        print('valores cambiados')
+        print(valores)
+        return valores
