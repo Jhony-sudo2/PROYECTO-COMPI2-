@@ -9,6 +9,7 @@ class Trucate():
         self.idTable=idTable
         self.errores=errores
         self.tablaRef=''
+        self.resultado = ''
 
 
     def ejecutar(self, db):
@@ -23,6 +24,7 @@ class Trucate():
                 seelimino=self.borrar_elementos(ruta2)
                 if seelimino:
                     print('Se borro el contenido de la tabla')
+                    self.resultado = f'Se vacio el contenido de la tabla {self.idTable}'
                 else:
                     print('No se borro el contenido de la tabla')
             else:

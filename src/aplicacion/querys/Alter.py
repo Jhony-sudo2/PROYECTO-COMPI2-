@@ -16,6 +16,7 @@ class Alter():
         self.tipoColumna = tipoColumna
         self.esTabla = esTabla
         self.errores = errores
+        self.resultado = ''
 
     def ejecutar(self, db):
         # Agregamos codigo para agregar columna
@@ -27,6 +28,7 @@ class Alter():
             if self.agregar is True:
                     if self.verificarColumna(ruta_tabla, '/estructura.xml') is False:
                         print('Se ingreso un nueo atributo a la tabla ')
+                        self.resultado = f'Se agregp la columnda {self.idColumna} a la tabla'
 
             else:
                 # agresgamos codigo para eliminar columna
@@ -81,6 +83,7 @@ class Alter():
                     fila.remove(child)
                     existeColumna=True
                     print('Se elimino la columna ')
+                    self.resultado=f'Se elimino la columna {self.idColumna}'
                     break
         if existeColumna is False:
             self.error= f'Error la columna {self.idColumna} no exite en la tabla, por loo tanto no se puede eliminar'

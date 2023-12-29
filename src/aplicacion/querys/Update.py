@@ -12,6 +12,7 @@ class Update:
         self.cambios= cambios
         self.actualees=actuales
         self.tablasimbolos=tablasimbolos
+        self.resultado = ''
     def ejecutar(self, db):
         ruta_actual = os.getcwd()
         ruta_tabla = os.path.abspath( os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/' + self.tabla
@@ -120,6 +121,7 @@ class Update:
                         elemento.text = nuevo_valor
                     persona = elemento
                 seEncontroVal=True
+                self.resultado = 'Se ha actualizado la tabla'
             else:
                 print(f"eroror el valor no se encontro")
 

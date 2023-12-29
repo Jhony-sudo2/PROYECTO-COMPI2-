@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter import filedialog
 
 from src.aplicacion.querys import Usar
+from src.aplicacion.ventanas.arbolgramatica import Arbolgramatica
 from src.parser.lexer import lexer
 from src.parser.parser import parser
 from Analizador import Analizador
@@ -65,6 +66,8 @@ def ejecutar_consulta():
                     db = elemento.nueva
             print('la nueva db es',db)
             consola.insert(END,salida)
+        arbol= Arbolgramatica(s)
+        arbol.dibujar()
         cargar_carpetas()
         cargarArbol(db)
     except EOFError:
