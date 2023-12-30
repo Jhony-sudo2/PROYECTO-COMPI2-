@@ -6,18 +6,19 @@ from xml.etree.ElementTree import parse
 
 class Update:
     #recibinos los val de cambiios queson los nuevos valores
-    def __init__(self, tabla, cambios, actuales, tablasimbolos=None):
+    def __init__(self, tabla, cambios, actuales, signo=None, tablasimbolos=None):
         self.errores = ''
         self.tabla= tabla
         self.cambios= cambios
         self.actualees=actuales
+        self.signo= signo
         self.tablasimbolos=tablasimbolos
         self.resultado = ''
     def ejecutar(self, db):
         ruta_actual = os.getcwd()
         ruta_tabla = os.path.abspath( os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/' + self.tabla
         existeTb=existetabla(ruta_tabla)
-        self.actualees=self.convertirCadenas(self.actualees)
+        #self.actualees=self.convertirCadenas(self.actualees)
         self.cambios=self.convertirCadenas(self.cambios)
         if existeTb :
             #Debemos verificar si existen los campos que se quieren actualizar
@@ -33,6 +34,7 @@ class Update:
     #Verifica que los atributos que  se quieran actualizar esten en la estructura de la tabla
     def getEstructura(self, ruta, select):
         existenAtributos= False
+        tipoIgual=False
         archivo = open(ruta + select, "r")
         df = pd.read_xml(archivo)
         # Cargar el archivo XML
@@ -40,10 +42,20 @@ class Update:
         root = tree.getroot()
         for persona in root.findall('Estructura'):
             row = {}
-            for etiqueta in self.cambios.keys():
+            for etiqueta,valor in self.cambios.items():
+                print(f'Etiqueta: {etiqueta}  Valor: {type(valor)}')
                 for child in persona:
                     row[child.tag] = child.text
+                    print(f'Etiqueta: {etiqueta}  tag: {child.tag}')
+                    valor=(valor)
                     if child.tag ==etiqueta:
+                        '''print(f'{self.getTipo(valor[0])} : {child.text}')
+                        if self.getTipo(valor[0])== child.text:
+                            tipoIgual=True
+                        else:
+                            tipoIgual=False
+                            self.errores=f'Tipo de dato no coincide'
+                            return False'''
                         existenAtributos=True
                         break
                     else:
@@ -66,19 +78,22 @@ class Update:
         df = pd.read_xml(archivo)
         tree = parse(ruta + select)
         root = tree.getroot()
+        print(type(self.actualees))
         for persona in root.findall('Estructura'):
             row = {}
-            for etiqueta in self.actualees.keys():
+            for condicion in self.actualees:
+                id= str(condicion.getId())
                 for child in persona:
                     row[child.tag] = child.text
-                    if child.tag == etiqueta:
+                    if child.tag == id:
+
                         existenAtributos = True
                         break
                     else:
                         print('no existe el atributo')
                         existenAtributos = False
                 if existenAtributos is False:
-                    self.errores = f'El atributo {etiqueta} no existe'
+                    self.errores = f'El atributo {id} no existe'
                     return False
 
         return existenAtributos
@@ -99,14 +114,17 @@ class Update:
         for persona in root.findall('elemento'):
             coincidencia = False
 
-            for etiqueta, valor in self.actualees.items():
+            for condicion in self.actualees:
+                etiqueta=str(condicion.getId())
+                valor=condicion.getVa2()
                 valor_en_persona = persona.find(etiqueta).text if persona.find(etiqueta) is not None else None
                 if isinstance(valor, str) and (
                         valor.startswith("'") and valor.endswith("'") or valor.startswith('"') and valor.endswith('"')):
                     valor = valor.strip('\'"')
 
                 print(f'val {valor_en_persona} == {valor}')
-                if str(valor_en_persona) == str(valor):
+                #if str(valor_en_persona) == str(valor):
+                if condicion.validar(valor_en_persona):
                     coincidencia = True
                 else:
                     coincidencia = False
@@ -123,10 +141,11 @@ class Update:
                 seEncontroVal=True
                 self.resultado = 'Se ha actualizado la tabla'
             else:
-                print(f"eroror el valor no se encontro")
+                break
+                print(f"eroror el valor {valor} no se encontro")
 
         if seEncontroVal is False:
-            self.errores = f'Error no se encontro el valor en la columnas especificadas'
+            self.errores = f'Error no se encontro el valor {valor}  en la columnas especificadas'
 
         archivo.close()
 
@@ -135,11 +154,7 @@ class Update:
 
         return 0
 
-    #obtine el valor de atributo que se quiere actualizar
-    def obtnervalorCambio(self, id):
-        dic = {}
-        dic= self.cambios
-        return  dic[id]
+
     def convertirCadenas(self, cadenas):
         for etiqueta, valor in cadenas.items():
             valor= getvalores(valor, self.tablasimbolos)
@@ -153,3 +168,37 @@ class Update:
         print('valores cambiados')
         print(valores)
         return valores
+
+    def getTipo(self, valor):
+        print(f"Valor recibido en getTipo: {valor}")
+
+        if isinstance(valor, int):
+            print("Tipo 1: int")
+            return 1
+        elif isinstance(valor, float):
+            print("Tipo 2: float")
+            return 2
+        elif isinstance(valor, str) and valor.startswith("'") and valor.endswith("'"):
+            if len(valor) == 22 and valor[1:11].replace('-', '').isdigit() and valor[12:22].replace(':', '').isdigit():
+                try:
+                    datetime.strptime(valor[1:-1], '%Y-%m-%d %H:%M')
+                    print("Tipo 6: datetime")
+                    return 6
+                except ValueError:
+                    print("Tipo 4: formato incorrecto para datetime")
+                    return 4
+            elif len(valor) == 12 and valor[1:5].isdigit() and valor[6:8].isdigit() and valor[9:11].isdigit():
+                try:
+                    datetime.strptime(valor[1:-1], '%Y-%m-%d')
+                    print("Tipo 5: fecha")
+                    return 5
+                except ValueError:
+                    print("Tipo 4: formato incorrecto para fecha")
+                    return 4
+            else:
+                print("Tipo 4: formato incorrecto para cadena")
+                return 4
+        else:
+            print("Tipo 0: no reconocido")
+            return 0
+

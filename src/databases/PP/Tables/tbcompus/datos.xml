@@ -1,22 +1,27 @@
 <datos>
 	<elemento>
 		<marca>Dell</marca>
-		<nombre_pc>gamers lap68</nombre_pc>
+		<nombre_pc>gamers lap3</nombre_pc>
 		<idpc>1</idpc>
 	</elemento>
 	<elemento>
 		<marca>Dell</marca>
-		<nombre_pc>gamers lap68</nombre_pc>
+		<nombre_pc>gamers lap345</nombre_pc>
 		<idpc>2</idpc>
 	</elemento>
 	<elemento>
 		<marca>HP</marca>
-		<nombre_pc>pavilion</nombre_pc>
+		<nombre_pc>gamers hp</nombre_pc>
 		<idpc>3</idpc>
+	</elemento>
+	<elemento>
+		<marca>Dell</marca>
+		<nombre_pc>gamers lap345</nombre_pc>
+		<idpc>4</idpc>
 	</elemento>
 	<elemento>
 		<idpc>5</idpc>
 		<marca>asus</marca>
-		<nombre_pc>ROG</nombre_pc>
+		<nombre_pc>gamers menor</nombre_pc>
 	</elemento>
 </datos>

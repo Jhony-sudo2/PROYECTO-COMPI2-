@@ -71,164 +71,166 @@ Rule 61    valentradas -> expression COMA valentradas
 Rule 62    valentradas -> expression
 Rule 63    valores -> ID COMA valores
 Rule 64    valores -> ID
-Rule 65    update -> UPDATE ID SET cambios WHERE ID EQUALS expression
-Rule 66    update -> UPDATE ID SET cambios WHERE condiciones
-Rule 67    cambios -> campocambios COMA cambios
-Rule 68    cambios -> campocambios
-Rule 69    campocambios -> ID EQUALS expression
-Rule 70    delete -> DELETE FROM ID WHERE ID EQUALS expression
-Rule 71    variable -> DECLARE ARROBA ID tipodato
-Rule 72    variable -> SET ARROBA ID EQUALS valorvar
-Rule 73    valorvar -> expression
-Rule 74    valorvar -> funcionesdefinidas
-Rule 75    initial2 -> opespeciales initial2
-Rule 76    initial2 -> opespeciales
-Rule 77    opespeciales -> if PCOMA
-Rule 78    opespeciales -> variable PCOMA
-Rule 79    opespeciales -> compartidas PCOMA
-Rule 80    funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
-Rule 81    parametros -> ARROBA ID tipodato COMA parametros
-Rule 82    parametros -> ARROBA ID tipodato
-Rule 83    procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END
-Rule 84    llamado -> EXEC ID entradas
-Rule 85    llamado -> ID entradas
-Rule 86    llamado -> ID LPAREN RPAREN
-Rule 87    if -> IF LPAREN condiciones RPAREN BEGIN initial2 END
-Rule 88    if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
-Rule 89    condiciones -> condicion
-Rule 90    condiciones -> condicion explogicas condiciones
-Rule 91    condicion -> expression toperador expression
-Rule 92    toperador -> EQUALS
-Rule 93    toperador -> DIFERENTE
-Rule 94    toperador -> MAYORQ
-Rule 95    toperador -> MENORQ
-Rule 96    toperador -> MAYORIQ
-Rule 97    toperador -> MENORIQ
-Rule 98    explogicas -> AND
-Rule 99    explogicas -> OR
-Rule 100   explogicas -> NOT1
-Rule 101   case -> <empty>
-Rule 102   expression -> expression PLUS term
-Rule 103   expression -> expression MINUS term
-Rule 104   expression -> term
-Rule 105   term -> term TIMES factor2
-Rule 106   term -> term DIVIDE factor2
-Rule 107   term -> factor2
-Rule 108   factor2 -> LPAREN expression RPAREN
-Rule 109   factor2 -> factor
-Rule 110   factor -> NUMBER
-Rule 111   factor -> DECIMAL1
-Rule 112   factor -> CADENA
-Rule 113   factor -> ARROBA ID
-Rule 114   factor -> ID PUNTO ID
-Rule 115   factor -> ID
+Rule 65    update -> UPDATE ID SET cambios WHERE condi
+Rule 66    cambios -> campocambios COMA cambios
+Rule 67    cambios -> campocambios
+Rule 68    campocambios -> ID EQUALS expression
+Rule 69    delete -> DELETE FROM ID WHERE condi
+Rule 70    condi -> ID toperador expression AND condi
+Rule 71    condi -> ID toperador expression
+Rule 72    variable -> DECLARE ARROBA ID tipodato
+Rule 73    variable -> SET ARROBA ID EQUALS valorvar
+Rule 74    valorvar -> expression
+Rule 75    valorvar -> funcionesdefinidas
+Rule 76    initial2 -> opespeciales initial2
+Rule 77    initial2 -> opespeciales
+Rule 78    opespeciales -> if PCOMA
+Rule 79    opespeciales -> variable PCOMA
+Rule 80    opespeciales -> compartidas PCOMA
+Rule 81    funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+Rule 82    parametros -> ARROBA ID tipodato COMA parametros
+Rule 83    parametros -> ARROBA ID tipodato
+Rule 84    procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END
+Rule 85    llamado -> EXEC ID entradas
+Rule 86    llamado -> ID entradas
+Rule 87    llamado -> ID LPAREN RPAREN
+Rule 88    if -> IF LPAREN condiciones RPAREN BEGIN initial2 END
+Rule 89    if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+Rule 90    condiciones -> condicion
+Rule 91    condiciones -> condicion explogicas condiciones
+Rule 92    condicion -> expression toperador expression
+Rule 93    toperador -> EQUALS
+Rule 94    toperador -> DIFERENTE
+Rule 95    toperador -> MAYORQ
+Rule 96    toperador -> MENORQ
+Rule 97    toperador -> MAYORIQ
+Rule 98    toperador -> MENORIQ
+Rule 99    explogicas -> AND
+Rule 100   explogicas -> OR
+Rule 101   explogicas -> NOT1
+Rule 102   case -> <empty>
+Rule 103   expression -> expression PLUS term
+Rule 104   expression -> expression MINUS term
+Rule 105   expression -> term
+Rule 106   term -> term TIMES factor2
+Rule 107   term -> term DIVIDE factor2
+Rule 108   term -> factor2
+Rule 109   factor2 -> LPAREN expression RPAREN
+Rule 110   factor2 -> factor
+Rule 111   factor -> NUMBER
+Rule 112   factor -> DECIMAL1
+Rule 113   factor -> CADENA
+Rule 114   factor -> ARROBA ID
+Rule 115   factor -> ID PUNTO ID
+Rule 116   factor -> ID
 
 Terminals, with rules where they appear
 
 ADD                  : 53
 ALTER                : 53 54
-AND                  : 98
-ARROBA               : 71 72 81 82 113
-AS                   : 80 83
+AND                  : 70 99
+ARROBA               : 72 73 82 83 114
+AS                   : 81 84
 BASE                 : 18
-BEGIN                : 80 83 87 88 88
+BEGIN                : 81 84 88 89 89
 BOOL                 : 31
-CADENA               : 48 112
+CADENA               : 48 113
 CAST                 : 52
 COLUMN               : 53 54 57
-COMA                 : 20 40 47 48 48 61 63 67 81
+COMA                 : 20 40 47 48 48 61 63 66 82
 CONCATENA            : 47
 CONTAR               : 50
-CREATE               : 18 19 80 83
+CREATE               : 18 19 81 84
 DATA                 : 18
 DATE                 : 34
 DATETIME             : 35
 DECIMAL              : 30
-DECIMAL1             : 111
-DECLARE              : 71
-DELETE               : 70
-DIFERENTE            : 93
-DIVIDE               : 106
+DECIMAL1             : 112
+DECLARE              : 72
+DELETE               : 69
+DIFERENTE            : 94
+DIVIDE               : 107
 DROP                 : 54 56 57
-ELSE                 : 88
-END                  : 80 83 87 88 88
-EQUALS               : 65 69 70 72 92
-EXEC                 : 84
-FROM                 : 38 39 50 51 70
-FUNCTION             : 80
+ELSE                 : 89
+END                  : 81 84 88 89 89
+EQUALS               : 68 73 93
+EXEC                 : 85
+FROM                 : 38 39 50 51 69
+FUNCTION             : 81
 HOY                  : 49
-ID                   : 3 18 19 22 23 28 28 43 43 44 50 51 51 53 53 54 54 55 56 57 58 63 64 65 65 66 69 70 70 71 72 80 81 82 83 84 85 86 113 114 114 115
-IF                   : 87 88
+ID                   : 3 18 19 22 23 28 28 43 43 44 50 51 51 53 53 54 54 55 56 57 58 63 64 65 68 69 70 71 72 73 81 82 83 84 85 86 87 114 115 115 116
+IF                   : 88 89
 IGUAL                : 
 INSERT               : 58
 INT                  : 29
 INTO                 : 58
 KEY                  : 25 26
-LPAREN               : 19 28 32 33 47 48 49 50 51 59 60 80 83 86 87 88 108
-MAYORIQ              : 96
-MAYORQ               : 94
-MENORIQ              : 97
-MENORQ               : 95
-MINUS                : 103
+LPAREN               : 19 28 32 33 47 48 49 50 51 59 60 81 84 87 88 89 109
+MAYORIQ              : 97
+MAYORQ               : 95
+MENORIQ              : 98
+MENORQ               : 96
+MINUS                : 104
 NCHAR                : 33
 NOT                  : 24
-NOT1                 : 100
+NOT1                 : 101
 NULL                 : 24
-NUMBER               : 32 33 48 48 110
+NUMBER               : 32 33 48 48 111
 NVARCHAR             : 32
-OR                   : 99
-PCOMA                : 4 5 6 7 9 10 77 78 79 80
-PLUS                 : 102
+OR                   : 100
+PCOMA                : 4 5 6 7 9 10 78 79 80 81
+PLUS                 : 103
 PRIMARY              : 25 26
-PROCEDURE            : 83
-PUNTO                : 43 114
+PROCEDURE            : 84
+PUNTO                : 43 115
 REFERENCES           : 28
-RETURN               : 80 80
-RPAREN               : 19 28 32 33 47 49 50 51 59 60 80 83 86 87 88 108
+RETURN               : 81 81
+RPAREN               : 19 28 32 33 47 49 50 51 59 60 81 84 87 88 89 109
 SELECT               : 36 37
-SET                  : 65 66 72
+SET                  : 65 73
 SUBSTRAER            : 48
 SUMA                 : 51
 TABLE                : 19 53 54 55 56
-TIMES                : 42 50 105
+TIMES                : 42 50 106
 TRUNCATE             : 55
-UPDATE               : 65 66
+UPDATE               : 65
 USAR                 : 3
 VALUES               : 58
-WHERE                : 38 65 66 70
+WHERE                : 38 65 69
 error                : 
 
 Nonterminals, with rules where they appear
 
 alter                : 16
-cambios              : 65 66 67
+cambios              : 65 66
 campo                : 20 21
-campocambios         : 67 68
+campocambios         : 66 67
 case                 : 
-compartidas          : 6 79
-condicion            : 89 90
-condiciones          : 38 66 87 88 90
+compartidas          : 6 80
+condi                : 65 69 70
+condicion            : 90 91
+condiciones          : 38 88 89 91
 create               : 4
 createdb             : 5
 defcreate            : 19 20
 delete               : 17
 drop                 : 15
-entradas             : 58 84 85
-explogicas           : 90
-expression           : 61 62 65 69 70 73 80 91 91 102 103 108
-factor               : 47 47 109
-factor2              : 105 106 107
+entradas             : 58 85 86
+explogicas           : 91
+expression           : 61 62 68 70 71 74 81 92 92 103 104 109
+factor               : 47 47 110
+factor2              : 106 107 108
 foranea              : 25 27
 funcion              : 8
-funcionesdefinidas   : 36 45 74
-if                   : 77
+funcionesdefinidas   : 36 45 75
+if                   : 78
 initial              : 1 0
-initial2             : 75 80 83 87 88 88
+initial2             : 76 81 84 88 89 89
 insert               : 11
 listacolumn          : 38 39 40
 llamado              : 10 46
-opespeciales         : 75 76
-parametros           : 80 81 83
+opespeciales         : 76 77
+parametros           : 81 82 84
 parametrosi          : 58
 procedure            : 9
 produccion           : 1 2
@@ -236,16 +238,16 @@ restriccion          : 22
 seleccionardb        : 7
 select               : 12
 selectmultiple       : 37
-term                 : 102 103 104 105 106
-tipodato             : 22 23 53 71 80 81 82
-toperador            : 91
+term                 : 103 104 105 106 107
+tipodato             : 22 23 53 72 81 82 83
+toperador            : 70 71 92
 truncate             : 14
 update               : 13
 valentradas          : 60 61
 valores              : 38 39 59 63
 valorescolumna       : 40 41
-valorvar             : 72
-variable             : 78
+valorvar             : 73
+variable             : 79
 
 Parsing method: LALR
 
@@ -271,22 +273,21 @@ state 0
     (16) compartidas -> . alter
     (17) compartidas -> . delete
     (3) seleccionardb -> . USAR ID
-    (80) funcion -> . CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
-    (83) procedure -> . CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END
-    (84) llamado -> . EXEC ID entradas
-    (85) llamado -> . ID entradas
-    (86) llamado -> . ID LPAREN RPAREN
+    (81) funcion -> . CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+    (84) procedure -> . CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END
+    (85) llamado -> . EXEC ID entradas
+    (86) llamado -> . ID entradas
+    (87) llamado -> . ID LPAREN RPAREN
     (58) insert -> . INSERT INTO ID parametrosi VALUES entradas
     (36) select -> . SELECT funcionesdefinidas
     (37) select -> . SELECT selectmultiple
-    (65) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (66) update -> . UPDATE ID SET cambios WHERE condiciones
+    (65) update -> . UPDATE ID SET cambios WHERE condi
     (55) truncate -> . TRUNCATE TABLE ID
     (56) drop -> . DROP TABLE ID
     (57) drop -> . DROP COLUMN ID
     (53) alter -> . ALTER TABLE ID ADD COLUMN ID tipodato
     (54) alter -> . ALTER TABLE ID DROP COLUMN ID
-    (70) delete -> . DELETE FROM ID WHERE ID EQUALS expression
+    (69) delete -> . DELETE FROM ID WHERE condi
 
     CREATE          shift and go to state 10
     USAR            shift and go to state 19
@@ -346,22 +347,21 @@ state 2
     (16) compartidas -> . alter
     (17) compartidas -> . delete
     (3) seleccionardb -> . USAR ID
-    (80) funcion -> . CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
-    (83) procedure -> . CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END
-    (84) llamado -> . EXEC ID entradas
-    (85) llamado -> . ID entradas
-    (86) llamado -> . ID LPAREN RPAREN
+    (81) funcion -> . CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+    (84) procedure -> . CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END
+    (85) llamado -> . EXEC ID entradas
+    (86) llamado -> . ID entradas
+    (87) llamado -> . ID LPAREN RPAREN
     (58) insert -> . INSERT INTO ID parametrosi VALUES entradas
     (36) select -> . SELECT funcionesdefinidas
     (37) select -> . SELECT selectmultiple
-    (65) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (66) update -> . UPDATE ID SET cambios WHERE condiciones
+    (65) update -> . UPDATE ID SET cambios WHERE condi
     (55) truncate -> . TRUNCATE TABLE ID
     (56) drop -> . DROP TABLE ID
     (57) drop -> . DROP COLUMN ID
     (53) alter -> . ALTER TABLE ID ADD COLUMN ID tipodato
     (54) alter -> . ALTER TABLE ID DROP COLUMN ID
-    (70) delete -> . DELETE FROM ID WHERE ID EQUALS expression
+    (69) delete -> . DELETE FROM ID WHERE condi
 
     $end            reduce using rule 2 (initial -> produccion .)
     CREATE          shift and go to state 10
@@ -457,8 +457,8 @@ state 10
 
     (19) create -> CREATE . TABLE ID LPAREN defcreate RPAREN
     (18) createdb -> CREATE . DATA BASE ID
-    (80) funcion -> CREATE . FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
-    (83) procedure -> CREATE . PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END
+    (81) funcion -> CREATE . FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+    (84) procedure -> CREATE . PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END
 
     TABLE           shift and go to state 35
     DATA            shift and go to state 36
@@ -468,8 +468,8 @@ state 10
 
 state 11
 
-    (85) llamado -> ID . entradas
-    (86) llamado -> ID . LPAREN RPAREN
+    (86) llamado -> ID . entradas
+    (87) llamado -> ID . LPAREN RPAREN
     (60) entradas -> . LPAREN valentradas RPAREN
 
     LPAREN          shift and go to state 40
@@ -534,7 +534,7 @@ state 19
 
 state 20
 
-    (84) llamado -> EXEC . ID entradas
+    (85) llamado -> EXEC . ID entradas
 
     ID              shift and go to state 42
 
@@ -565,9 +565,9 @@ state 22
     (44) valorescolumna -> . ID
     (45) valorescolumna -> . funcionesdefinidas
     (46) valorescolumna -> . llamado
-    (84) llamado -> . EXEC ID entradas
-    (85) llamado -> . ID entradas
-    (86) llamado -> . ID LPAREN RPAREN
+    (85) llamado -> . EXEC ID entradas
+    (86) llamado -> . ID entradas
+    (87) llamado -> . ID LPAREN RPAREN
 
     CONCATENA       shift and go to state 46
     SUBSTRAER       shift and go to state 47
@@ -587,8 +587,7 @@ state 22
 
 state 23
 
-    (65) update -> UPDATE . ID SET cambios WHERE ID EQUALS expression
-    (66) update -> UPDATE . ID SET cambios WHERE condiciones
+    (65) update -> UPDATE . ID SET cambios WHERE condi
 
     ID              shift and go to state 57
 
@@ -619,7 +618,7 @@ state 26
 
 state 27
 
-    (70) delete -> DELETE . FROM ID WHERE ID EQUALS expression
+    (69) delete -> DELETE . FROM ID WHERE condi
 
     FROM            shift and go to state 62
 
@@ -755,47 +754,47 @@ state 36
 
 state 37
 
-    (80) funcion -> CREATE FUNCTION . ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+    (81) funcion -> CREATE FUNCTION . ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
 
     ID              shift and go to state 65
 
 
 state 38
 
-    (83) procedure -> CREATE PROCEDURE . ID LPAREN parametros RPAREN AS BEGIN initial2 END
+    (84) procedure -> CREATE PROCEDURE . ID LPAREN parametros RPAREN AS BEGIN initial2 END
 
     ID              shift and go to state 66
 
 
 state 39
 
-    (85) llamado -> ID entradas .
+    (86) llamado -> ID entradas .
 
-    PCOMA           reduce using rule 85 (llamado -> ID entradas .)
-    COMA            reduce using rule 85 (llamado -> ID entradas .)
-    FROM            reduce using rule 85 (llamado -> ID entradas .)
+    PCOMA           reduce using rule 86 (llamado -> ID entradas .)
+    COMA            reduce using rule 86 (llamado -> ID entradas .)
+    FROM            reduce using rule 86 (llamado -> ID entradas .)
 
 
 state 40
 
-    (86) llamado -> ID LPAREN . RPAREN
+    (87) llamado -> ID LPAREN . RPAREN
     (60) entradas -> LPAREN . valentradas RPAREN
     (61) valentradas -> . expression COMA valentradas
     (62) valentradas -> . expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     RPAREN          shift and go to state 69
     LPAREN          shift and go to state 68
@@ -820,7 +819,7 @@ state 41
 
 state 42
 
-    (84) llamado -> EXEC ID . entradas
+    (85) llamado -> EXEC ID . entradas
     (60) entradas -> . LPAREN valentradas RPAREN
 
     LPAREN          shift and go to state 80
@@ -890,8 +889,8 @@ state 51
 
     (43) valorescolumna -> ID . PUNTO ID
     (44) valorescolumna -> ID .
-    (85) llamado -> ID . entradas
-    (86) llamado -> ID . LPAREN RPAREN
+    (86) llamado -> ID . entradas
+    (87) llamado -> ID . LPAREN RPAREN
     (60) entradas -> . LPAREN valentradas RPAREN
 
     PUNTO           shift and go to state 86
@@ -944,8 +943,7 @@ state 56
 
 state 57
 
-    (65) update -> UPDATE ID . SET cambios WHERE ID EQUALS expression
-    (66) update -> UPDATE ID . SET cambios WHERE condiciones
+    (65) update -> UPDATE ID . SET cambios WHERE condi
 
     SET             shift and go to state 90
 
@@ -981,7 +979,7 @@ state 61
 
 state 62
 
-    (70) delete -> DELETE FROM . ID WHERE ID EQUALS expression
+    (69) delete -> DELETE FROM . ID WHERE condi
 
     ID              shift and go to state 95
 
@@ -1002,60 +1000,60 @@ state 64
 
 state 65
 
-    (80) funcion -> CREATE FUNCTION ID . LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+    (81) funcion -> CREATE FUNCTION ID . LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
 
     LPAREN          shift and go to state 98
 
 
 state 66
 
-    (83) procedure -> CREATE PROCEDURE ID . LPAREN parametros RPAREN AS BEGIN initial2 END
+    (84) procedure -> CREATE PROCEDURE ID . LPAREN parametros RPAREN AS BEGIN initial2 END
 
     LPAREN          shift and go to state 99
 
 
 state 67
 
-    (114) factor -> ID . PUNTO ID
-    (115) factor -> ID .
+    (115) factor -> ID . PUNTO ID
+    (116) factor -> ID .
 
     PUNTO           shift and go to state 100
-    TIMES           reduce using rule 115 (factor -> ID .)
-    DIVIDE          reduce using rule 115 (factor -> ID .)
-    COMA            reduce using rule 115 (factor -> ID .)
-    PLUS            reduce using rule 115 (factor -> ID .)
-    MINUS           reduce using rule 115 (factor -> ID .)
-    RPAREN          reduce using rule 115 (factor -> ID .)
-    EQUALS          reduce using rule 115 (factor -> ID .)
-    DIFERENTE       reduce using rule 115 (factor -> ID .)
-    MAYORQ          reduce using rule 115 (factor -> ID .)
-    MENORQ          reduce using rule 115 (factor -> ID .)
-    MAYORIQ         reduce using rule 115 (factor -> ID .)
-    MENORIQ         reduce using rule 115 (factor -> ID .)
-    WHERE           reduce using rule 115 (factor -> ID .)
-    PCOMA           reduce using rule 115 (factor -> ID .)
-    AND             reduce using rule 115 (factor -> ID .)
-    OR              reduce using rule 115 (factor -> ID .)
-    NOT1            reduce using rule 115 (factor -> ID .)
+    TIMES           reduce using rule 116 (factor -> ID .)
+    DIVIDE          reduce using rule 116 (factor -> ID .)
+    COMA            reduce using rule 116 (factor -> ID .)
+    PLUS            reduce using rule 116 (factor -> ID .)
+    MINUS           reduce using rule 116 (factor -> ID .)
+    RPAREN          reduce using rule 116 (factor -> ID .)
+    EQUALS          reduce using rule 116 (factor -> ID .)
+    DIFERENTE       reduce using rule 116 (factor -> ID .)
+    MAYORQ          reduce using rule 116 (factor -> ID .)
+    MENORQ          reduce using rule 116 (factor -> ID .)
+    MAYORIQ         reduce using rule 116 (factor -> ID .)
+    MENORIQ         reduce using rule 116 (factor -> ID .)
+    WHERE           reduce using rule 116 (factor -> ID .)
+    AND             reduce using rule 116 (factor -> ID .)
+    PCOMA           reduce using rule 116 (factor -> ID .)
+    OR              reduce using rule 116 (factor -> ID .)
+    NOT1            reduce using rule 116 (factor -> ID .)
 
 
 state 68
 
-    (108) factor2 -> LPAREN . expression RPAREN
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (109) factor2 -> LPAREN . expression RPAREN
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -1071,11 +1069,11 @@ state 68
 
 state 69
 
-    (86) llamado -> ID LPAREN RPAREN .
+    (87) llamado -> ID LPAREN RPAREN .
 
-    PCOMA           reduce using rule 86 (llamado -> ID LPAREN RPAREN .)
-    COMA            reduce using rule 86 (llamado -> ID LPAREN RPAREN .)
-    FROM            reduce using rule 86 (llamado -> ID LPAREN RPAREN .)
+    PCOMA           reduce using rule 87 (llamado -> ID LPAREN RPAREN .)
+    COMA            reduce using rule 87 (llamado -> ID LPAREN RPAREN .)
+    FROM            reduce using rule 87 (llamado -> ID LPAREN RPAREN .)
 
 
 state 70
@@ -1089,8 +1087,8 @@ state 71
 
     (61) valentradas -> expression . COMA valentradas
     (62) valentradas -> expression .
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
+    (103) expression -> expression . PLUS term
+    (104) expression -> expression . MINUS term
 
     COMA            shift and go to state 103
     RPAREN          reduce using rule 62 (valentradas -> expression .)
@@ -1100,158 +1098,158 @@ state 71
 
 state 72
 
-    (104) expression -> term .
-    (105) term -> term . TIMES factor2
-    (106) term -> term . DIVIDE factor2
+    (105) expression -> term .
+    (106) term -> term . TIMES factor2
+    (107) term -> term . DIVIDE factor2
 
-    COMA            reduce using rule 104 (expression -> term .)
-    PLUS            reduce using rule 104 (expression -> term .)
-    MINUS           reduce using rule 104 (expression -> term .)
-    RPAREN          reduce using rule 104 (expression -> term .)
-    EQUALS          reduce using rule 104 (expression -> term .)
-    DIFERENTE       reduce using rule 104 (expression -> term .)
-    MAYORQ          reduce using rule 104 (expression -> term .)
-    MENORQ          reduce using rule 104 (expression -> term .)
-    MAYORIQ         reduce using rule 104 (expression -> term .)
-    MENORIQ         reduce using rule 104 (expression -> term .)
-    WHERE           reduce using rule 104 (expression -> term .)
-    PCOMA           reduce using rule 104 (expression -> term .)
-    AND             reduce using rule 104 (expression -> term .)
-    OR              reduce using rule 104 (expression -> term .)
-    NOT1            reduce using rule 104 (expression -> term .)
+    COMA            reduce using rule 105 (expression -> term .)
+    PLUS            reduce using rule 105 (expression -> term .)
+    MINUS           reduce using rule 105 (expression -> term .)
+    RPAREN          reduce using rule 105 (expression -> term .)
+    EQUALS          reduce using rule 105 (expression -> term .)
+    DIFERENTE       reduce using rule 105 (expression -> term .)
+    MAYORQ          reduce using rule 105 (expression -> term .)
+    MENORQ          reduce using rule 105 (expression -> term .)
+    MAYORIQ         reduce using rule 105 (expression -> term .)
+    MENORIQ         reduce using rule 105 (expression -> term .)
+    WHERE           reduce using rule 105 (expression -> term .)
+    AND             reduce using rule 105 (expression -> term .)
+    PCOMA           reduce using rule 105 (expression -> term .)
+    OR              reduce using rule 105 (expression -> term .)
+    NOT1            reduce using rule 105 (expression -> term .)
     TIMES           shift and go to state 106
     DIVIDE          shift and go to state 107
 
 
 state 73
 
-    (107) term -> factor2 .
+    (108) term -> factor2 .
 
-    TIMES           reduce using rule 107 (term -> factor2 .)
-    DIVIDE          reduce using rule 107 (term -> factor2 .)
-    COMA            reduce using rule 107 (term -> factor2 .)
-    PLUS            reduce using rule 107 (term -> factor2 .)
-    MINUS           reduce using rule 107 (term -> factor2 .)
-    RPAREN          reduce using rule 107 (term -> factor2 .)
-    EQUALS          reduce using rule 107 (term -> factor2 .)
-    DIFERENTE       reduce using rule 107 (term -> factor2 .)
-    MAYORQ          reduce using rule 107 (term -> factor2 .)
-    MENORQ          reduce using rule 107 (term -> factor2 .)
-    MAYORIQ         reduce using rule 107 (term -> factor2 .)
-    MENORIQ         reduce using rule 107 (term -> factor2 .)
-    WHERE           reduce using rule 107 (term -> factor2 .)
-    PCOMA           reduce using rule 107 (term -> factor2 .)
-    AND             reduce using rule 107 (term -> factor2 .)
-    OR              reduce using rule 107 (term -> factor2 .)
-    NOT1            reduce using rule 107 (term -> factor2 .)
+    TIMES           reduce using rule 108 (term -> factor2 .)
+    DIVIDE          reduce using rule 108 (term -> factor2 .)
+    COMA            reduce using rule 108 (term -> factor2 .)
+    PLUS            reduce using rule 108 (term -> factor2 .)
+    MINUS           reduce using rule 108 (term -> factor2 .)
+    RPAREN          reduce using rule 108 (term -> factor2 .)
+    EQUALS          reduce using rule 108 (term -> factor2 .)
+    DIFERENTE       reduce using rule 108 (term -> factor2 .)
+    MAYORQ          reduce using rule 108 (term -> factor2 .)
+    MENORQ          reduce using rule 108 (term -> factor2 .)
+    MAYORIQ         reduce using rule 108 (term -> factor2 .)
+    MENORIQ         reduce using rule 108 (term -> factor2 .)
+    WHERE           reduce using rule 108 (term -> factor2 .)
+    AND             reduce using rule 108 (term -> factor2 .)
+    PCOMA           reduce using rule 108 (term -> factor2 .)
+    OR              reduce using rule 108 (term -> factor2 .)
+    NOT1            reduce using rule 108 (term -> factor2 .)
 
 
 state 74
 
-    (109) factor2 -> factor .
+    (110) factor2 -> factor .
 
-    TIMES           reduce using rule 109 (factor2 -> factor .)
-    DIVIDE          reduce using rule 109 (factor2 -> factor .)
-    COMA            reduce using rule 109 (factor2 -> factor .)
-    PLUS            reduce using rule 109 (factor2 -> factor .)
-    MINUS           reduce using rule 109 (factor2 -> factor .)
-    RPAREN          reduce using rule 109 (factor2 -> factor .)
-    EQUALS          reduce using rule 109 (factor2 -> factor .)
-    DIFERENTE       reduce using rule 109 (factor2 -> factor .)
-    MAYORQ          reduce using rule 109 (factor2 -> factor .)
-    MENORQ          reduce using rule 109 (factor2 -> factor .)
-    MAYORIQ         reduce using rule 109 (factor2 -> factor .)
-    MENORIQ         reduce using rule 109 (factor2 -> factor .)
-    WHERE           reduce using rule 109 (factor2 -> factor .)
-    PCOMA           reduce using rule 109 (factor2 -> factor .)
-    AND             reduce using rule 109 (factor2 -> factor .)
-    OR              reduce using rule 109 (factor2 -> factor .)
-    NOT1            reduce using rule 109 (factor2 -> factor .)
+    TIMES           reduce using rule 110 (factor2 -> factor .)
+    DIVIDE          reduce using rule 110 (factor2 -> factor .)
+    COMA            reduce using rule 110 (factor2 -> factor .)
+    PLUS            reduce using rule 110 (factor2 -> factor .)
+    MINUS           reduce using rule 110 (factor2 -> factor .)
+    RPAREN          reduce using rule 110 (factor2 -> factor .)
+    EQUALS          reduce using rule 110 (factor2 -> factor .)
+    DIFERENTE       reduce using rule 110 (factor2 -> factor .)
+    MAYORQ          reduce using rule 110 (factor2 -> factor .)
+    MENORQ          reduce using rule 110 (factor2 -> factor .)
+    MAYORIQ         reduce using rule 110 (factor2 -> factor .)
+    MENORIQ         reduce using rule 110 (factor2 -> factor .)
+    WHERE           reduce using rule 110 (factor2 -> factor .)
+    AND             reduce using rule 110 (factor2 -> factor .)
+    PCOMA           reduce using rule 110 (factor2 -> factor .)
+    OR              reduce using rule 110 (factor2 -> factor .)
+    NOT1            reduce using rule 110 (factor2 -> factor .)
 
 
 state 75
 
-    (110) factor -> NUMBER .
+    (111) factor -> NUMBER .
 
-    TIMES           reduce using rule 110 (factor -> NUMBER .)
-    DIVIDE          reduce using rule 110 (factor -> NUMBER .)
-    COMA            reduce using rule 110 (factor -> NUMBER .)
-    PLUS            reduce using rule 110 (factor -> NUMBER .)
-    MINUS           reduce using rule 110 (factor -> NUMBER .)
-    RPAREN          reduce using rule 110 (factor -> NUMBER .)
-    EQUALS          reduce using rule 110 (factor -> NUMBER .)
-    DIFERENTE       reduce using rule 110 (factor -> NUMBER .)
-    MAYORQ          reduce using rule 110 (factor -> NUMBER .)
-    MENORQ          reduce using rule 110 (factor -> NUMBER .)
-    MAYORIQ         reduce using rule 110 (factor -> NUMBER .)
-    MENORIQ         reduce using rule 110 (factor -> NUMBER .)
-    WHERE           reduce using rule 110 (factor -> NUMBER .)
-    PCOMA           reduce using rule 110 (factor -> NUMBER .)
-    AND             reduce using rule 110 (factor -> NUMBER .)
-    OR              reduce using rule 110 (factor -> NUMBER .)
-    NOT1            reduce using rule 110 (factor -> NUMBER .)
+    TIMES           reduce using rule 111 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 111 (factor -> NUMBER .)
+    COMA            reduce using rule 111 (factor -> NUMBER .)
+    PLUS            reduce using rule 111 (factor -> NUMBER .)
+    MINUS           reduce using rule 111 (factor -> NUMBER .)
+    RPAREN          reduce using rule 111 (factor -> NUMBER .)
+    EQUALS          reduce using rule 111 (factor -> NUMBER .)
+    DIFERENTE       reduce using rule 111 (factor -> NUMBER .)
+    MAYORQ          reduce using rule 111 (factor -> NUMBER .)
+    MENORQ          reduce using rule 111 (factor -> NUMBER .)
+    MAYORIQ         reduce using rule 111 (factor -> NUMBER .)
+    MENORIQ         reduce using rule 111 (factor -> NUMBER .)
+    WHERE           reduce using rule 111 (factor -> NUMBER .)
+    AND             reduce using rule 111 (factor -> NUMBER .)
+    PCOMA           reduce using rule 111 (factor -> NUMBER .)
+    OR              reduce using rule 111 (factor -> NUMBER .)
+    NOT1            reduce using rule 111 (factor -> NUMBER .)
 
 
 state 76
 
-    (111) factor -> DECIMAL1 .
+    (112) factor -> DECIMAL1 .
 
-    TIMES           reduce using rule 111 (factor -> DECIMAL1 .)
-    DIVIDE          reduce using rule 111 (factor -> DECIMAL1 .)
-    COMA            reduce using rule 111 (factor -> DECIMAL1 .)
-    PLUS            reduce using rule 111 (factor -> DECIMAL1 .)
-    MINUS           reduce using rule 111 (factor -> DECIMAL1 .)
-    RPAREN          reduce using rule 111 (factor -> DECIMAL1 .)
-    EQUALS          reduce using rule 111 (factor -> DECIMAL1 .)
-    DIFERENTE       reduce using rule 111 (factor -> DECIMAL1 .)
-    MAYORQ          reduce using rule 111 (factor -> DECIMAL1 .)
-    MENORQ          reduce using rule 111 (factor -> DECIMAL1 .)
-    MAYORIQ         reduce using rule 111 (factor -> DECIMAL1 .)
-    MENORIQ         reduce using rule 111 (factor -> DECIMAL1 .)
-    WHERE           reduce using rule 111 (factor -> DECIMAL1 .)
-    PCOMA           reduce using rule 111 (factor -> DECIMAL1 .)
-    AND             reduce using rule 111 (factor -> DECIMAL1 .)
-    OR              reduce using rule 111 (factor -> DECIMAL1 .)
-    NOT1            reduce using rule 111 (factor -> DECIMAL1 .)
+    TIMES           reduce using rule 112 (factor -> DECIMAL1 .)
+    DIVIDE          reduce using rule 112 (factor -> DECIMAL1 .)
+    COMA            reduce using rule 112 (factor -> DECIMAL1 .)
+    PLUS            reduce using rule 112 (factor -> DECIMAL1 .)
+    MINUS           reduce using rule 112 (factor -> DECIMAL1 .)
+    RPAREN          reduce using rule 112 (factor -> DECIMAL1 .)
+    EQUALS          reduce using rule 112 (factor -> DECIMAL1 .)
+    DIFERENTE       reduce using rule 112 (factor -> DECIMAL1 .)
+    MAYORQ          reduce using rule 112 (factor -> DECIMAL1 .)
+    MENORQ          reduce using rule 112 (factor -> DECIMAL1 .)
+    MAYORIQ         reduce using rule 112 (factor -> DECIMAL1 .)
+    MENORIQ         reduce using rule 112 (factor -> DECIMAL1 .)
+    WHERE           reduce using rule 112 (factor -> DECIMAL1 .)
+    AND             reduce using rule 112 (factor -> DECIMAL1 .)
+    PCOMA           reduce using rule 112 (factor -> DECIMAL1 .)
+    OR              reduce using rule 112 (factor -> DECIMAL1 .)
+    NOT1            reduce using rule 112 (factor -> DECIMAL1 .)
 
 
 state 77
 
-    (112) factor -> CADENA .
+    (113) factor -> CADENA .
 
-    TIMES           reduce using rule 112 (factor -> CADENA .)
-    DIVIDE          reduce using rule 112 (factor -> CADENA .)
-    COMA            reduce using rule 112 (factor -> CADENA .)
-    PLUS            reduce using rule 112 (factor -> CADENA .)
-    MINUS           reduce using rule 112 (factor -> CADENA .)
-    RPAREN          reduce using rule 112 (factor -> CADENA .)
-    EQUALS          reduce using rule 112 (factor -> CADENA .)
-    DIFERENTE       reduce using rule 112 (factor -> CADENA .)
-    MAYORQ          reduce using rule 112 (factor -> CADENA .)
-    MENORQ          reduce using rule 112 (factor -> CADENA .)
-    MAYORIQ         reduce using rule 112 (factor -> CADENA .)
-    MENORIQ         reduce using rule 112 (factor -> CADENA .)
-    WHERE           reduce using rule 112 (factor -> CADENA .)
-    PCOMA           reduce using rule 112 (factor -> CADENA .)
-    AND             reduce using rule 112 (factor -> CADENA .)
-    OR              reduce using rule 112 (factor -> CADENA .)
-    NOT1            reduce using rule 112 (factor -> CADENA .)
+    TIMES           reduce using rule 113 (factor -> CADENA .)
+    DIVIDE          reduce using rule 113 (factor -> CADENA .)
+    COMA            reduce using rule 113 (factor -> CADENA .)
+    PLUS            reduce using rule 113 (factor -> CADENA .)
+    MINUS           reduce using rule 113 (factor -> CADENA .)
+    RPAREN          reduce using rule 113 (factor -> CADENA .)
+    EQUALS          reduce using rule 113 (factor -> CADENA .)
+    DIFERENTE       reduce using rule 113 (factor -> CADENA .)
+    MAYORQ          reduce using rule 113 (factor -> CADENA .)
+    MENORQ          reduce using rule 113 (factor -> CADENA .)
+    MAYORIQ         reduce using rule 113 (factor -> CADENA .)
+    MENORIQ         reduce using rule 113 (factor -> CADENA .)
+    WHERE           reduce using rule 113 (factor -> CADENA .)
+    AND             reduce using rule 113 (factor -> CADENA .)
+    PCOMA           reduce using rule 113 (factor -> CADENA .)
+    OR              reduce using rule 113 (factor -> CADENA .)
+    NOT1            reduce using rule 113 (factor -> CADENA .)
 
 
 state 78
 
-    (113) factor -> ARROBA . ID
+    (114) factor -> ARROBA . ID
 
     ID              shift and go to state 108
 
 
 state 79
 
-    (84) llamado -> EXEC ID entradas .
+    (85) llamado -> EXEC ID entradas .
 
-    PCOMA           reduce using rule 84 (llamado -> EXEC ID entradas .)
-    COMA            reduce using rule 84 (llamado -> EXEC ID entradas .)
-    FROM            reduce using rule 84 (llamado -> EXEC ID entradas .)
+    PCOMA           reduce using rule 85 (llamado -> EXEC ID entradas .)
+    COMA            reduce using rule 85 (llamado -> EXEC ID entradas .)
+    FROM            reduce using rule 85 (llamado -> EXEC ID entradas .)
 
 
 state 80
@@ -1259,20 +1257,20 @@ state 80
     (60) entradas -> LPAREN . valentradas RPAREN
     (61) valentradas -> . expression COMA valentradas
     (62) valentradas -> . expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -1299,12 +1297,12 @@ state 81
 state 82
 
     (47) funcionesdefinidas -> CONCATENA LPAREN . factor COMA factor RPAREN
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     NUMBER          shift and go to state 75
     DECIMAL1        shift and go to state 76
@@ -1376,9 +1374,9 @@ state 89
     (50) funcionesdefinidas -> . CONTAR LPAREN TIMES RPAREN FROM ID
     (51) funcionesdefinidas -> . SUMA LPAREN ID RPAREN FROM ID
     (52) funcionesdefinidas -> . CAST
-    (84) llamado -> . EXEC ID entradas
-    (85) llamado -> . ID entradas
-    (86) llamado -> . ID LPAREN RPAREN
+    (85) llamado -> . EXEC ID entradas
+    (86) llamado -> . ID entradas
+    (87) llamado -> . ID LPAREN RPAREN
 
     TIMES           shift and go to state 50
     ID              shift and go to state 51
@@ -1397,11 +1395,10 @@ state 89
 
 state 90
 
-    (65) update -> UPDATE ID SET . cambios WHERE ID EQUALS expression
-    (66) update -> UPDATE ID SET . cambios WHERE condiciones
-    (67) cambios -> . campocambios COMA cambios
-    (68) cambios -> . campocambios
-    (69) campocambios -> . ID EQUALS expression
+    (65) update -> UPDATE ID SET . cambios WHERE condi
+    (66) cambios -> . campocambios COMA cambios
+    (67) cambios -> . campocambios
+    (68) campocambios -> . ID EQUALS expression
 
     ID              shift and go to state 121
 
@@ -1440,7 +1437,7 @@ state 94
 
 state 95
 
-    (70) delete -> DELETE FROM ID . WHERE ID EQUALS expression
+    (69) delete -> DELETE FROM ID . WHERE condi
 
     WHERE           shift and go to state 126
 
@@ -1467,9 +1464,9 @@ state 97
 
 state 98
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN . parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
-    (81) parametros -> . ARROBA ID tipodato COMA parametros
-    (82) parametros -> . ARROBA ID tipodato
+    (81) funcion -> CREATE FUNCTION ID LPAREN . parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+    (82) parametros -> . ARROBA ID tipodato COMA parametros
+    (83) parametros -> . ARROBA ID tipodato
 
     ARROBA          shift and go to state 131
 
@@ -1477,9 +1474,9 @@ state 98
 
 state 99
 
-    (83) procedure -> CREATE PROCEDURE ID LPAREN . parametros RPAREN AS BEGIN initial2 END
-    (81) parametros -> . ARROBA ID tipodato COMA parametros
-    (82) parametros -> . ARROBA ID tipodato
+    (84) procedure -> CREATE PROCEDURE ID LPAREN . parametros RPAREN AS BEGIN initial2 END
+    (82) parametros -> . ARROBA ID tipodato COMA parametros
+    (83) parametros -> . ARROBA ID tipodato
 
     ARROBA          shift and go to state 131
 
@@ -1487,16 +1484,16 @@ state 99
 
 state 100
 
-    (114) factor -> ID PUNTO . ID
+    (115) factor -> ID PUNTO . ID
 
     ID              shift and go to state 133
 
 
 state 101
 
-    (108) factor2 -> LPAREN expression . RPAREN
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
+    (109) factor2 -> LPAREN expression . RPAREN
+    (103) expression -> expression . PLUS term
+    (104) expression -> expression . MINUS term
 
     RPAREN          shift and go to state 134
     PLUS            shift and go to state 104
@@ -1517,20 +1514,20 @@ state 103
     (61) valentradas -> expression COMA . valentradas
     (61) valentradas -> . expression COMA valentradas
     (62) valentradas -> . expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -1547,18 +1544,18 @@ state 103
 
 state 104
 
-    (102) expression -> expression PLUS . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (103) expression -> expression PLUS . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -1573,18 +1570,18 @@ state 104
 
 state 105
 
-    (103) expression -> expression MINUS . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (104) expression -> expression MINUS . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -1599,15 +1596,15 @@ state 105
 
 state 106
 
-    (105) term -> term TIMES . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (106) term -> term TIMES . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -1621,15 +1618,15 @@ state 106
 
 state 107
 
-    (106) term -> term DIVIDE . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (107) term -> term DIVIDE . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -1643,25 +1640,25 @@ state 107
 
 state 108
 
-    (113) factor -> ARROBA ID .
+    (114) factor -> ARROBA ID .
 
-    TIMES           reduce using rule 113 (factor -> ARROBA ID .)
-    DIVIDE          reduce using rule 113 (factor -> ARROBA ID .)
-    COMA            reduce using rule 113 (factor -> ARROBA ID .)
-    PLUS            reduce using rule 113 (factor -> ARROBA ID .)
-    MINUS           reduce using rule 113 (factor -> ARROBA ID .)
-    RPAREN          reduce using rule 113 (factor -> ARROBA ID .)
-    EQUALS          reduce using rule 113 (factor -> ARROBA ID .)
-    DIFERENTE       reduce using rule 113 (factor -> ARROBA ID .)
-    MAYORQ          reduce using rule 113 (factor -> ARROBA ID .)
-    MENORQ          reduce using rule 113 (factor -> ARROBA ID .)
-    MAYORIQ         reduce using rule 113 (factor -> ARROBA ID .)
-    MENORIQ         reduce using rule 113 (factor -> ARROBA ID .)
-    WHERE           reduce using rule 113 (factor -> ARROBA ID .)
-    PCOMA           reduce using rule 113 (factor -> ARROBA ID .)
-    AND             reduce using rule 113 (factor -> ARROBA ID .)
-    OR              reduce using rule 113 (factor -> ARROBA ID .)
-    NOT1            reduce using rule 113 (factor -> ARROBA ID .)
+    TIMES           reduce using rule 114 (factor -> ARROBA ID .)
+    DIVIDE          reduce using rule 114 (factor -> ARROBA ID .)
+    COMA            reduce using rule 114 (factor -> ARROBA ID .)
+    PLUS            reduce using rule 114 (factor -> ARROBA ID .)
+    MINUS           reduce using rule 114 (factor -> ARROBA ID .)
+    RPAREN          reduce using rule 114 (factor -> ARROBA ID .)
+    EQUALS          reduce using rule 114 (factor -> ARROBA ID .)
+    DIFERENTE       reduce using rule 114 (factor -> ARROBA ID .)
+    MAYORQ          reduce using rule 114 (factor -> ARROBA ID .)
+    MENORQ          reduce using rule 114 (factor -> ARROBA ID .)
+    MAYORIQ         reduce using rule 114 (factor -> ARROBA ID .)
+    MENORIQ         reduce using rule 114 (factor -> ARROBA ID .)
+    WHERE           reduce using rule 114 (factor -> ARROBA ID .)
+    AND             reduce using rule 114 (factor -> ARROBA ID .)
+    PCOMA           reduce using rule 114 (factor -> ARROBA ID .)
+    OR              reduce using rule 114 (factor -> ARROBA ID .)
+    NOT1            reduce using rule 114 (factor -> ARROBA ID .)
 
 
 state 109
@@ -1763,26 +1760,25 @@ state 120
 
 state 121
 
-    (69) campocambios -> ID . EQUALS expression
+    (68) campocambios -> ID . EQUALS expression
 
     EQUALS          shift and go to state 148
 
 
 state 122
 
-    (65) update -> UPDATE ID SET cambios . WHERE ID EQUALS expression
-    (66) update -> UPDATE ID SET cambios . WHERE condiciones
+    (65) update -> UPDATE ID SET cambios . WHERE condi
 
     WHERE           shift and go to state 149
 
 
 state 123
 
-    (67) cambios -> campocambios . COMA cambios
-    (68) cambios -> campocambios .
+    (66) cambios -> campocambios . COMA cambios
+    (67) cambios -> campocambios .
 
     COMA            shift and go to state 150
-    WHERE           reduce using rule 68 (cambios -> campocambios .)
+    WHERE           reduce using rule 67 (cambios -> campocambios .)
 
 
 state 124
@@ -1801,10 +1797,13 @@ state 125
 
 state 126
 
-    (70) delete -> DELETE FROM ID WHERE . ID EQUALS expression
+    (69) delete -> DELETE FROM ID WHERE . condi
+    (70) condi -> . ID toperador expression AND condi
+    (71) condi -> . ID toperador expression
 
     ID              shift and go to state 153
 
+    condi                          shift and go to state 154
 
 state 127
 
@@ -1818,21 +1817,21 @@ state 127
     (34) tipodato -> . DATE
     (35) tipodato -> . DATETIME
 
-    INT             shift and go to state 155
-    DECIMAL         shift and go to state 156
-    BOOL            shift and go to state 157
-    NVARCHAR        shift and go to state 158
-    NCHAR           shift and go to state 159
-    DATE            shift and go to state 160
-    DATETIME        shift and go to state 161
+    INT             shift and go to state 156
+    DECIMAL         shift and go to state 157
+    BOOL            shift and go to state 158
+    NVARCHAR        shift and go to state 159
+    NCHAR           shift and go to state 160
+    DATE            shift and go to state 161
+    DATETIME        shift and go to state 162
 
-    tipodato                       shift and go to state 154
+    tipodato                       shift and go to state 155
 
 state 128
 
     (19) create -> CREATE TABLE ID LPAREN defcreate . RPAREN
 
-    RPAREN          shift and go to state 162
+    RPAREN          shift and go to state 163
 
 
 state 129
@@ -1840,76 +1839,76 @@ state 129
     (20) defcreate -> campo . COMA defcreate
     (21) defcreate -> campo .
 
-    COMA            shift and go to state 163
+    COMA            shift and go to state 164
     RPAREN          reduce using rule 21 (defcreate -> campo .)
 
 
 state 130
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros . RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros . RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
 
-    RPAREN          shift and go to state 164
+    RPAREN          shift and go to state 165
 
 
 state 131
 
-    (81) parametros -> ARROBA . ID tipodato COMA parametros
-    (82) parametros -> ARROBA . ID tipodato
+    (82) parametros -> ARROBA . ID tipodato COMA parametros
+    (83) parametros -> ARROBA . ID tipodato
 
-    ID              shift and go to state 165
+    ID              shift and go to state 166
 
 
 state 132
 
-    (83) procedure -> CREATE PROCEDURE ID LPAREN parametros . RPAREN AS BEGIN initial2 END
+    (84) procedure -> CREATE PROCEDURE ID LPAREN parametros . RPAREN AS BEGIN initial2 END
 
-    RPAREN          shift and go to state 166
+    RPAREN          shift and go to state 167
 
 
 state 133
 
-    (114) factor -> ID PUNTO ID .
+    (115) factor -> ID PUNTO ID .
 
-    TIMES           reduce using rule 114 (factor -> ID PUNTO ID .)
-    DIVIDE          reduce using rule 114 (factor -> ID PUNTO ID .)
-    COMA            reduce using rule 114 (factor -> ID PUNTO ID .)
-    PLUS            reduce using rule 114 (factor -> ID PUNTO ID .)
-    MINUS           reduce using rule 114 (factor -> ID PUNTO ID .)
-    RPAREN          reduce using rule 114 (factor -> ID PUNTO ID .)
-    EQUALS          reduce using rule 114 (factor -> ID PUNTO ID .)
-    DIFERENTE       reduce using rule 114 (factor -> ID PUNTO ID .)
-    MAYORQ          reduce using rule 114 (factor -> ID PUNTO ID .)
-    MENORQ          reduce using rule 114 (factor -> ID PUNTO ID .)
-    MAYORIQ         reduce using rule 114 (factor -> ID PUNTO ID .)
-    MENORIQ         reduce using rule 114 (factor -> ID PUNTO ID .)
-    WHERE           reduce using rule 114 (factor -> ID PUNTO ID .)
-    PCOMA           reduce using rule 114 (factor -> ID PUNTO ID .)
-    AND             reduce using rule 114 (factor -> ID PUNTO ID .)
-    OR              reduce using rule 114 (factor -> ID PUNTO ID .)
-    NOT1            reduce using rule 114 (factor -> ID PUNTO ID .)
+    TIMES           reduce using rule 115 (factor -> ID PUNTO ID .)
+    DIVIDE          reduce using rule 115 (factor -> ID PUNTO ID .)
+    COMA            reduce using rule 115 (factor -> ID PUNTO ID .)
+    PLUS            reduce using rule 115 (factor -> ID PUNTO ID .)
+    MINUS           reduce using rule 115 (factor -> ID PUNTO ID .)
+    RPAREN          reduce using rule 115 (factor -> ID PUNTO ID .)
+    EQUALS          reduce using rule 115 (factor -> ID PUNTO ID .)
+    DIFERENTE       reduce using rule 115 (factor -> ID PUNTO ID .)
+    MAYORQ          reduce using rule 115 (factor -> ID PUNTO ID .)
+    MENORQ          reduce using rule 115 (factor -> ID PUNTO ID .)
+    MAYORIQ         reduce using rule 115 (factor -> ID PUNTO ID .)
+    MENORIQ         reduce using rule 115 (factor -> ID PUNTO ID .)
+    WHERE           reduce using rule 115 (factor -> ID PUNTO ID .)
+    AND             reduce using rule 115 (factor -> ID PUNTO ID .)
+    PCOMA           reduce using rule 115 (factor -> ID PUNTO ID .)
+    OR              reduce using rule 115 (factor -> ID PUNTO ID .)
+    NOT1            reduce using rule 115 (factor -> ID PUNTO ID .)
 
 
 state 134
 
-    (108) factor2 -> LPAREN expression RPAREN .
+    (109) factor2 -> LPAREN expression RPAREN .
 
-    TIMES           reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    COMA            reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    PLUS            reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    EQUALS          reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    DIFERENTE       reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    MAYORQ          reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    MENORQ          reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    MAYORIQ         reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    MENORIQ         reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    WHERE           reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    PCOMA           reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    AND             reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    OR              reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
-    NOT1            reduce using rule 108 (factor2 -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    COMA            reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    EQUALS          reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    DIFERENTE       reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    MAYORQ          reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    MENORQ          reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    MAYORIQ         reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    MENORIQ         reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    WHERE           reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    AND             reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    PCOMA           reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    OR              reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
+    NOT1            reduce using rule 109 (factor2 -> LPAREN expression RPAREN .)
 
 
 state 135
@@ -1921,98 +1920,98 @@ state 135
 
 state 136
 
-    (102) expression -> expression PLUS term .
-    (105) term -> term . TIMES factor2
-    (106) term -> term . DIVIDE factor2
+    (103) expression -> expression PLUS term .
+    (106) term -> term . TIMES factor2
+    (107) term -> term . DIVIDE factor2
 
-    COMA            reduce using rule 102 (expression -> expression PLUS term .)
-    PLUS            reduce using rule 102 (expression -> expression PLUS term .)
-    MINUS           reduce using rule 102 (expression -> expression PLUS term .)
-    RPAREN          reduce using rule 102 (expression -> expression PLUS term .)
-    EQUALS          reduce using rule 102 (expression -> expression PLUS term .)
-    DIFERENTE       reduce using rule 102 (expression -> expression PLUS term .)
-    MAYORQ          reduce using rule 102 (expression -> expression PLUS term .)
-    MENORQ          reduce using rule 102 (expression -> expression PLUS term .)
-    MAYORIQ         reduce using rule 102 (expression -> expression PLUS term .)
-    MENORIQ         reduce using rule 102 (expression -> expression PLUS term .)
-    WHERE           reduce using rule 102 (expression -> expression PLUS term .)
-    PCOMA           reduce using rule 102 (expression -> expression PLUS term .)
-    AND             reduce using rule 102 (expression -> expression PLUS term .)
-    OR              reduce using rule 102 (expression -> expression PLUS term .)
-    NOT1            reduce using rule 102 (expression -> expression PLUS term .)
+    COMA            reduce using rule 103 (expression -> expression PLUS term .)
+    PLUS            reduce using rule 103 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 103 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 103 (expression -> expression PLUS term .)
+    EQUALS          reduce using rule 103 (expression -> expression PLUS term .)
+    DIFERENTE       reduce using rule 103 (expression -> expression PLUS term .)
+    MAYORQ          reduce using rule 103 (expression -> expression PLUS term .)
+    MENORQ          reduce using rule 103 (expression -> expression PLUS term .)
+    MAYORIQ         reduce using rule 103 (expression -> expression PLUS term .)
+    MENORIQ         reduce using rule 103 (expression -> expression PLUS term .)
+    WHERE           reduce using rule 103 (expression -> expression PLUS term .)
+    AND             reduce using rule 103 (expression -> expression PLUS term .)
+    PCOMA           reduce using rule 103 (expression -> expression PLUS term .)
+    OR              reduce using rule 103 (expression -> expression PLUS term .)
+    NOT1            reduce using rule 103 (expression -> expression PLUS term .)
     TIMES           shift and go to state 106
     DIVIDE          shift and go to state 107
 
 
 state 137
 
-    (103) expression -> expression MINUS term .
-    (105) term -> term . TIMES factor2
-    (106) term -> term . DIVIDE factor2
+    (104) expression -> expression MINUS term .
+    (106) term -> term . TIMES factor2
+    (107) term -> term . DIVIDE factor2
 
-    COMA            reduce using rule 103 (expression -> expression MINUS term .)
-    PLUS            reduce using rule 103 (expression -> expression MINUS term .)
-    MINUS           reduce using rule 103 (expression -> expression MINUS term .)
-    RPAREN          reduce using rule 103 (expression -> expression MINUS term .)
-    EQUALS          reduce using rule 103 (expression -> expression MINUS term .)
-    DIFERENTE       reduce using rule 103 (expression -> expression MINUS term .)
-    MAYORQ          reduce using rule 103 (expression -> expression MINUS term .)
-    MENORQ          reduce using rule 103 (expression -> expression MINUS term .)
-    MAYORIQ         reduce using rule 103 (expression -> expression MINUS term .)
-    MENORIQ         reduce using rule 103 (expression -> expression MINUS term .)
-    WHERE           reduce using rule 103 (expression -> expression MINUS term .)
-    PCOMA           reduce using rule 103 (expression -> expression MINUS term .)
-    AND             reduce using rule 103 (expression -> expression MINUS term .)
-    OR              reduce using rule 103 (expression -> expression MINUS term .)
-    NOT1            reduce using rule 103 (expression -> expression MINUS term .)
+    COMA            reduce using rule 104 (expression -> expression MINUS term .)
+    PLUS            reduce using rule 104 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 104 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 104 (expression -> expression MINUS term .)
+    EQUALS          reduce using rule 104 (expression -> expression MINUS term .)
+    DIFERENTE       reduce using rule 104 (expression -> expression MINUS term .)
+    MAYORQ          reduce using rule 104 (expression -> expression MINUS term .)
+    MENORQ          reduce using rule 104 (expression -> expression MINUS term .)
+    MAYORIQ         reduce using rule 104 (expression -> expression MINUS term .)
+    MENORIQ         reduce using rule 104 (expression -> expression MINUS term .)
+    WHERE           reduce using rule 104 (expression -> expression MINUS term .)
+    AND             reduce using rule 104 (expression -> expression MINUS term .)
+    PCOMA           reduce using rule 104 (expression -> expression MINUS term .)
+    OR              reduce using rule 104 (expression -> expression MINUS term .)
+    NOT1            reduce using rule 104 (expression -> expression MINUS term .)
     TIMES           shift and go to state 106
     DIVIDE          shift and go to state 107
 
 
 state 138
 
-    (105) term -> term TIMES factor2 .
+    (106) term -> term TIMES factor2 .
 
-    TIMES           reduce using rule 105 (term -> term TIMES factor2 .)
-    DIVIDE          reduce using rule 105 (term -> term TIMES factor2 .)
-    COMA            reduce using rule 105 (term -> term TIMES factor2 .)
-    PLUS            reduce using rule 105 (term -> term TIMES factor2 .)
-    MINUS           reduce using rule 105 (term -> term TIMES factor2 .)
-    RPAREN          reduce using rule 105 (term -> term TIMES factor2 .)
-    EQUALS          reduce using rule 105 (term -> term TIMES factor2 .)
-    DIFERENTE       reduce using rule 105 (term -> term TIMES factor2 .)
-    MAYORQ          reduce using rule 105 (term -> term TIMES factor2 .)
-    MENORQ          reduce using rule 105 (term -> term TIMES factor2 .)
-    MAYORIQ         reduce using rule 105 (term -> term TIMES factor2 .)
-    MENORIQ         reduce using rule 105 (term -> term TIMES factor2 .)
-    WHERE           reduce using rule 105 (term -> term TIMES factor2 .)
-    PCOMA           reduce using rule 105 (term -> term TIMES factor2 .)
-    AND             reduce using rule 105 (term -> term TIMES factor2 .)
-    OR              reduce using rule 105 (term -> term TIMES factor2 .)
-    NOT1            reduce using rule 105 (term -> term TIMES factor2 .)
+    TIMES           reduce using rule 106 (term -> term TIMES factor2 .)
+    DIVIDE          reduce using rule 106 (term -> term TIMES factor2 .)
+    COMA            reduce using rule 106 (term -> term TIMES factor2 .)
+    PLUS            reduce using rule 106 (term -> term TIMES factor2 .)
+    MINUS           reduce using rule 106 (term -> term TIMES factor2 .)
+    RPAREN          reduce using rule 106 (term -> term TIMES factor2 .)
+    EQUALS          reduce using rule 106 (term -> term TIMES factor2 .)
+    DIFERENTE       reduce using rule 106 (term -> term TIMES factor2 .)
+    MAYORQ          reduce using rule 106 (term -> term TIMES factor2 .)
+    MENORQ          reduce using rule 106 (term -> term TIMES factor2 .)
+    MAYORIQ         reduce using rule 106 (term -> term TIMES factor2 .)
+    MENORIQ         reduce using rule 106 (term -> term TIMES factor2 .)
+    WHERE           reduce using rule 106 (term -> term TIMES factor2 .)
+    AND             reduce using rule 106 (term -> term TIMES factor2 .)
+    PCOMA           reduce using rule 106 (term -> term TIMES factor2 .)
+    OR              reduce using rule 106 (term -> term TIMES factor2 .)
+    NOT1            reduce using rule 106 (term -> term TIMES factor2 .)
 
 
 state 139
 
-    (106) term -> term DIVIDE factor2 .
+    (107) term -> term DIVIDE factor2 .
 
-    TIMES           reduce using rule 106 (term -> term DIVIDE factor2 .)
-    DIVIDE          reduce using rule 106 (term -> term DIVIDE factor2 .)
-    COMA            reduce using rule 106 (term -> term DIVIDE factor2 .)
-    PLUS            reduce using rule 106 (term -> term DIVIDE factor2 .)
-    MINUS           reduce using rule 106 (term -> term DIVIDE factor2 .)
-    RPAREN          reduce using rule 106 (term -> term DIVIDE factor2 .)
-    EQUALS          reduce using rule 106 (term -> term DIVIDE factor2 .)
-    DIFERENTE       reduce using rule 106 (term -> term DIVIDE factor2 .)
-    MAYORQ          reduce using rule 106 (term -> term DIVIDE factor2 .)
-    MENORQ          reduce using rule 106 (term -> term DIVIDE factor2 .)
-    MAYORIQ         reduce using rule 106 (term -> term DIVIDE factor2 .)
-    MENORIQ         reduce using rule 106 (term -> term DIVIDE factor2 .)
-    WHERE           reduce using rule 106 (term -> term DIVIDE factor2 .)
-    PCOMA           reduce using rule 106 (term -> term DIVIDE factor2 .)
-    AND             reduce using rule 106 (term -> term DIVIDE factor2 .)
-    OR              reduce using rule 106 (term -> term DIVIDE factor2 .)
-    NOT1            reduce using rule 106 (term -> term DIVIDE factor2 .)
+    TIMES           reduce using rule 107 (term -> term DIVIDE factor2 .)
+    DIVIDE          reduce using rule 107 (term -> term DIVIDE factor2 .)
+    COMA            reduce using rule 107 (term -> term DIVIDE factor2 .)
+    PLUS            reduce using rule 107 (term -> term DIVIDE factor2 .)
+    MINUS           reduce using rule 107 (term -> term DIVIDE factor2 .)
+    RPAREN          reduce using rule 107 (term -> term DIVIDE factor2 .)
+    EQUALS          reduce using rule 107 (term -> term DIVIDE factor2 .)
+    DIFERENTE       reduce using rule 107 (term -> term DIVIDE factor2 .)
+    MAYORQ          reduce using rule 107 (term -> term DIVIDE factor2 .)
+    MENORQ          reduce using rule 107 (term -> term DIVIDE factor2 .)
+    MAYORIQ         reduce using rule 107 (term -> term DIVIDE factor2 .)
+    MENORIQ         reduce using rule 107 (term -> term DIVIDE factor2 .)
+    WHERE           reduce using rule 107 (term -> term DIVIDE factor2 .)
+    AND             reduce using rule 107 (term -> term DIVIDE factor2 .)
+    PCOMA           reduce using rule 107 (term -> term DIVIDE factor2 .)
+    OR              reduce using rule 107 (term -> term DIVIDE factor2 .)
+    NOT1            reduce using rule 107 (term -> term DIVIDE factor2 .)
 
 
 state 140
@@ -2022,24 +2021,24 @@ state 140
 
     LPAREN          shift and go to state 80
 
-    entradas                       shift and go to state 167
+    entradas                       shift and go to state 168
 
 state 141
 
     (59) parametrosi -> LPAREN valores . RPAREN
 
-    RPAREN          shift and go to state 168
+    RPAREN          shift and go to state 169
 
 
 state 142
 
     (47) funcionesdefinidas -> CONCATENA LPAREN factor COMA . factor RPAREN
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     NUMBER          shift and go to state 75
     DECIMAL1        shift and go to state 76
@@ -2047,49 +2046,49 @@ state 142
     ARROBA          shift and go to state 78
     ID              shift and go to state 67
 
-    factor                         shift and go to state 169
+    factor                         shift and go to state 170
 
 state 143
 
     (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA . NUMBER COMA NUMBER
 
-    NUMBER          shift and go to state 170
+    NUMBER          shift and go to state 171
 
 
 state 144
 
     (50) funcionesdefinidas -> CONTAR LPAREN TIMES RPAREN . FROM ID
 
-    FROM            shift and go to state 171
+    FROM            shift and go to state 172
 
 
 state 145
 
     (51) funcionesdefinidas -> SUMA LPAREN ID RPAREN . FROM ID
 
-    FROM            shift and go to state 172
+    FROM            shift and go to state 173
 
 
 state 146
 
     (38) selectmultiple -> listacolumn FROM valores WHERE . condiciones
-    (89) condiciones -> . condicion
-    (90) condiciones -> . condicion explogicas condiciones
-    (91) condicion -> . expression toperador expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (90) condiciones -> . condicion
+    (91) condiciones -> . condicion explogicas condiciones
+    (92) condicion -> . expression toperador expression
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -2098,9 +2097,9 @@ state 146
     ARROBA          shift and go to state 78
     ID              shift and go to state 67
 
-    condiciones                    shift and go to state 173
-    condicion                      shift and go to state 174
-    expression                     shift and go to state 175
+    condiciones                    shift and go to state 174
+    condicion                      shift and go to state 175
+    expression                     shift and go to state 176
     term                           shift and go to state 72
     factor2                        shift and go to state 73
     factor                         shift and go to state 74
@@ -2113,25 +2112,25 @@ state 147
 
     ID              shift and go to state 118
 
-    valores                        shift and go to state 176
+    valores                        shift and go to state 177
 
 state 148
 
-    (69) campocambios -> ID EQUALS . expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (68) campocambios -> ID EQUALS . expression
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -2140,53 +2139,27 @@ state 148
     ARROBA          shift and go to state 78
     ID              shift and go to state 67
 
-    expression                     shift and go to state 177
+    expression                     shift and go to state 178
     term                           shift and go to state 72
     factor2                        shift and go to state 73
     factor                         shift and go to state 74
 
 state 149
 
-    (65) update -> UPDATE ID SET cambios WHERE . ID EQUALS expression
-    (66) update -> UPDATE ID SET cambios WHERE . condiciones
-    (89) condiciones -> . condicion
-    (90) condiciones -> . condicion explogicas condiciones
-    (91) condicion -> . expression toperador expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (65) update -> UPDATE ID SET cambios WHERE . condi
+    (70) condi -> . ID toperador expression AND condi
+    (71) condi -> . ID toperador expression
 
-    ID              shift and go to state 178
-    LPAREN          shift and go to state 68
-    NUMBER          shift and go to state 75
-    DECIMAL1        shift and go to state 76
-    CADENA          shift and go to state 77
-    ARROBA          shift and go to state 78
+    ID              shift and go to state 153
 
-    expression                     shift and go to state 175
-    condiciones                    shift and go to state 179
-    condicion                      shift and go to state 174
-    term                           shift and go to state 72
-    factor2                        shift and go to state 73
-    factor                         shift and go to state 74
+    condi                          shift and go to state 179
 
 state 150
 
-    (67) cambios -> campocambios COMA . cambios
-    (67) cambios -> . campocambios COMA cambios
-    (68) cambios -> . campocambios
-    (69) campocambios -> . ID EQUALS expression
+    (66) cambios -> campocambios COMA . cambios
+    (66) cambios -> . campocambios COMA cambios
+    (67) cambios -> . campocambios
+    (68) campocambios -> . ID EQUALS expression
 
     ID              shift and go to state 121
 
@@ -2209,12 +2182,32 @@ state 152
 
 state 153
 
-    (70) delete -> DELETE FROM ID WHERE ID . EQUALS expression
+    (70) condi -> ID . toperador expression AND condi
+    (71) condi -> ID . toperador expression
+    (93) toperador -> . EQUALS
+    (94) toperador -> . DIFERENTE
+    (95) toperador -> . MAYORQ
+    (96) toperador -> . MENORQ
+    (97) toperador -> . MAYORIQ
+    (98) toperador -> . MENORIQ
 
-    EQUALS          shift and go to state 183
+    EQUALS          shift and go to state 184
+    DIFERENTE       shift and go to state 185
+    MAYORQ          shift and go to state 186
+    MENORQ          shift and go to state 187
+    MAYORIQ         shift and go to state 188
+    MENORIQ         shift and go to state 189
 
+    toperador                      shift and go to state 183
 
 state 154
+
+    (69) delete -> DELETE FROM ID WHERE condi .
+
+    PCOMA           reduce using rule 69 (delete -> DELETE FROM ID WHERE condi .)
+
+
+state 155
 
     (22) campo -> ID tipodato . restriccion
     (23) campo -> ID tipodato .
@@ -2226,14 +2219,14 @@ state 154
 
     COMA            reduce using rule 23 (campo -> ID tipodato .)
     RPAREN          reduce using rule 23 (campo -> ID tipodato .)
-    NOT             shift and go to state 185
-    PRIMARY         shift and go to state 186
-    REFERENCES      shift and go to state 188
+    NOT             shift and go to state 191
+    PRIMARY         shift and go to state 192
+    REFERENCES      shift and go to state 194
 
-    restriccion                    shift and go to state 184
-    foranea                        shift and go to state 187
+    restriccion                    shift and go to state 190
+    foranea                        shift and go to state 193
 
-state 155
+state 156
 
     (29) tipodato -> INT .
 
@@ -2246,7 +2239,7 @@ state 155
     AS              reduce using rule 29 (tipodato -> INT .)
 
 
-state 156
+state 157
 
     (30) tipodato -> DECIMAL .
 
@@ -2259,7 +2252,7 @@ state 156
     AS              reduce using rule 30 (tipodato -> DECIMAL .)
 
 
-state 157
+state 158
 
     (31) tipodato -> BOOL .
 
@@ -2272,21 +2265,21 @@ state 157
     AS              reduce using rule 31 (tipodato -> BOOL .)
 
 
-state 158
+state 159
 
     (32) tipodato -> NVARCHAR . LPAREN NUMBER RPAREN
 
-    LPAREN          shift and go to state 189
-
-
-state 159
-
-    (33) tipodato -> NCHAR . LPAREN NUMBER RPAREN
-
-    LPAREN          shift and go to state 190
+    LPAREN          shift and go to state 195
 
 
 state 160
+
+    (33) tipodato -> NCHAR . LPAREN NUMBER RPAREN
+
+    LPAREN          shift and go to state 196
+
+
+state 161
 
     (34) tipodato -> DATE .
 
@@ -2299,7 +2292,7 @@ state 160
     AS              reduce using rule 34 (tipodato -> DATE .)
 
 
-state 161
+state 162
 
     (35) tipodato -> DATETIME .
 
@@ -2312,14 +2305,14 @@ state 161
     AS              reduce using rule 35 (tipodato -> DATETIME .)
 
 
-state 162
+state 163
 
     (19) create -> CREATE TABLE ID LPAREN defcreate RPAREN .
 
     PCOMA           reduce using rule 19 (create -> CREATE TABLE ID LPAREN defcreate RPAREN .)
 
 
-state 163
+state 164
 
     (20) defcreate -> campo COMA . defcreate
     (20) defcreate -> . campo COMA defcreate
@@ -2330,19 +2323,19 @@ state 163
     ID              shift and go to state 127
 
     campo                          shift and go to state 129
-    defcreate                      shift and go to state 191
-
-state 164
-
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN . RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
-
-    RETURN          shift and go to state 192
-
+    defcreate                      shift and go to state 197
 
 state 165
 
-    (81) parametros -> ARROBA ID . tipodato COMA parametros
-    (82) parametros -> ARROBA ID . tipodato
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN . RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
+
+    RETURN          shift and go to state 198
+
+
+state 166
+
+    (82) parametros -> ARROBA ID . tipodato COMA parametros
+    (83) parametros -> ARROBA ID . tipodato
     (29) tipodato -> . INT
     (30) tipodato -> . DECIMAL
     (31) tipodato -> . BOOL
@@ -2351,112 +2344,112 @@ state 165
     (34) tipodato -> . DATE
     (35) tipodato -> . DATETIME
 
-    INT             shift and go to state 155
-    DECIMAL         shift and go to state 156
-    BOOL            shift and go to state 157
-    NVARCHAR        shift and go to state 158
-    NCHAR           shift and go to state 159
-    DATE            shift and go to state 160
-    DATETIME        shift and go to state 161
+    INT             shift and go to state 156
+    DECIMAL         shift and go to state 157
+    BOOL            shift and go to state 158
+    NVARCHAR        shift and go to state 159
+    NCHAR           shift and go to state 160
+    DATE            shift and go to state 161
+    DATETIME        shift and go to state 162
 
-    tipodato                       shift and go to state 193
-
-state 166
-
-    (83) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN . AS BEGIN initial2 END
-
-    AS              shift and go to state 194
-
+    tipodato                       shift and go to state 199
 
 state 167
+
+    (84) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN . AS BEGIN initial2 END
+
+    AS              shift and go to state 200
+
+
+state 168
 
     (58) insert -> INSERT INTO ID parametrosi VALUES entradas .
 
     PCOMA           reduce using rule 58 (insert -> INSERT INTO ID parametrosi VALUES entradas .)
 
 
-state 168
+state 169
 
     (59) parametrosi -> LPAREN valores RPAREN .
 
     VALUES          reduce using rule 59 (parametrosi -> LPAREN valores RPAREN .)
 
 
-state 169
+state 170
 
     (47) funcionesdefinidas -> CONCATENA LPAREN factor COMA factor . RPAREN
 
-    RPAREN          shift and go to state 195
-
-
-state 170
-
-    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER . COMA NUMBER
-
-    COMA            shift and go to state 196
+    RPAREN          shift and go to state 201
 
 
 state 171
 
-    (50) funcionesdefinidas -> CONTAR LPAREN TIMES RPAREN FROM . ID
+    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER . COMA NUMBER
 
-    ID              shift and go to state 197
+    COMA            shift and go to state 202
 
 
 state 172
 
-    (51) funcionesdefinidas -> SUMA LPAREN ID RPAREN FROM . ID
+    (50) funcionesdefinidas -> CONTAR LPAREN TIMES RPAREN FROM . ID
 
-    ID              shift and go to state 198
+    ID              shift and go to state 203
 
 
 state 173
+
+    (51) funcionesdefinidas -> SUMA LPAREN ID RPAREN FROM . ID
+
+    ID              shift and go to state 204
+
+
+state 174
 
     (38) selectmultiple -> listacolumn FROM valores WHERE condiciones .
 
     PCOMA           reduce using rule 38 (selectmultiple -> listacolumn FROM valores WHERE condiciones .)
 
 
-state 174
-
-    (89) condiciones -> condicion .
-    (90) condiciones -> condicion . explogicas condiciones
-    (98) explogicas -> . AND
-    (99) explogicas -> . OR
-    (100) explogicas -> . NOT1
-
-    PCOMA           reduce using rule 89 (condiciones -> condicion .)
-    RPAREN          reduce using rule 89 (condiciones -> condicion .)
-    AND             shift and go to state 200
-    OR              shift and go to state 201
-    NOT1            shift and go to state 202
-
-    explogicas                     shift and go to state 199
-
 state 175
 
-    (91) condicion -> expression . toperador expression
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
-    (92) toperador -> . EQUALS
-    (93) toperador -> . DIFERENTE
-    (94) toperador -> . MAYORQ
-    (95) toperador -> . MENORQ
-    (96) toperador -> . MAYORIQ
-    (97) toperador -> . MENORIQ
+    (90) condiciones -> condicion .
+    (91) condiciones -> condicion . explogicas condiciones
+    (99) explogicas -> . AND
+    (100) explogicas -> . OR
+    (101) explogicas -> . NOT1
+
+    PCOMA           reduce using rule 90 (condiciones -> condicion .)
+    RPAREN          reduce using rule 90 (condiciones -> condicion .)
+    AND             shift and go to state 206
+    OR              shift and go to state 207
+    NOT1            shift and go to state 208
+
+    explogicas                     shift and go to state 205
+
+state 176
+
+    (92) condicion -> expression . toperador expression
+    (103) expression -> expression . PLUS term
+    (104) expression -> expression . MINUS term
+    (93) toperador -> . EQUALS
+    (94) toperador -> . DIFERENTE
+    (95) toperador -> . MAYORQ
+    (96) toperador -> . MENORQ
+    (97) toperador -> . MAYORIQ
+    (98) toperador -> . MENORIQ
 
     PLUS            shift and go to state 104
     MINUS           shift and go to state 105
-    EQUALS          shift and go to state 204
-    DIFERENTE       shift and go to state 205
-    MAYORQ          shift and go to state 206
-    MENORQ          shift and go to state 207
-    MAYORIQ         shift and go to state 208
-    MENORIQ         shift and go to state 209
+    EQUALS          shift and go to state 184
+    DIFERENTE       shift and go to state 185
+    MAYORQ          shift and go to state 186
+    MENORQ          shift and go to state 187
+    MAYORIQ         shift and go to state 188
+    MENORIQ         shift and go to state 189
 
-    toperador                      shift and go to state 203
+    toperador                      shift and go to state 209
 
-state 176
+state 177
 
     (63) valores -> ID COMA valores .
 
@@ -2465,52 +2458,30 @@ state 176
     RPAREN          reduce using rule 63 (valores -> ID COMA valores .)
 
 
-state 177
+state 178
 
-    (69) campocambios -> ID EQUALS expression .
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
+    (68) campocambios -> ID EQUALS expression .
+    (103) expression -> expression . PLUS term
+    (104) expression -> expression . MINUS term
 
-    COMA            reduce using rule 69 (campocambios -> ID EQUALS expression .)
-    WHERE           reduce using rule 69 (campocambios -> ID EQUALS expression .)
+    COMA            reduce using rule 68 (campocambios -> ID EQUALS expression .)
+    WHERE           reduce using rule 68 (campocambios -> ID EQUALS expression .)
     PLUS            shift and go to state 104
     MINUS           shift and go to state 105
 
 
-state 178
-
-    (65) update -> UPDATE ID SET cambios WHERE ID . EQUALS expression
-    (114) factor -> ID . PUNTO ID
-    (115) factor -> ID .
-
-  ! shift/reduce conflict for EQUALS resolved as shift
-    EQUALS          shift and go to state 210
-    PUNTO           shift and go to state 100
-    TIMES           reduce using rule 115 (factor -> ID .)
-    DIVIDE          reduce using rule 115 (factor -> ID .)
-    PLUS            reduce using rule 115 (factor -> ID .)
-    MINUS           reduce using rule 115 (factor -> ID .)
-    DIFERENTE       reduce using rule 115 (factor -> ID .)
-    MAYORQ          reduce using rule 115 (factor -> ID .)
-    MENORQ          reduce using rule 115 (factor -> ID .)
-    MAYORIQ         reduce using rule 115 (factor -> ID .)
-    MENORIQ         reduce using rule 115 (factor -> ID .)
-
-  ! EQUALS          [ reduce using rule 115 (factor -> ID .) ]
-
-
 state 179
 
-    (66) update -> UPDATE ID SET cambios WHERE condiciones .
+    (65) update -> UPDATE ID SET cambios WHERE condi .
 
-    PCOMA           reduce using rule 66 (update -> UPDATE ID SET cambios WHERE condiciones .)
+    PCOMA           reduce using rule 65 (update -> UPDATE ID SET cambios WHERE condi .)
 
 
 state 180
 
-    (67) cambios -> campocambios COMA cambios .
+    (66) cambios -> campocambios COMA cambios .
 
-    WHERE           reduce using rule 67 (cambios -> campocambios COMA cambios .)
+    WHERE           reduce using rule 66 (cambios -> campocambios COMA cambios .)
 
 
 state 181
@@ -2524,15 +2495,15 @@ state 181
     (34) tipodato -> . DATE
     (35) tipodato -> . DATETIME
 
-    INT             shift and go to state 155
-    DECIMAL         shift and go to state 156
-    BOOL            shift and go to state 157
-    NVARCHAR        shift and go to state 158
-    NCHAR           shift and go to state 159
-    DATE            shift and go to state 160
-    DATETIME        shift and go to state 161
+    INT             shift and go to state 156
+    DECIMAL         shift and go to state 157
+    BOOL            shift and go to state 158
+    NVARCHAR        shift and go to state 159
+    NCHAR           shift and go to state 160
+    DATE            shift and go to state 161
+    DATETIME        shift and go to state 162
 
-    tipodato                       shift and go to state 211
+    tipodato                       shift and go to state 210
 
 state 182
 
@@ -2543,21 +2514,22 @@ state 182
 
 state 183
 
-    (70) delete -> DELETE FROM ID WHERE ID EQUALS . expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (70) condi -> ID toperador . expression AND condi
+    (71) condi -> ID toperador . expression
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -2566,12 +2538,84 @@ state 183
     ARROBA          shift and go to state 78
     ID              shift and go to state 67
 
-    expression                     shift and go to state 212
+    expression                     shift and go to state 211
     term                           shift and go to state 72
     factor2                        shift and go to state 73
     factor                         shift and go to state 74
 
 state 184
+
+    (93) toperador -> EQUALS .
+
+    LPAREN          reduce using rule 93 (toperador -> EQUALS .)
+    NUMBER          reduce using rule 93 (toperador -> EQUALS .)
+    DECIMAL1        reduce using rule 93 (toperador -> EQUALS .)
+    CADENA          reduce using rule 93 (toperador -> EQUALS .)
+    ARROBA          reduce using rule 93 (toperador -> EQUALS .)
+    ID              reduce using rule 93 (toperador -> EQUALS .)
+
+
+state 185
+
+    (94) toperador -> DIFERENTE .
+
+    LPAREN          reduce using rule 94 (toperador -> DIFERENTE .)
+    NUMBER          reduce using rule 94 (toperador -> DIFERENTE .)
+    DECIMAL1        reduce using rule 94 (toperador -> DIFERENTE .)
+    CADENA          reduce using rule 94 (toperador -> DIFERENTE .)
+    ARROBA          reduce using rule 94 (toperador -> DIFERENTE .)
+    ID              reduce using rule 94 (toperador -> DIFERENTE .)
+
+
+state 186
+
+    (95) toperador -> MAYORQ .
+
+    LPAREN          reduce using rule 95 (toperador -> MAYORQ .)
+    NUMBER          reduce using rule 95 (toperador -> MAYORQ .)
+    DECIMAL1        reduce using rule 95 (toperador -> MAYORQ .)
+    CADENA          reduce using rule 95 (toperador -> MAYORQ .)
+    ARROBA          reduce using rule 95 (toperador -> MAYORQ .)
+    ID              reduce using rule 95 (toperador -> MAYORQ .)
+
+
+state 187
+
+    (96) toperador -> MENORQ .
+
+    LPAREN          reduce using rule 96 (toperador -> MENORQ .)
+    NUMBER          reduce using rule 96 (toperador -> MENORQ .)
+    DECIMAL1        reduce using rule 96 (toperador -> MENORQ .)
+    CADENA          reduce using rule 96 (toperador -> MENORQ .)
+    ARROBA          reduce using rule 96 (toperador -> MENORQ .)
+    ID              reduce using rule 96 (toperador -> MENORQ .)
+
+
+state 188
+
+    (97) toperador -> MAYORIQ .
+
+    LPAREN          reduce using rule 97 (toperador -> MAYORIQ .)
+    NUMBER          reduce using rule 97 (toperador -> MAYORIQ .)
+    DECIMAL1        reduce using rule 97 (toperador -> MAYORIQ .)
+    CADENA          reduce using rule 97 (toperador -> MAYORIQ .)
+    ARROBA          reduce using rule 97 (toperador -> MAYORIQ .)
+    ID              reduce using rule 97 (toperador -> MAYORIQ .)
+
+
+state 189
+
+    (98) toperador -> MENORIQ .
+
+    LPAREN          reduce using rule 98 (toperador -> MENORIQ .)
+    NUMBER          reduce using rule 98 (toperador -> MENORIQ .)
+    DECIMAL1        reduce using rule 98 (toperador -> MENORIQ .)
+    CADENA          reduce using rule 98 (toperador -> MENORIQ .)
+    ARROBA          reduce using rule 98 (toperador -> MENORIQ .)
+    ID              reduce using rule 98 (toperador -> MENORIQ .)
+
+
+state 190
 
     (22) campo -> ID tipodato restriccion .
 
@@ -2579,22 +2623,22 @@ state 184
     RPAREN          reduce using rule 22 (campo -> ID tipodato restriccion .)
 
 
-state 185
+state 191
 
     (24) restriccion -> NOT . NULL
 
-    NULL            shift and go to state 213
+    NULL            shift and go to state 212
 
 
-state 186
+state 192
 
     (25) restriccion -> PRIMARY . KEY foranea
     (26) restriccion -> PRIMARY . KEY
 
-    KEY             shift and go to state 214
+    KEY             shift and go to state 213
 
 
-state 187
+state 193
 
     (27) restriccion -> foranea .
 
@@ -2602,37 +2646,37 @@ state 187
     RPAREN          reduce using rule 27 (restriccion -> foranea .)
 
 
-state 188
+state 194
 
     (28) foranea -> REFERENCES . ID LPAREN ID RPAREN
 
-    ID              shift and go to state 215
+    ID              shift and go to state 214
 
 
-state 189
+state 195
 
     (32) tipodato -> NVARCHAR LPAREN . NUMBER RPAREN
+
+    NUMBER          shift and go to state 215
+
+
+state 196
+
+    (33) tipodato -> NCHAR LPAREN . NUMBER RPAREN
 
     NUMBER          shift and go to state 216
 
 
-state 190
-
-    (33) tipodato -> NCHAR LPAREN . NUMBER RPAREN
-
-    NUMBER          shift and go to state 217
-
-
-state 191
+state 197
 
     (20) defcreate -> campo COMA defcreate .
 
     RPAREN          reduce using rule 20 (defcreate -> campo COMA defcreate .)
 
 
-state 192
+state 198
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN . tipodato AS BEGIN initial2 RETURN expression PCOMA END
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN . tipodato AS BEGIN initial2 RETURN expression PCOMA END
     (29) tipodato -> . INT
     (30) tipodato -> . DECIMAL
     (31) tipodato -> . BOOL
@@ -2641,33 +2685,33 @@ state 192
     (34) tipodato -> . DATE
     (35) tipodato -> . DATETIME
 
-    INT             shift and go to state 155
-    DECIMAL         shift and go to state 156
-    BOOL            shift and go to state 157
-    NVARCHAR        shift and go to state 158
-    NCHAR           shift and go to state 159
-    DATE            shift and go to state 160
-    DATETIME        shift and go to state 161
+    INT             shift and go to state 156
+    DECIMAL         shift and go to state 157
+    BOOL            shift and go to state 158
+    NVARCHAR        shift and go to state 159
+    NCHAR           shift and go to state 160
+    DATE            shift and go to state 161
+    DATETIME        shift and go to state 162
 
-    tipodato                       shift and go to state 218
+    tipodato                       shift and go to state 217
 
-state 193
+state 199
 
-    (81) parametros -> ARROBA ID tipodato . COMA parametros
-    (82) parametros -> ARROBA ID tipodato .
+    (82) parametros -> ARROBA ID tipodato . COMA parametros
+    (83) parametros -> ARROBA ID tipodato .
 
-    COMA            shift and go to state 219
-    RPAREN          reduce using rule 82 (parametros -> ARROBA ID tipodato .)
-
-
-state 194
-
-    (83) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS . BEGIN initial2 END
-
-    BEGIN           shift and go to state 220
+    COMA            shift and go to state 218
+    RPAREN          reduce using rule 83 (parametros -> ARROBA ID tipodato .)
 
 
-state 195
+state 200
+
+    (84) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS . BEGIN initial2 END
+
+    BEGIN           shift and go to state 219
+
+
+state 201
 
     (47) funcionesdefinidas -> CONCATENA LPAREN factor COMA factor RPAREN .
 
@@ -2676,14 +2720,14 @@ state 195
     FROM            reduce using rule 47 (funcionesdefinidas -> CONCATENA LPAREN factor COMA factor RPAREN .)
 
 
-state 196
+state 202
 
     (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA . NUMBER
 
-    NUMBER          shift and go to state 221
+    NUMBER          shift and go to state 220
 
 
-state 197
+state 203
 
     (50) funcionesdefinidas -> CONTAR LPAREN TIMES RPAREN FROM ID .
 
@@ -2692,7 +2736,7 @@ state 197
     FROM            reduce using rule 50 (funcionesdefinidas -> CONTAR LPAREN TIMES RPAREN FROM ID .)
 
 
-state 198
+state 204
 
     (51) funcionesdefinidas -> SUMA LPAREN ID RPAREN FROM ID .
 
@@ -2701,196 +2745,94 @@ state 198
     FROM            reduce using rule 51 (funcionesdefinidas -> SUMA LPAREN ID RPAREN FROM ID .)
 
 
-state 199
-
-    (90) condiciones -> condicion explogicas . condiciones
-    (89) condiciones -> . condicion
-    (90) condiciones -> . condicion explogicas condiciones
-    (91) condicion -> . expression toperador expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
-
-    LPAREN          shift and go to state 68
-    NUMBER          shift and go to state 75
-    DECIMAL1        shift and go to state 76
-    CADENA          shift and go to state 77
-    ARROBA          shift and go to state 78
-    ID              shift and go to state 67
-
-    condicion                      shift and go to state 174
-    condiciones                    shift and go to state 222
-    expression                     shift and go to state 175
-    term                           shift and go to state 72
-    factor2                        shift and go to state 73
-    factor                         shift and go to state 74
-
-state 200
-
-    (98) explogicas -> AND .
-
-    LPAREN          reduce using rule 98 (explogicas -> AND .)
-    NUMBER          reduce using rule 98 (explogicas -> AND .)
-    DECIMAL1        reduce using rule 98 (explogicas -> AND .)
-    CADENA          reduce using rule 98 (explogicas -> AND .)
-    ARROBA          reduce using rule 98 (explogicas -> AND .)
-    ID              reduce using rule 98 (explogicas -> AND .)
-
-
-state 201
-
-    (99) explogicas -> OR .
-
-    LPAREN          reduce using rule 99 (explogicas -> OR .)
-    NUMBER          reduce using rule 99 (explogicas -> OR .)
-    DECIMAL1        reduce using rule 99 (explogicas -> OR .)
-    CADENA          reduce using rule 99 (explogicas -> OR .)
-    ARROBA          reduce using rule 99 (explogicas -> OR .)
-    ID              reduce using rule 99 (explogicas -> OR .)
-
-
-state 202
-
-    (100) explogicas -> NOT1 .
-
-    LPAREN          reduce using rule 100 (explogicas -> NOT1 .)
-    NUMBER          reduce using rule 100 (explogicas -> NOT1 .)
-    DECIMAL1        reduce using rule 100 (explogicas -> NOT1 .)
-    CADENA          reduce using rule 100 (explogicas -> NOT1 .)
-    ARROBA          reduce using rule 100 (explogicas -> NOT1 .)
-    ID              reduce using rule 100 (explogicas -> NOT1 .)
-
-
-state 203
-
-    (91) condicion -> expression toperador . expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
-
-    LPAREN          shift and go to state 68
-    NUMBER          shift and go to state 75
-    DECIMAL1        shift and go to state 76
-    CADENA          shift and go to state 77
-    ARROBA          shift and go to state 78
-    ID              shift and go to state 67
-
-    expression                     shift and go to state 223
-    term                           shift and go to state 72
-    factor2                        shift and go to state 73
-    factor                         shift and go to state 74
-
-state 204
-
-    (92) toperador -> EQUALS .
-
-    LPAREN          reduce using rule 92 (toperador -> EQUALS .)
-    NUMBER          reduce using rule 92 (toperador -> EQUALS .)
-    DECIMAL1        reduce using rule 92 (toperador -> EQUALS .)
-    CADENA          reduce using rule 92 (toperador -> EQUALS .)
-    ARROBA          reduce using rule 92 (toperador -> EQUALS .)
-    ID              reduce using rule 92 (toperador -> EQUALS .)
-
-
 state 205
 
-    (93) toperador -> DIFERENTE .
+    (91) condiciones -> condicion explogicas . condiciones
+    (90) condiciones -> . condicion
+    (91) condiciones -> . condicion explogicas condiciones
+    (92) condicion -> . expression toperador expression
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
-    LPAREN          reduce using rule 93 (toperador -> DIFERENTE .)
-    NUMBER          reduce using rule 93 (toperador -> DIFERENTE .)
-    DECIMAL1        reduce using rule 93 (toperador -> DIFERENTE .)
-    CADENA          reduce using rule 93 (toperador -> DIFERENTE .)
-    ARROBA          reduce using rule 93 (toperador -> DIFERENTE .)
-    ID              reduce using rule 93 (toperador -> DIFERENTE .)
+    LPAREN          shift and go to state 68
+    NUMBER          shift and go to state 75
+    DECIMAL1        shift and go to state 76
+    CADENA          shift and go to state 77
+    ARROBA          shift and go to state 78
+    ID              shift and go to state 67
 
+    condicion                      shift and go to state 175
+    condiciones                    shift and go to state 221
+    expression                     shift and go to state 176
+    term                           shift and go to state 72
+    factor2                        shift and go to state 73
+    factor                         shift and go to state 74
 
 state 206
 
-    (94) toperador -> MAYORQ .
+    (99) explogicas -> AND .
 
-    LPAREN          reduce using rule 94 (toperador -> MAYORQ .)
-    NUMBER          reduce using rule 94 (toperador -> MAYORQ .)
-    DECIMAL1        reduce using rule 94 (toperador -> MAYORQ .)
-    CADENA          reduce using rule 94 (toperador -> MAYORQ .)
-    ARROBA          reduce using rule 94 (toperador -> MAYORQ .)
-    ID              reduce using rule 94 (toperador -> MAYORQ .)
+    LPAREN          reduce using rule 99 (explogicas -> AND .)
+    NUMBER          reduce using rule 99 (explogicas -> AND .)
+    DECIMAL1        reduce using rule 99 (explogicas -> AND .)
+    CADENA          reduce using rule 99 (explogicas -> AND .)
+    ARROBA          reduce using rule 99 (explogicas -> AND .)
+    ID              reduce using rule 99 (explogicas -> AND .)
 
 
 state 207
 
-    (95) toperador -> MENORQ .
+    (100) explogicas -> OR .
 
-    LPAREN          reduce using rule 95 (toperador -> MENORQ .)
-    NUMBER          reduce using rule 95 (toperador -> MENORQ .)
-    DECIMAL1        reduce using rule 95 (toperador -> MENORQ .)
-    CADENA          reduce using rule 95 (toperador -> MENORQ .)
-    ARROBA          reduce using rule 95 (toperador -> MENORQ .)
-    ID              reduce using rule 95 (toperador -> MENORQ .)
+    LPAREN          reduce using rule 100 (explogicas -> OR .)
+    NUMBER          reduce using rule 100 (explogicas -> OR .)
+    DECIMAL1        reduce using rule 100 (explogicas -> OR .)
+    CADENA          reduce using rule 100 (explogicas -> OR .)
+    ARROBA          reduce using rule 100 (explogicas -> OR .)
+    ID              reduce using rule 100 (explogicas -> OR .)
 
 
 state 208
 
-    (96) toperador -> MAYORIQ .
+    (101) explogicas -> NOT1 .
 
-    LPAREN          reduce using rule 96 (toperador -> MAYORIQ .)
-    NUMBER          reduce using rule 96 (toperador -> MAYORIQ .)
-    DECIMAL1        reduce using rule 96 (toperador -> MAYORIQ .)
-    CADENA          reduce using rule 96 (toperador -> MAYORIQ .)
-    ARROBA          reduce using rule 96 (toperador -> MAYORIQ .)
-    ID              reduce using rule 96 (toperador -> MAYORIQ .)
+    LPAREN          reduce using rule 101 (explogicas -> NOT1 .)
+    NUMBER          reduce using rule 101 (explogicas -> NOT1 .)
+    DECIMAL1        reduce using rule 101 (explogicas -> NOT1 .)
+    CADENA          reduce using rule 101 (explogicas -> NOT1 .)
+    ARROBA          reduce using rule 101 (explogicas -> NOT1 .)
+    ID              reduce using rule 101 (explogicas -> NOT1 .)
 
 
 state 209
 
-    (97) toperador -> MENORIQ .
-
-    LPAREN          reduce using rule 97 (toperador -> MENORIQ .)
-    NUMBER          reduce using rule 97 (toperador -> MENORIQ .)
-    DECIMAL1        reduce using rule 97 (toperador -> MENORIQ .)
-    CADENA          reduce using rule 97 (toperador -> MENORIQ .)
-    ARROBA          reduce using rule 97 (toperador -> MENORIQ .)
-    ID              reduce using rule 97 (toperador -> MENORIQ .)
-
-
-state 210
-
-    (65) update -> UPDATE ID SET cambios WHERE ID EQUALS . expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (92) condicion -> expression toperador . expression
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -2899,30 +2841,32 @@ state 210
     ARROBA          shift and go to state 78
     ID              shift and go to state 67
 
-    expression                     shift and go to state 224
+    expression                     shift and go to state 222
     term                           shift and go to state 72
     factor2                        shift and go to state 73
     factor                         shift and go to state 74
 
-state 211
+state 210
 
     (53) alter -> ALTER TABLE ID ADD COLUMN ID tipodato .
 
     PCOMA           reduce using rule 53 (alter -> ALTER TABLE ID ADD COLUMN ID tipodato .)
 
 
-state 212
+state 211
 
-    (70) delete -> DELETE FROM ID WHERE ID EQUALS expression .
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
+    (70) condi -> ID toperador expression . AND condi
+    (71) condi -> ID toperador expression .
+    (103) expression -> expression . PLUS term
+    (104) expression -> expression . MINUS term
 
-    PCOMA           reduce using rule 70 (delete -> DELETE FROM ID WHERE ID EQUALS expression .)
+    AND             shift and go to state 223
+    PCOMA           reduce using rule 71 (condi -> ID toperador expression .)
     PLUS            shift and go to state 104
     MINUS           shift and go to state 105
 
 
-state 213
+state 212
 
     (24) restriccion -> NOT NULL .
 
@@ -2930,7 +2874,7 @@ state 213
     RPAREN          reduce using rule 24 (restriccion -> NOT NULL .)
 
 
-state 214
+state 213
 
     (25) restriccion -> PRIMARY KEY . foranea
     (26) restriccion -> PRIMARY KEY .
@@ -2938,60 +2882,60 @@ state 214
 
     COMA            reduce using rule 26 (restriccion -> PRIMARY KEY .)
     RPAREN          reduce using rule 26 (restriccion -> PRIMARY KEY .)
-    REFERENCES      shift and go to state 188
+    REFERENCES      shift and go to state 194
 
-    foranea                        shift and go to state 225
+    foranea                        shift and go to state 224
 
-state 215
+state 214
 
     (28) foranea -> REFERENCES ID . LPAREN ID RPAREN
 
-    LPAREN          shift and go to state 226
+    LPAREN          shift and go to state 225
+
+
+state 215
+
+    (32) tipodato -> NVARCHAR LPAREN NUMBER . RPAREN
+
+    RPAREN          shift and go to state 226
 
 
 state 216
 
-    (32) tipodato -> NVARCHAR LPAREN NUMBER . RPAREN
+    (33) tipodato -> NCHAR LPAREN NUMBER . RPAREN
 
     RPAREN          shift and go to state 227
 
 
 state 217
 
-    (33) tipodato -> NCHAR LPAREN NUMBER . RPAREN
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato . AS BEGIN initial2 RETURN expression PCOMA END
 
-    RPAREN          shift and go to state 228
+    AS              shift and go to state 228
 
 
 state 218
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato . AS BEGIN initial2 RETURN expression PCOMA END
-
-    AS              shift and go to state 229
-
-
-state 219
-
-    (81) parametros -> ARROBA ID tipodato COMA . parametros
-    (81) parametros -> . ARROBA ID tipodato COMA parametros
-    (82) parametros -> . ARROBA ID tipodato
+    (82) parametros -> ARROBA ID tipodato COMA . parametros
+    (82) parametros -> . ARROBA ID tipodato COMA parametros
+    (83) parametros -> . ARROBA ID tipodato
 
     ARROBA          shift and go to state 131
 
-    parametros                     shift and go to state 230
+    parametros                     shift and go to state 229
 
-state 220
+state 219
 
-    (83) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN . initial2 END
-    (75) initial2 -> . opespeciales initial2
-    (76) initial2 -> . opespeciales
-    (77) opespeciales -> . if PCOMA
-    (78) opespeciales -> . variable PCOMA
-    (79) opespeciales -> . compartidas PCOMA
-    (87) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
-    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
-    (71) variable -> . DECLARE ARROBA ID tipodato
-    (72) variable -> . SET ARROBA ID EQUALS valorvar
+    (84) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN . initial2 END
+    (76) initial2 -> . opespeciales initial2
+    (77) initial2 -> . opespeciales
+    (78) opespeciales -> . if PCOMA
+    (79) opespeciales -> . variable PCOMA
+    (80) opespeciales -> . compartidas PCOMA
+    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
+    (89) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+    (72) variable -> . DECLARE ARROBA ID tipodato
+    (73) variable -> . SET ARROBA ID EQUALS valorvar
     (11) compartidas -> . insert
     (12) compartidas -> . select
     (13) compartidas -> . update
@@ -3002,18 +2946,17 @@ state 220
     (58) insert -> . INSERT INTO ID parametrosi VALUES entradas
     (36) select -> . SELECT funcionesdefinidas
     (37) select -> . SELECT selectmultiple
-    (65) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (66) update -> . UPDATE ID SET cambios WHERE condiciones
+    (65) update -> . UPDATE ID SET cambios WHERE condi
     (55) truncate -> . TRUNCATE TABLE ID
     (56) drop -> . DROP TABLE ID
     (57) drop -> . DROP COLUMN ID
     (53) alter -> . ALTER TABLE ID ADD COLUMN ID tipodato
     (54) alter -> . ALTER TABLE ID DROP COLUMN ID
-    (70) delete -> . DELETE FROM ID WHERE ID EQUALS expression
+    (69) delete -> . DELETE FROM ID WHERE condi
 
-    IF              shift and go to state 236
-    DECLARE         shift and go to state 237
-    SET             shift and go to state 238
+    IF              shift and go to state 235
+    DECLARE         shift and go to state 236
+    SET             shift and go to state 237
     INSERT          shift and go to state 21
     SELECT          shift and go to state 22
     UPDATE          shift and go to state 23
@@ -3022,11 +2965,11 @@ state 220
     ALTER           shift and go to state 26
     DELETE          shift and go to state 27
 
-    initial2                       shift and go to state 231
-    opespeciales                   shift and go to state 232
-    if                             shift and go to state 233
-    variable                       shift and go to state 234
-    compartidas                    shift and go to state 235
+    initial2                       shift and go to state 230
+    opespeciales                   shift and go to state 231
+    if                             shift and go to state 232
+    variable                       shift and go to state 233
+    compartidas                    shift and go to state 234
     insert                         shift and go to state 12
     select                         shift and go to state 13
     update                         shift and go to state 14
@@ -3035,7 +2978,7 @@ state 220
     alter                          shift and go to state 17
     delete                         shift and go to state 18
 
-state 221
+state 220
 
     (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .
 
@@ -3044,41 +2987,40 @@ state 221
     FROM            reduce using rule 48 (funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .)
 
 
+state 221
+
+    (91) condiciones -> condicion explogicas condiciones .
+
+    PCOMA           reduce using rule 91 (condiciones -> condicion explogicas condiciones .)
+    RPAREN          reduce using rule 91 (condiciones -> condicion explogicas condiciones .)
+
+
 state 222
 
-    (90) condiciones -> condicion explogicas condiciones .
+    (92) condicion -> expression toperador expression .
+    (103) expression -> expression . PLUS term
+    (104) expression -> expression . MINUS term
 
-    PCOMA           reduce using rule 90 (condiciones -> condicion explogicas condiciones .)
-    RPAREN          reduce using rule 90 (condiciones -> condicion explogicas condiciones .)
+    AND             reduce using rule 92 (condicion -> expression toperador expression .)
+    OR              reduce using rule 92 (condicion -> expression toperador expression .)
+    NOT1            reduce using rule 92 (condicion -> expression toperador expression .)
+    PCOMA           reduce using rule 92 (condicion -> expression toperador expression .)
+    RPAREN          reduce using rule 92 (condicion -> expression toperador expression .)
+    PLUS            shift and go to state 104
+    MINUS           shift and go to state 105
 
 
 state 223
 
-    (91) condicion -> expression toperador expression .
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
+    (70) condi -> ID toperador expression AND . condi
+    (70) condi -> . ID toperador expression AND condi
+    (71) condi -> . ID toperador expression
 
-    AND             reduce using rule 91 (condicion -> expression toperador expression .)
-    OR              reduce using rule 91 (condicion -> expression toperador expression .)
-    NOT1            reduce using rule 91 (condicion -> expression toperador expression .)
-    PCOMA           reduce using rule 91 (condicion -> expression toperador expression .)
-    RPAREN          reduce using rule 91 (condicion -> expression toperador expression .)
-    PLUS            shift and go to state 104
-    MINUS           shift and go to state 105
+    ID              shift and go to state 153
 
+    condi                          shift and go to state 238
 
 state 224
-
-    (65) update -> UPDATE ID SET cambios WHERE ID EQUALS expression .
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
-
-    PCOMA           reduce using rule 65 (update -> UPDATE ID SET cambios WHERE ID EQUALS expression .)
-    PLUS            shift and go to state 104
-    MINUS           shift and go to state 105
-
-
-state 225
 
     (25) restriccion -> PRIMARY KEY foranea .
 
@@ -3086,14 +3028,14 @@ state 225
     RPAREN          reduce using rule 25 (restriccion -> PRIMARY KEY foranea .)
 
 
-state 226
+state 225
 
     (28) foranea -> REFERENCES ID LPAREN . ID RPAREN
 
     ID              shift and go to state 239
 
 
-state 227
+state 226
 
     (32) tipodato -> NVARCHAR LPAREN NUMBER RPAREN .
 
@@ -3106,7 +3048,7 @@ state 227
     AS              reduce using rule 32 (tipodato -> NVARCHAR LPAREN NUMBER RPAREN .)
 
 
-state 228
+state 227
 
     (33) tipodato -> NCHAR LPAREN NUMBER RPAREN .
 
@@ -3119,40 +3061,40 @@ state 228
     AS              reduce using rule 33 (tipodato -> NCHAR LPAREN NUMBER RPAREN .)
 
 
-state 229
+state 228
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS . BEGIN initial2 RETURN expression PCOMA END
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS . BEGIN initial2 RETURN expression PCOMA END
 
     BEGIN           shift and go to state 240
 
 
+state 229
+
+    (82) parametros -> ARROBA ID tipodato COMA parametros .
+
+    RPAREN          reduce using rule 82 (parametros -> ARROBA ID tipodato COMA parametros .)
+
+
 state 230
 
-    (81) parametros -> ARROBA ID tipodato COMA parametros .
-
-    RPAREN          reduce using rule 81 (parametros -> ARROBA ID tipodato COMA parametros .)
-
-
-state 231
-
-    (83) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 . END
+    (84) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 . END
 
     END             shift and go to state 241
 
 
-state 232
+state 231
 
-    (75) initial2 -> opespeciales . initial2
-    (76) initial2 -> opespeciales .
-    (75) initial2 -> . opespeciales initial2
-    (76) initial2 -> . opespeciales
-    (77) opespeciales -> . if PCOMA
-    (78) opespeciales -> . variable PCOMA
-    (79) opespeciales -> . compartidas PCOMA
-    (87) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
-    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
-    (71) variable -> . DECLARE ARROBA ID tipodato
-    (72) variable -> . SET ARROBA ID EQUALS valorvar
+    (76) initial2 -> opespeciales . initial2
+    (77) initial2 -> opespeciales .
+    (76) initial2 -> . opespeciales initial2
+    (77) initial2 -> . opespeciales
+    (78) opespeciales -> . if PCOMA
+    (79) opespeciales -> . variable PCOMA
+    (80) opespeciales -> . compartidas PCOMA
+    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
+    (89) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+    (72) variable -> . DECLARE ARROBA ID tipodato
+    (73) variable -> . SET ARROBA ID EQUALS valorvar
     (11) compartidas -> . insert
     (12) compartidas -> . select
     (13) compartidas -> . update
@@ -3163,20 +3105,19 @@ state 232
     (58) insert -> . INSERT INTO ID parametrosi VALUES entradas
     (36) select -> . SELECT funcionesdefinidas
     (37) select -> . SELECT selectmultiple
-    (65) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (66) update -> . UPDATE ID SET cambios WHERE condiciones
+    (65) update -> . UPDATE ID SET cambios WHERE condi
     (55) truncate -> . TRUNCATE TABLE ID
     (56) drop -> . DROP TABLE ID
     (57) drop -> . DROP COLUMN ID
     (53) alter -> . ALTER TABLE ID ADD COLUMN ID tipodato
     (54) alter -> . ALTER TABLE ID DROP COLUMN ID
-    (70) delete -> . DELETE FROM ID WHERE ID EQUALS expression
+    (69) delete -> . DELETE FROM ID WHERE condi
 
-    END             reduce using rule 76 (initial2 -> opespeciales .)
-    RETURN          reduce using rule 76 (initial2 -> opespeciales .)
-    IF              shift and go to state 236
-    DECLARE         shift and go to state 237
-    SET             shift and go to state 238
+    END             reduce using rule 77 (initial2 -> opespeciales .)
+    RETURN          reduce using rule 77 (initial2 -> opespeciales .)
+    IF              shift and go to state 235
+    DECLARE         shift and go to state 236
+    SET             shift and go to state 237
     INSERT          shift and go to state 21
     SELECT          shift and go to state 22
     UPDATE          shift and go to state 23
@@ -3185,11 +3126,11 @@ state 232
     ALTER           shift and go to state 26
     DELETE          shift and go to state 27
 
-    opespeciales                   shift and go to state 232
+    opespeciales                   shift and go to state 231
     initial2                       shift and go to state 242
-    if                             shift and go to state 233
-    variable                       shift and go to state 234
-    compartidas                    shift and go to state 235
+    if                             shift and go to state 232
+    variable                       shift and go to state 233
+    compartidas                    shift and go to state 234
     insert                         shift and go to state 12
     select                         shift and go to state 13
     update                         shift and go to state 14
@@ -3198,47 +3139,54 @@ state 232
     alter                          shift and go to state 17
     delete                         shift and go to state 18
 
-state 233
+state 232
 
-    (77) opespeciales -> if . PCOMA
+    (78) opespeciales -> if . PCOMA
 
     PCOMA           shift and go to state 243
 
 
-state 234
+state 233
 
-    (78) opespeciales -> variable . PCOMA
+    (79) opespeciales -> variable . PCOMA
 
     PCOMA           shift and go to state 244
 
 
-state 235
+state 234
 
-    (79) opespeciales -> compartidas . PCOMA
+    (80) opespeciales -> compartidas . PCOMA
 
     PCOMA           shift and go to state 245
 
 
-state 236
+state 235
 
-    (87) if -> IF . LPAREN condiciones RPAREN BEGIN initial2 END
-    (88) if -> IF . LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+    (88) if -> IF . LPAREN condiciones RPAREN BEGIN initial2 END
+    (89) if -> IF . LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
 
     LPAREN          shift and go to state 246
 
 
-state 237
+state 236
 
-    (71) variable -> DECLARE . ARROBA ID tipodato
+    (72) variable -> DECLARE . ARROBA ID tipodato
 
     ARROBA          shift and go to state 247
 
 
-state 238
+state 237
 
-    (72) variable -> SET . ARROBA ID EQUALS valorvar
+    (73) variable -> SET . ARROBA ID EQUALS valorvar
 
     ARROBA          shift and go to state 248
+
+
+state 238
+
+    (70) condi -> ID toperador expression AND condi .
+
+    PCOMA           reduce using rule 70 (condi -> ID toperador expression AND condi .)
 
 
 state 239
@@ -3250,16 +3198,16 @@ state 239
 
 state 240
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN . initial2 RETURN expression PCOMA END
-    (75) initial2 -> . opespeciales initial2
-    (76) initial2 -> . opespeciales
-    (77) opespeciales -> . if PCOMA
-    (78) opespeciales -> . variable PCOMA
-    (79) opespeciales -> . compartidas PCOMA
-    (87) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
-    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
-    (71) variable -> . DECLARE ARROBA ID tipodato
-    (72) variable -> . SET ARROBA ID EQUALS valorvar
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN . initial2 RETURN expression PCOMA END
+    (76) initial2 -> . opespeciales initial2
+    (77) initial2 -> . opespeciales
+    (78) opespeciales -> . if PCOMA
+    (79) opespeciales -> . variable PCOMA
+    (80) opespeciales -> . compartidas PCOMA
+    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
+    (89) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+    (72) variable -> . DECLARE ARROBA ID tipodato
+    (73) variable -> . SET ARROBA ID EQUALS valorvar
     (11) compartidas -> . insert
     (12) compartidas -> . select
     (13) compartidas -> . update
@@ -3270,18 +3218,17 @@ state 240
     (58) insert -> . INSERT INTO ID parametrosi VALUES entradas
     (36) select -> . SELECT funcionesdefinidas
     (37) select -> . SELECT selectmultiple
-    (65) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (66) update -> . UPDATE ID SET cambios WHERE condiciones
+    (65) update -> . UPDATE ID SET cambios WHERE condi
     (55) truncate -> . TRUNCATE TABLE ID
     (56) drop -> . DROP TABLE ID
     (57) drop -> . DROP COLUMN ID
     (53) alter -> . ALTER TABLE ID ADD COLUMN ID tipodato
     (54) alter -> . ALTER TABLE ID DROP COLUMN ID
-    (70) delete -> . DELETE FROM ID WHERE ID EQUALS expression
+    (69) delete -> . DELETE FROM ID WHERE condi
 
-    IF              shift and go to state 236
-    DECLARE         shift and go to state 237
-    SET             shift and go to state 238
+    IF              shift and go to state 235
+    DECLARE         shift and go to state 236
+    SET             shift and go to state 237
     INSERT          shift and go to state 21
     SELECT          shift and go to state 22
     UPDATE          shift and go to state 23
@@ -3291,10 +3238,10 @@ state 240
     DELETE          shift and go to state 27
 
     initial2                       shift and go to state 250
-    opespeciales                   shift and go to state 232
-    if                             shift and go to state 233
-    variable                       shift and go to state 234
-    compartidas                    shift and go to state 235
+    opespeciales                   shift and go to state 231
+    if                             shift and go to state 232
+    variable                       shift and go to state 233
+    compartidas                    shift and go to state 234
     insert                         shift and go to state 12
     select                         shift and go to state 13
     update                         shift and go to state 14
@@ -3305,94 +3252,94 @@ state 240
 
 state 241
 
-    (83) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END .
+    (84) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END .
 
-    PCOMA           reduce using rule 83 (procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END .)
+    PCOMA           reduce using rule 84 (procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END .)
 
 
 state 242
 
-    (75) initial2 -> opespeciales initial2 .
+    (76) initial2 -> opespeciales initial2 .
 
-    END             reduce using rule 75 (initial2 -> opespeciales initial2 .)
-    RETURN          reduce using rule 75 (initial2 -> opespeciales initial2 .)
+    END             reduce using rule 76 (initial2 -> opespeciales initial2 .)
+    RETURN          reduce using rule 76 (initial2 -> opespeciales initial2 .)
 
 
 state 243
 
-    (77) opespeciales -> if PCOMA .
+    (78) opespeciales -> if PCOMA .
 
-    IF              reduce using rule 77 (opespeciales -> if PCOMA .)
-    DECLARE         reduce using rule 77 (opespeciales -> if PCOMA .)
-    SET             reduce using rule 77 (opespeciales -> if PCOMA .)
-    INSERT          reduce using rule 77 (opespeciales -> if PCOMA .)
-    SELECT          reduce using rule 77 (opespeciales -> if PCOMA .)
-    UPDATE          reduce using rule 77 (opespeciales -> if PCOMA .)
-    TRUNCATE        reduce using rule 77 (opespeciales -> if PCOMA .)
-    DROP            reduce using rule 77 (opespeciales -> if PCOMA .)
-    ALTER           reduce using rule 77 (opespeciales -> if PCOMA .)
-    DELETE          reduce using rule 77 (opespeciales -> if PCOMA .)
-    END             reduce using rule 77 (opespeciales -> if PCOMA .)
-    RETURN          reduce using rule 77 (opespeciales -> if PCOMA .)
+    IF              reduce using rule 78 (opespeciales -> if PCOMA .)
+    DECLARE         reduce using rule 78 (opespeciales -> if PCOMA .)
+    SET             reduce using rule 78 (opespeciales -> if PCOMA .)
+    INSERT          reduce using rule 78 (opespeciales -> if PCOMA .)
+    SELECT          reduce using rule 78 (opespeciales -> if PCOMA .)
+    UPDATE          reduce using rule 78 (opespeciales -> if PCOMA .)
+    TRUNCATE        reduce using rule 78 (opespeciales -> if PCOMA .)
+    DROP            reduce using rule 78 (opespeciales -> if PCOMA .)
+    ALTER           reduce using rule 78 (opespeciales -> if PCOMA .)
+    DELETE          reduce using rule 78 (opespeciales -> if PCOMA .)
+    END             reduce using rule 78 (opespeciales -> if PCOMA .)
+    RETURN          reduce using rule 78 (opespeciales -> if PCOMA .)
 
 
 state 244
 
-    (78) opespeciales -> variable PCOMA .
+    (79) opespeciales -> variable PCOMA .
 
-    IF              reduce using rule 78 (opespeciales -> variable PCOMA .)
-    DECLARE         reduce using rule 78 (opespeciales -> variable PCOMA .)
-    SET             reduce using rule 78 (opespeciales -> variable PCOMA .)
-    INSERT          reduce using rule 78 (opespeciales -> variable PCOMA .)
-    SELECT          reduce using rule 78 (opespeciales -> variable PCOMA .)
-    UPDATE          reduce using rule 78 (opespeciales -> variable PCOMA .)
-    TRUNCATE        reduce using rule 78 (opespeciales -> variable PCOMA .)
-    DROP            reduce using rule 78 (opespeciales -> variable PCOMA .)
-    ALTER           reduce using rule 78 (opespeciales -> variable PCOMA .)
-    DELETE          reduce using rule 78 (opespeciales -> variable PCOMA .)
-    END             reduce using rule 78 (opespeciales -> variable PCOMA .)
-    RETURN          reduce using rule 78 (opespeciales -> variable PCOMA .)
+    IF              reduce using rule 79 (opespeciales -> variable PCOMA .)
+    DECLARE         reduce using rule 79 (opespeciales -> variable PCOMA .)
+    SET             reduce using rule 79 (opespeciales -> variable PCOMA .)
+    INSERT          reduce using rule 79 (opespeciales -> variable PCOMA .)
+    SELECT          reduce using rule 79 (opespeciales -> variable PCOMA .)
+    UPDATE          reduce using rule 79 (opespeciales -> variable PCOMA .)
+    TRUNCATE        reduce using rule 79 (opespeciales -> variable PCOMA .)
+    DROP            reduce using rule 79 (opespeciales -> variable PCOMA .)
+    ALTER           reduce using rule 79 (opespeciales -> variable PCOMA .)
+    DELETE          reduce using rule 79 (opespeciales -> variable PCOMA .)
+    END             reduce using rule 79 (opespeciales -> variable PCOMA .)
+    RETURN          reduce using rule 79 (opespeciales -> variable PCOMA .)
 
 
 state 245
 
-    (79) opespeciales -> compartidas PCOMA .
+    (80) opespeciales -> compartidas PCOMA .
 
-    IF              reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    DECLARE         reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    SET             reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    INSERT          reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    SELECT          reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    UPDATE          reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    TRUNCATE        reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    DROP            reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    ALTER           reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    DELETE          reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    END             reduce using rule 79 (opespeciales -> compartidas PCOMA .)
-    RETURN          reduce using rule 79 (opespeciales -> compartidas PCOMA .)
+    IF              reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    DECLARE         reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    SET             reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    INSERT          reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    SELECT          reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    UPDATE          reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    TRUNCATE        reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    DROP            reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    ALTER           reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    DELETE          reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    END             reduce using rule 80 (opespeciales -> compartidas PCOMA .)
+    RETURN          reduce using rule 80 (opespeciales -> compartidas PCOMA .)
 
 
 state 246
 
-    (87) if -> IF LPAREN . condiciones RPAREN BEGIN initial2 END
-    (88) if -> IF LPAREN . condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
-    (89) condiciones -> . condicion
-    (90) condiciones -> . condicion explogicas condiciones
-    (91) condicion -> . expression toperador expression
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (88) if -> IF LPAREN . condiciones RPAREN BEGIN initial2 END
+    (89) if -> IF LPAREN . condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+    (90) condiciones -> . condicion
+    (91) condiciones -> . condicion explogicas condiciones
+    (92) condicion -> . expression toperador expression
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -3402,22 +3349,22 @@ state 246
     ID              shift and go to state 67
 
     condiciones                    shift and go to state 251
-    condicion                      shift and go to state 174
-    expression                     shift and go to state 175
+    condicion                      shift and go to state 175
+    expression                     shift and go to state 176
     term                           shift and go to state 72
     factor2                        shift and go to state 73
     factor                         shift and go to state 74
 
 state 247
 
-    (71) variable -> DECLARE ARROBA . ID tipodato
+    (72) variable -> DECLARE ARROBA . ID tipodato
 
     ID              shift and go to state 252
 
 
 state 248
 
-    (72) variable -> SET ARROBA . ID EQUALS valorvar
+    (73) variable -> SET ARROBA . ID EQUALS valorvar
 
     ID              shift and go to state 253
 
@@ -3432,22 +3379,22 @@ state 249
 
 state 250
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 . RETURN expression PCOMA END
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 . RETURN expression PCOMA END
 
     RETURN          shift and go to state 254
 
 
 state 251
 
-    (87) if -> IF LPAREN condiciones . RPAREN BEGIN initial2 END
-    (88) if -> IF LPAREN condiciones . RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+    (88) if -> IF LPAREN condiciones . RPAREN BEGIN initial2 END
+    (89) if -> IF LPAREN condiciones . RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
 
     RPAREN          shift and go to state 255
 
 
 state 252
 
-    (71) variable -> DECLARE ARROBA ID . tipodato
+    (72) variable -> DECLARE ARROBA ID . tipodato
     (29) tipodato -> . INT
     (30) tipodato -> . DECIMAL
     (31) tipodato -> . BOOL
@@ -3456,40 +3403,40 @@ state 252
     (34) tipodato -> . DATE
     (35) tipodato -> . DATETIME
 
-    INT             shift and go to state 155
-    DECIMAL         shift and go to state 156
-    BOOL            shift and go to state 157
-    NVARCHAR        shift and go to state 158
-    NCHAR           shift and go to state 159
-    DATE            shift and go to state 160
-    DATETIME        shift and go to state 161
+    INT             shift and go to state 156
+    DECIMAL         shift and go to state 157
+    BOOL            shift and go to state 158
+    NVARCHAR        shift and go to state 159
+    NCHAR           shift and go to state 160
+    DATE            shift and go to state 161
+    DATETIME        shift and go to state 162
 
     tipodato                       shift and go to state 256
 
 state 253
 
-    (72) variable -> SET ARROBA ID . EQUALS valorvar
+    (73) variable -> SET ARROBA ID . EQUALS valorvar
 
     EQUALS          shift and go to state 257
 
 
 state 254
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN . expression PCOMA END
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN . expression PCOMA END
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     LPAREN          shift and go to state 68
     NUMBER          shift and go to state 75
@@ -3505,44 +3452,44 @@ state 254
 
 state 255
 
-    (87) if -> IF LPAREN condiciones RPAREN . BEGIN initial2 END
-    (88) if -> IF LPAREN condiciones RPAREN . BEGIN initial2 END ELSE BEGIN initial2 END
+    (88) if -> IF LPAREN condiciones RPAREN . BEGIN initial2 END
+    (89) if -> IF LPAREN condiciones RPAREN . BEGIN initial2 END ELSE BEGIN initial2 END
 
     BEGIN           shift and go to state 259
 
 
 state 256
 
-    (71) variable -> DECLARE ARROBA ID tipodato .
+    (72) variable -> DECLARE ARROBA ID tipodato .
 
-    PCOMA           reduce using rule 71 (variable -> DECLARE ARROBA ID tipodato .)
+    PCOMA           reduce using rule 72 (variable -> DECLARE ARROBA ID tipodato .)
 
 
 state 257
 
-    (72) variable -> SET ARROBA ID EQUALS . valorvar
-    (73) valorvar -> . expression
-    (74) valorvar -> . funcionesdefinidas
-    (102) expression -> . expression PLUS term
-    (103) expression -> . expression MINUS term
-    (104) expression -> . term
+    (73) variable -> SET ARROBA ID EQUALS . valorvar
+    (74) valorvar -> . expression
+    (75) valorvar -> . funcionesdefinidas
+    (103) expression -> . expression PLUS term
+    (104) expression -> . expression MINUS term
+    (105) expression -> . term
     (47) funcionesdefinidas -> . CONCATENA LPAREN factor COMA factor RPAREN
     (48) funcionesdefinidas -> . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
     (49) funcionesdefinidas -> . HOY LPAREN RPAREN
     (50) funcionesdefinidas -> . CONTAR LPAREN TIMES RPAREN FROM ID
     (51) funcionesdefinidas -> . SUMA LPAREN ID RPAREN FROM ID
     (52) funcionesdefinidas -> . CAST
-    (105) term -> . term TIMES factor2
-    (106) term -> . term DIVIDE factor2
-    (107) term -> . factor2
-    (108) factor2 -> . LPAREN expression RPAREN
-    (109) factor2 -> . factor
-    (110) factor -> . NUMBER
-    (111) factor -> . DECIMAL1
-    (112) factor -> . CADENA
-    (113) factor -> . ARROBA ID
-    (114) factor -> . ID PUNTO ID
-    (115) factor -> . ID
+    (106) term -> . term TIMES factor2
+    (107) term -> . term DIVIDE factor2
+    (108) term -> . factor2
+    (109) factor2 -> . LPAREN expression RPAREN
+    (110) factor2 -> . factor
+    (111) factor -> . NUMBER
+    (112) factor -> . DECIMAL1
+    (113) factor -> . CADENA
+    (114) factor -> . ARROBA ID
+    (115) factor -> . ID PUNTO ID
+    (116) factor -> . ID
 
     CONCATENA       shift and go to state 46
     SUBSTRAER       shift and go to state 47
@@ -3566,9 +3513,9 @@ state 257
 
 state 258
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression . PCOMA END
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression . PCOMA END
+    (103) expression -> expression . PLUS term
+    (104) expression -> expression . MINUS term
 
     PCOMA           shift and go to state 263
     PLUS            shift and go to state 104
@@ -3577,17 +3524,17 @@ state 258
 
 state 259
 
-    (87) if -> IF LPAREN condiciones RPAREN BEGIN . initial2 END
-    (88) if -> IF LPAREN condiciones RPAREN BEGIN . initial2 END ELSE BEGIN initial2 END
-    (75) initial2 -> . opespeciales initial2
-    (76) initial2 -> . opespeciales
-    (77) opespeciales -> . if PCOMA
-    (78) opespeciales -> . variable PCOMA
-    (79) opespeciales -> . compartidas PCOMA
-    (87) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
-    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
-    (71) variable -> . DECLARE ARROBA ID tipodato
-    (72) variable -> . SET ARROBA ID EQUALS valorvar
+    (88) if -> IF LPAREN condiciones RPAREN BEGIN . initial2 END
+    (89) if -> IF LPAREN condiciones RPAREN BEGIN . initial2 END ELSE BEGIN initial2 END
+    (76) initial2 -> . opespeciales initial2
+    (77) initial2 -> . opespeciales
+    (78) opespeciales -> . if PCOMA
+    (79) opespeciales -> . variable PCOMA
+    (80) opespeciales -> . compartidas PCOMA
+    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
+    (89) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+    (72) variable -> . DECLARE ARROBA ID tipodato
+    (73) variable -> . SET ARROBA ID EQUALS valorvar
     (11) compartidas -> . insert
     (12) compartidas -> . select
     (13) compartidas -> . update
@@ -3598,18 +3545,17 @@ state 259
     (58) insert -> . INSERT INTO ID parametrosi VALUES entradas
     (36) select -> . SELECT funcionesdefinidas
     (37) select -> . SELECT selectmultiple
-    (65) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (66) update -> . UPDATE ID SET cambios WHERE condiciones
+    (65) update -> . UPDATE ID SET cambios WHERE condi
     (55) truncate -> . TRUNCATE TABLE ID
     (56) drop -> . DROP TABLE ID
     (57) drop -> . DROP COLUMN ID
     (53) alter -> . ALTER TABLE ID ADD COLUMN ID tipodato
     (54) alter -> . ALTER TABLE ID DROP COLUMN ID
-    (70) delete -> . DELETE FROM ID WHERE ID EQUALS expression
+    (69) delete -> . DELETE FROM ID WHERE condi
 
-    IF              shift and go to state 236
-    DECLARE         shift and go to state 237
-    SET             shift and go to state 238
+    IF              shift and go to state 235
+    DECLARE         shift and go to state 236
+    SET             shift and go to state 237
     INSERT          shift and go to state 21
     SELECT          shift and go to state 22
     UPDATE          shift and go to state 23
@@ -3619,10 +3565,10 @@ state 259
     DELETE          shift and go to state 27
 
     initial2                       shift and go to state 264
-    opespeciales                   shift and go to state 232
-    if                             shift and go to state 233
-    variable                       shift and go to state 234
-    compartidas                    shift and go to state 235
+    opespeciales                   shift and go to state 231
+    if                             shift and go to state 232
+    variable                       shift and go to state 233
+    compartidas                    shift and go to state 234
     insert                         shift and go to state 12
     select                         shift and go to state 13
     update                         shift and go to state 14
@@ -3633,90 +3579,90 @@ state 259
 
 state 260
 
-    (72) variable -> SET ARROBA ID EQUALS valorvar .
+    (73) variable -> SET ARROBA ID EQUALS valorvar .
 
-    PCOMA           reduce using rule 72 (variable -> SET ARROBA ID EQUALS valorvar .)
+    PCOMA           reduce using rule 73 (variable -> SET ARROBA ID EQUALS valorvar .)
 
 
 state 261
 
-    (73) valorvar -> expression .
-    (102) expression -> expression . PLUS term
-    (103) expression -> expression . MINUS term
+    (74) valorvar -> expression .
+    (103) expression -> expression . PLUS term
+    (104) expression -> expression . MINUS term
 
-    PCOMA           reduce using rule 73 (valorvar -> expression .)
+    PCOMA           reduce using rule 74 (valorvar -> expression .)
     PLUS            shift and go to state 104
     MINUS           shift and go to state 105
 
 
 state 262
 
-    (74) valorvar -> funcionesdefinidas .
+    (75) valorvar -> funcionesdefinidas .
 
-    PCOMA           reduce using rule 74 (valorvar -> funcionesdefinidas .)
+    PCOMA           reduce using rule 75 (valorvar -> funcionesdefinidas .)
 
 
 state 263
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA . END
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA . END
 
     END             shift and go to state 265
 
 
 state 264
 
-    (87) if -> IF LPAREN condiciones RPAREN BEGIN initial2 . END
-    (88) if -> IF LPAREN condiciones RPAREN BEGIN initial2 . END ELSE BEGIN initial2 END
+    (88) if -> IF LPAREN condiciones RPAREN BEGIN initial2 . END
+    (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 . END ELSE BEGIN initial2 END
 
     END             shift and go to state 266
 
 
 state 265
 
-    (80) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .
+    (81) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .
 
-    CREATE          reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    USAR            reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    EXEC            reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    ID              reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    INSERT          reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    SELECT          reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    UPDATE          reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    TRUNCATE        reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    DROP            reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    ALTER           reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    DELETE          reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
-    $end            reduce using rule 80 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    CREATE          reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    USAR            reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    EXEC            reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    ID              reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    INSERT          reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    SELECT          reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    UPDATE          reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    TRUNCATE        reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    DROP            reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    ALTER           reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    DELETE          reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
+    $end            reduce using rule 81 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
 
 
 state 266
 
-    (87) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END .
-    (88) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END . ELSE BEGIN initial2 END
+    (88) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END .
+    (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END . ELSE BEGIN initial2 END
 
-    PCOMA           reduce using rule 87 (if -> IF LPAREN condiciones RPAREN BEGIN initial2 END .)
+    PCOMA           reduce using rule 88 (if -> IF LPAREN condiciones RPAREN BEGIN initial2 END .)
     ELSE            shift and go to state 267
 
 
 state 267
 
-    (88) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE . BEGIN initial2 END
+    (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE . BEGIN initial2 END
 
     BEGIN           shift and go to state 268
 
 
 state 268
 
-    (88) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN . initial2 END
-    (75) initial2 -> . opespeciales initial2
-    (76) initial2 -> . opespeciales
-    (77) opespeciales -> . if PCOMA
-    (78) opespeciales -> . variable PCOMA
-    (79) opespeciales -> . compartidas PCOMA
-    (87) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
-    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
-    (71) variable -> . DECLARE ARROBA ID tipodato
-    (72) variable -> . SET ARROBA ID EQUALS valorvar
+    (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN . initial2 END
+    (76) initial2 -> . opespeciales initial2
+    (77) initial2 -> . opespeciales
+    (78) opespeciales -> . if PCOMA
+    (79) opespeciales -> . variable PCOMA
+    (80) opespeciales -> . compartidas PCOMA
+    (88) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END
+    (89) if -> . IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
+    (72) variable -> . DECLARE ARROBA ID tipodato
+    (73) variable -> . SET ARROBA ID EQUALS valorvar
     (11) compartidas -> . insert
     (12) compartidas -> . select
     (13) compartidas -> . update
@@ -3727,18 +3673,17 @@ state 268
     (58) insert -> . INSERT INTO ID parametrosi VALUES entradas
     (36) select -> . SELECT funcionesdefinidas
     (37) select -> . SELECT selectmultiple
-    (65) update -> . UPDATE ID SET cambios WHERE ID EQUALS expression
-    (66) update -> . UPDATE ID SET cambios WHERE condiciones
+    (65) update -> . UPDATE ID SET cambios WHERE condi
     (55) truncate -> . TRUNCATE TABLE ID
     (56) drop -> . DROP TABLE ID
     (57) drop -> . DROP COLUMN ID
     (53) alter -> . ALTER TABLE ID ADD COLUMN ID tipodato
     (54) alter -> . ALTER TABLE ID DROP COLUMN ID
-    (70) delete -> . DELETE FROM ID WHERE ID EQUALS expression
+    (69) delete -> . DELETE FROM ID WHERE condi
 
-    IF              shift and go to state 236
-    DECLARE         shift and go to state 237
-    SET             shift and go to state 238
+    IF              shift and go to state 235
+    DECLARE         shift and go to state 236
+    SET             shift and go to state 237
     INSERT          shift and go to state 21
     SELECT          shift and go to state 22
     UPDATE          shift and go to state 23
@@ -3748,10 +3693,10 @@ state 268
     DELETE          shift and go to state 27
 
     initial2                       shift and go to state 269
-    opespeciales                   shift and go to state 232
-    if                             shift and go to state 233
-    variable                       shift and go to state 234
-    compartidas                    shift and go to state 235
+    opespeciales                   shift and go to state 231
+    if                             shift and go to state 232
+    variable                       shift and go to state 233
+    compartidas                    shift and go to state 234
     insert                         shift and go to state 12
     select                         shift and go to state 13
     update                         shift and go to state 14
@@ -3762,18 +3707,14 @@ state 268
 
 state 269
 
-    (88) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 . END
+    (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 . END
 
     END             shift and go to state 270
 
 
 state 270
 
-    (88) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END .
+    (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END .
 
-    PCOMA           reduce using rule 88 (if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END .)
+    PCOMA           reduce using rule 89 (if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END .)
 
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for EQUALS in state 178 resolved as shift

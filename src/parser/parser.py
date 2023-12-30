@@ -2,8 +2,10 @@
 import ply.yacc as yacc
 
 from ..aplicacion.querys.Alter import Alter
+from ..aplicacion.querys.Condicion import Condicion
 from ..aplicacion.querys.CreateDB import CreateDB
 from ..aplicacion.querys.CreateTable import CreateTable
+from ..aplicacion.querys.Delete import Delete
 from ..aplicacion.querys.Insert import Insert
 from ..aplicacion.querys.Parametrostabla import Parametrostabla
 from ..aplicacion.querys.Select import Select
@@ -302,11 +304,10 @@ def p_valores(p):
 #UPDATE    
 def p_update(p):
     '''
-    update  : UPDATE ID SET cambios WHERE ID EQUALS expression
-            | UPDATE ID SET cambios WHERE condiciones
+    update  :  UPDATE ID SET cambios WHERE condi
     '''
-    dic= {p[6]:p[8]}
-    update = Update(p[2], p[4], dic )
+
+    update = Update(p[2], p[4],  p[6] )
     p[0] = update
 
 
@@ -334,8 +335,22 @@ def p_campocambios(p):
 #DELETE
 def p_delete(p):
     '''
-    delete  : DELETE FROM ID WHERE ID EQUALS expression
+    delete  : DELETE FROM ID WHERE condi
     '''
+    delet = Delete(p[3], p[5])
+    p[0]= delet
+
+def p_condi(p):
+     '''
+     condi : ID toperador expression AND condi
+            | ID toperador expression
+     '''
+     if len(p) == 6:
+         condi= Condicion(p[1], p[2], p[3])
+         p[0]=[condi] + p[5]
+     else:
+         condi= Condicion(p[1], p[2], p[3])
+         p[0]=[condi]
 
 
 #DECLARACION------VARIABLES
