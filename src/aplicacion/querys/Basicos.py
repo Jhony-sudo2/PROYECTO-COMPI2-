@@ -2,7 +2,22 @@ import  os
 from datetime import datetime
 from src.parser.lexer2 import lexer2
 from src.parser.parser2 import parser2
-from src.parser.parser2 import tablasimbolos
+from src.parser.parser2 import tablaparser
+
+def getvalores(texto,tablasimbolose):
+    global tablatmp
+    try:
+        if tablasimbolose is not None:
+            for tmp in tablasimbolose:
+                tablaparser.append(tmp)
+        resultado = parser2.parse(texto, lexer=lexer2)
+        if tablaparser is not None:
+            tablaparser.clear()
+        return resultado
+    except Exception as e:
+        print('ocurrio un error')
+        print(e)
+
 def getrutatablas(db):
     ruta_actual = os.getcwd()
     ruta3 = os.path.abspath(os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/'
@@ -49,10 +64,3 @@ def getTipoDato(valor):
         return 0
 
 
-def getvalores(texto,tablasimbolose):
-    try:
-        tablasimbolos = tablasimbolose
-        resultado = parser2.parse(texto, lexer=lexer2)
-        return resultado
-    except Exception as e:
-        print('ocurrio un error')

@@ -11,6 +11,15 @@ tokens = [
     'ARROBA',
     'LPAREN',
     'RPAREN',
+    'DIFERENTE',
+    'MAYORQ',
+    'MENORQ',
+    'MAYORIQ',
+    'MENORIQ',
+    'AND',
+    'OR',
+    'NOT',
+    'EQUALS'
 
 ]
 
@@ -21,7 +30,15 @@ t_DIVIDE = r'/'
 t_ARROBA = r'@'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-
+t_EQUALS = r'='
+t_DIFERENTE = r'!='
+t_MAYORQ = r'>'
+t_MENORQ = r'<'
+t_MAYORIQ = r'>='
+t_MENORIQ = r'<='
+t_AND = r'&&'
+t_OR = r'\|\|'
+t_NOT = r'!'
 
 
 def t_newline(t):

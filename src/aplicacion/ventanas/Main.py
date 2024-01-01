@@ -18,6 +18,7 @@ def ejecutar_consulta():
     texto = campo_texto.get("1.0", "end-1c").strip()
     if db :
         try:
+            lexer.lineno = 0
             s = texto
             result = parser.parse(s, lexer=lexer)
             if parsererror:
@@ -39,11 +40,12 @@ def ejecutar_consulta():
                     if hasattr(elemento,'resultado'):
                         if len(elemento.resultado) !=0:
                             salida += str(elemento.resultado)
-                    if hasattr(elemento,'nueva'):
+                    if hasattr(elemento,'nueva') and len(elemento.errores) == 0:
                         db = elemento.nueva
+                        cargar_carpetas()
+                        cargarArbol(db)
                 consola.insert(END,salida)
-            cargar_carpetas()
-            cargarArbol(db)
+
         except EOFError:
             print("Error")
     else:

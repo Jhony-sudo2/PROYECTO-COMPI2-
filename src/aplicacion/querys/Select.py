@@ -5,7 +5,7 @@ import pandas as pd
 import xml.etree.ElementTree as ET
 
 class Select:
-    def __init__(self,tablas,columnas,condiciones=None):
+    def __init__(self,tablas,columnas,linea,condiciones=None):
         pd.set_option('display.max_columns', None)
         pd.set_option('display.max_rows', None)
         self.tabla = tablas
@@ -17,6 +17,7 @@ class Select:
         self.tablasi = []
         self.columnasi = []
         self.datos = {}
+        self.linea = linea
 
     def ejecutar(self,db):
         if self.verificartablas(db,self.tabla):
@@ -38,7 +39,7 @@ class Select:
         self.ruta = getrutatablas(db)
         for elemento in tablas:
             if not os.path.exists(self.ruta+'/'+elemento):
-                self.errores += f' la tabla: {elemento} no existe en la base de datos {db}'
+                self.errores += f' Error en select: la tabla: {elemento} no existe en la base de datos {db} linea: {self.linea} \n'
                 return False
         return True
 
@@ -52,7 +53,7 @@ class Select:
                     self.tablasi.append(tupla[0])
                     self.columnasi.append(tupla[1])
                 except IndexError:
-                    self.errores += f'el elemento {tupla}  no esta asociado con ninguna tabla  el formato es tabla.atributo para las tablas \n'
+                    self.errores += f'ERROR SELECT: elemento {tupla}  no esta asociado con ninguna tabla  el formato es tabla.atributo para las tablas linea: {self.linea} \n'
             verificacion = all(tabla in self.tabla for tabla in self.tablasi)
             if verificacion:
                 for index,elemento in enumerate(self.columnasi):
@@ -74,7 +75,7 @@ class Select:
                 nombre_subetiqueta = subetiqueta.tag
                 if nombre_subetiqueta == atributo:
                     return True
-        self.errores += f'el atributo {atributo} no existe en la tabla {tabla}'
+        self.errores += f'ERROR SELECT: el atributo {atributo} no existe en la tabla {tabla}, linea: {self.linea}\n'
         return False
 
 
