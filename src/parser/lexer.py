@@ -45,9 +45,6 @@ reservadas = {
     'COLUMN':'COLUMN',
     'DROP':'DROP',
 
-    #TRUNCATE
-    'TRUNCATE':'TRUNCATE',
-
     #SSL
     'IF':'IF',
     'ELSE':'ELSE',

@@ -7,5 +7,5 @@
   <NOTNULL_2>nombre_pc</NOTNULL_2>
   <NOTNULL_3>marca</NOTNULL_3>
   <impuesto>2</impuesto>
-  <precio4>2</precio4></Estructura>
+  <precio4>2</precio4><idc>1</idc><namer>1</namer><tasa>2</tasa><nueva>1</nueva><nueva2>2</nueva2></Estructura>
 </Tabla>

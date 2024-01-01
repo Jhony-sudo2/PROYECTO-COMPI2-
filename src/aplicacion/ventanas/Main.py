@@ -4,10 +4,37 @@ from tkinter import ttk
 from tkinter import filedialog
 
 from src.aplicacion.querys import Usar
-from src.parser.lexer import lexer
+from src.aplicacion.ventanas.arbolgramatica import Arbolgramatica
+from src.parser.lexer import lexer, reservadas
 from src.parser.parser import parser
 from Analizador import Analizador
 from src.parser.parser import parsererror
+class CustomLexer:
+    def __init__(self):
+        self.keywords = set(reservadas.values())
+        #self.keywords_lower = set(keyword.lower() for keyword in self.keywords)
+
+    def lex(self, code):
+        for token, value in self.tokenize(code.upper()):
+            yield token, value
+
+    def tokenize(self, code):
+        start = 0
+        while start < len(code):
+            while start < len(code) and code[start].isspace():
+                start += 1
+            if start >= len(code):
+                break
+
+            end = start + 1
+            while end < len(code) and not code[end].isspace():
+                end += 1
+
+            value = code[start:end]
+            token = 'Token.Keyword' if value in  self.keywords else 'Token.Text'
+            yield token, value
+
+            start = end
 
 db = ''
 funciones = []
@@ -35,17 +62,14 @@ def ejecutar_consulta():
                     elemento.ejecutar(db)
                     if len(elemento.errores) != 0:
                         salida += elemento.errores
-                    if hasattr(elemento,'tablafunciones'):
-                        elemento.tablafunciones = funciones
                     if hasattr(elemento,'resultado'):
                         if len(elemento.resultado) !=0:
                             salida += str(elemento.resultado)
-                    if hasattr(elemento,'nueva') and len(elemento.errores) == 0:
+                    if hasattr(elemento,'nueva'):
                         db = elemento.nueva
-                        cargar_carpetas()
-                        cargarArbol(db)
                 consola.insert(END,salida)
-
+            cargar_carpetas()
+            cargarArbol(db)
         except EOFError:
             print("Error")
     else:

@@ -6,15 +6,19 @@ from xml.etree.ElementTree import parse
 
 class Update:
     #recibinos los val de cambiios queson los nuevos valores
-    def __init__(self, tabla, cambios, actuales):
+    def __init__(self, tabla, cambios, actuales, tablasimbolos=None):
         self.errores = ''
         self.tabla= tabla
         self.cambios= cambios
         self.actualees=actuales
+        self.tablasimbolos=tablasimbolos
+        self.resultado = ''
     def ejecutar(self, db):
         ruta_actual = os.getcwd()
         ruta_tabla = os.path.abspath( os.path.join(ruta_actual, '..', '..')) + '/databases/' + db + '/Tables/' + self.tabla
         existeTb=existetabla(ruta_tabla)
+        self.actualees=self.convertirCadenas(self.actualees)
+        self.cambios=self.convertirCadenas(self.cambios)
         if existeTb :
             #Debemos verificar si existen los campos que se quieren actualizar
             estructura=self.getEstructura(ruta_tabla, '/estructura.xml')
@@ -97,9 +101,12 @@ class Update:
 
             for etiqueta, valor in self.actualees.items():
                 valor_en_persona = persona.find(etiqueta).text if persona.find(etiqueta) is not None else None
-                valor = valor.strip('\'"') if valor is not None else valor
+                if isinstance(valor, str) and (
+                        valor.startswith("'") and valor.endswith("'") or valor.startswith('"') and valor.endswith('"')):
+                    valor = valor.strip('\'"')
 
-                if valor_en_persona == valor:
+                print(f'val {valor_en_persona} == {valor}')
+                if str(valor_en_persona) == str(valor):
                     coincidencia = True
                 else:
                     coincidencia = False
@@ -114,6 +121,7 @@ class Update:
                         elemento.text = nuevo_valor
                     persona = elemento
                 seEncontroVal=True
+                self.resultado = 'Se ha actualizado la tabla'
             else:
                 print(f"eroror el valor no se encontro")
 
@@ -132,4 +140,16 @@ class Update:
         dic = {}
         dic= self.cambios
         return  dic[id]
+    def convertirCadenas(self, cadenas):
+        for etiqueta, valor in cadenas.items():
+            valor= getvalores(valor, self.tablasimbolos)
+        return  cadenas;
 
+
+    def valorescambiados(self, valores):
+        print(valores)
+        for i in range(len(valores)):
+            valores[i] = getvalores(valores[i], self.tablasimbolos)
+        print('valores cambiados')
+        print(valores)
+        return valores

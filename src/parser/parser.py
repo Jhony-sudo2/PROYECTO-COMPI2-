@@ -9,6 +9,7 @@ from ..aplicacion.querys.Parametrostabla import Parametrostabla
 from ..aplicacion.querys.Select import Select
 from src.aplicacion.querys.bucles.Si import Si
 from src.parser.lexer import tokens
+from ..aplicacion.querys.Trucate import Trucate
 from ..aplicacion.querys.Update import Update
 from ..aplicacion.querys.Usar import Usar
 from ..aplicacion.querys.bucles.Caso import Caso
@@ -238,11 +239,11 @@ def p_funcionesefinidas(p):
 #****************ALTER TABLE
 def p_alter(p):
     '''
-    alter   : ALTER TABLE ID ADD ID tipodato
+    alter   : ALTER TABLE ID ADD COLUMN ID tipodato
             | ALTER TABLE ID DROP COLUMN ID
     '''
     if p[4] == "add":
-        alter = Alter(p[3], True, p[5],  p[6] )
+        alter = Alter(p[3], True, p[6],  p[7] )
         p[0]= alter
     else:
         alter = Alter(p[3], False, p[6],  p[6] )
@@ -252,7 +253,10 @@ def p_truncate(p):
     '''
     truncate    : TRUNCATE TABLE ID 
     '''
+    fn = Trucate(p[3])
+    p[0]= fn
 #****************DROP TABLE
+
 def p_drop(p):
     '''
     drop : DROP TABLE ID
@@ -306,7 +310,8 @@ def p_valores(p):
 #UPDATE    
 def p_update(p):
     '''
-    update  : UPDATE ID SET cambios WHERE ID EQUALS expression   
+    update  : UPDATE ID SET cambios WHERE ID EQUALS expression
+            | UPDATE ID SET cambios WHERE condiciones
     '''
     dic= {p[6]:p[8]}
     update = Update(p[2], p[4], dic )
@@ -546,7 +551,7 @@ def p_factor(p):
            | CADENA
            | ARROBA ID
            | ID PUNTO ID
-           |
+           | ID
     '''
     if len(p) == 2:
         p[0] = str(p[1])
@@ -558,7 +563,7 @@ def p_factor(p):
 def t_error(t):
     print("Carácter no válido '%s'" % t.value[0])
     t.lexer.skip(1)
-    
+
 def p_error(t):
     if t:
         errores = f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}'
