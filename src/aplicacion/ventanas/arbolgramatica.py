@@ -1,5 +1,7 @@
 import ply.lex as lex
 import ply.yacc as yacc
+
+#from src.aplicacion.ventanas.Digraph import Digraph
 from graphviz import Digraph
 from src.parser.lexer import tokens, lexer
 
@@ -12,6 +14,7 @@ class Node:
         self.type = type
         self.children = children if children else []
         self.value = value
+        self.production = None
 
     def __repr__(self):
         return f"{self.type}({self.value})" if self.value else f"{self.type}"
@@ -79,6 +82,7 @@ def p_defcreate_list(p):
     else:
         p[0] = [p[1]]
         p[0]=Node("defcreate", [p[1]])
+#    p[0].children.append(Node("def", [p[3]]))
 
 
 def p_defcreate(p):
@@ -87,9 +91,10 @@ def p_defcreate(p):
                 | campo
     '''
     if len(p) == 4:
-        p[0] = Node("defcreate", [p[1], Node("COMA"), Node("def",[p[3]])])
+        p[0] = Node("defcreate", [p[1], Node("COMA"), Node("def"),p[3]])
     else:
         p[0] = Node("defcreate", [p[1]])
+    #p[0].children.append(Node("produccion", [p[1]]))
 
 def p_campo(p):
     '''
@@ -98,7 +103,7 @@ def p_campo(p):
     '''
     if len(p) == 4:
 
-        p[0] = Node("campo", [p[1],Node(p[2]), p[3]])
+        p[0] = Node("campo", [p[1],p[2], p[3]])
     else:
         p[0] = Node("campo", [Node(p[1]),p[2]])
 def p_restriccion(p):
@@ -144,6 +149,8 @@ def p_tipodato(p):
         p[0] = Node("tipodato", [Node("DATE")])
     elif p[1] == 'datetime':
         p[0] = Node("tipodato", [Node("DATETIMEL")])
+    else:
+        p[0]= Node("tipodato", [p[1]])
 
 def p_select(p):
     '''
@@ -451,17 +458,31 @@ def create_ast(code):
     return parser.parse(code, lexer=lexer)
 
 # Función para visualizar el AST con Graphviz
-def visualize_ast(node, dot=None):
+def visualize_ast(node, dot=None, seen_nodes=None):
     if dot is None:
         dot = Digraph(comment='Abstract Syntax Tree')
 
-    if isinstance(node, Node):
-        dot.node(str(node), str(node))
+    if seen_nodes is None:
+        seen_nodes = set()
+
+    node_id = id(node)  # Utiliza el id del nodo como identificador único
+
+    if node_id not in seen_nodes:
+        seen_nodes.add(node_id)
+        dot.node(str(node_id), str(node))
         for child in node.children:
-            child_dot = visualize_ast(child, dot)
-            dot.edge(str(node), str(child))
+            if isinstance(child, Node):
+                child_id = id(child)
+                dot.edge(str(node_id), str(child_id))
+                visualize_ast(child, dot, seen_nodes)
+            else:
+                child_id = id(child)
+                dot.node(str(child_id), str(child))
+                dot.edge(str(node_id), str(child_id))
 
     return dot
+
+
 # Crea el parser
 parser = yacc.yacc()
 
@@ -470,6 +491,7 @@ parser = yacc.yacc()
 class Arbolgramatica():
     def __init__(self, code):
         self.code =code
+        self.nodes = {}
 # Ejemplo de código
 #code = "UPDATE tbcompus set nombre_pc = 'gamers lap' where marca = 'Dell';"
    # code = 'CREATE TABLE ' #"UPDATE tbcompus "
@@ -482,3 +504,4 @@ class Arbolgramatica():
         # Visualizar el AST
         dot = visualize_ast(ast)
         dot.render('ast_example', format='png', cleanup=True)
+        #dot.render("ast.dot", view=True)

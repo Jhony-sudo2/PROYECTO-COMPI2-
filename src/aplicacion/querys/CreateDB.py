@@ -5,9 +5,10 @@ from src.aplicacion.querys.Operacion import Operacion
 
 class CreateDB(Operacion):
     pass
-    def __init__(self, nombreTable):
+    def __init__(self, nombreTable,linea):
         self.nombreTable= nombreTable
         self.errores = ''
+        self.linea = linea
 
 
     def ejecutar(self, db):
@@ -31,7 +32,7 @@ class CreateDB(Operacion):
             os.makedirs(ruta_carpeta + '/Funciones')
             os.makedirs(ruta_carpeta + '/Procedimientos')
         else:
-            self.errores += f"---------Error -------\nLa Base de datos {self.nombreTable} ya existe. \n"
+            self.errores += f"Error: La Base de datos {self.nombreTable} ya existe. linea: { self.linea} \n"
 
 
 

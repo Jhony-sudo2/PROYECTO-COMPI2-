@@ -4,7 +4,7 @@ from src.aplicacion.querys.Basicos import *
 import xml.etree.ElementTree as ET
 import os
 class funcion:
-    def __init__(self,nombre,parametros,acciones,tiporetorno,tablafunciones=None,db = None):
+    def __init__(self,nombre,parametros,acciones,tiporetorno,retorno,tipo,tablafunciones=None,db = None):
         self.nombre = nombre
         self.parametros = parametros
         self.acciones = acciones
@@ -13,18 +13,22 @@ class funcion:
         self.tablasimbolos = []
         self.tablafunciones = tablafunciones
         self.db = db
+        self.retorno = retorno
+        self.tipo = tipo
     def ejecutar(self,db):
         if self.buscar(db):
             print(f'Guardando funcion  {self.nombre} EN LA BASE: {db}')
-            fn = funcion(self.nombre,self.parametros,self.acciones,self.tiporetorno,db=db)
+            fn = funcion(self.nombre,self.parametros,self.acciones,self.tiporetorno,self.retorno,self.tipo,db=db)
             self.tablafunciones.append(fn)
-
 
 
     def buscar(self,db):
         for tmp in self.tablafunciones:
-            if tmp.nombre == self.nombre and tmp.db == db:
-                self.errores += f' la funcion: {self.nombre} ya existe en la base de datos: {db}'
+            if tmp.nombre == self.nombre and tmp.db == db and tmp.tipo == self.tipo:
+                if self.tipo == 1:
+                    self.errores += f' ERROR: la funcion: {self.nombre} ya existe en la base de datos: {db}'
+                else:
+                    self.errores += f' ERROR: El procedimiento: {self.nombre} ya existe en la base de datos: {db}'
                 return False
         return True
 

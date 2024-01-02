@@ -45,12 +45,12 @@ reservadas = {
     'COLUMN':'COLUMN',
     'DROP':'DROP',
 
-    #TRUNCATE
-    'TRUNCATE':'TRUNCATE',
-
     #SSL
     'IF':'IF',
     'ELSE':'ELSE',
+    'CASE':'CASE',
+    'WHEN':'WHEN',
+    'THEN':'THEN',
     'AS':'AS',
     'PROCEDURE':'PROCEDURE',
     'WHERE':'WHERE',
@@ -74,7 +74,6 @@ tokens = [
     'MINUS',
     'TIMES',
     'DIVIDE',
-    'IGUAL',
     'DIFERENTE',
     'MAYORQ',
     'MENORQ',
@@ -102,7 +101,6 @@ t_PCOMA = r';'
 t_COMA = r','
 t_PUNTO = r'\.'
 t_ARROBA = r'@'
-t_IGUAL = r'=='
 t_EQUALS = r'='
 t_DIFERENTE = r'!='
 t_MAYORQ = r'>'
@@ -119,6 +117,8 @@ t_RPAREN = r'\)'
 
 def t_newline(t):
     r'\n+'
+    if t.lexer.lineno == 0:
+        t.lexer.lineno = 1
     t.lexer.lineno += len(t.value)
 def t_DECIMAL1(t):
     r'-?\d+\.\d+'

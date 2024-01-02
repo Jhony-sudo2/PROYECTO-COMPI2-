@@ -2,21 +2,23 @@ from src.aplicacion.querys.funciones.Variable import Variable
 import xml.etree.ElementTree as ET
 
 class OVariable:
-    def __init__(self,variable:Variable,tablasimbolos=None):
+    def __init__(self,variable:Variable,linea,tablasimbolos=None):
         self.variable = variable
         self.tablasimbolos = tablasimbolos
-
+        self.errores = ''
+        self.linea = linea
 
     def ejecutar(self,db):
-        print(f'nombre variable: {self.variable.nombre}')
-        print(f'valor: {self.variable.valor}')
-        pass
+        if self.buscar():
+            self.tablasimbolos.append(self.variable)
 
-    def ingresarvariable(self):
-        pass
+    def buscar(self):
+        for tmp in self.tablasimbolos:
+            if tmp.nombre == self.variable.nombre:
+                self.errores += f'ERROR SEMANTICO: la variable {self.variable} ya existe  linea {self.linea}'
+                return False
+        return True
 
-    def asignarvalor(self):
-        pass
     def obtenerxml(self):
         print('generando xml de una variable')
         variable = ET.Element('variable')

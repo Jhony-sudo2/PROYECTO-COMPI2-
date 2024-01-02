@@ -5,7 +5,7 @@ from tkinter import filedialog
 
 from src.aplicacion.querys import Usar
 from src.aplicacion.ventanas.arbolgramatica import Arbolgramatica
-from src.parser.lexer import lexer
+from src.parser.lexer import lexer, reservadas
 from src.parser.parser import parser
 from Analizador import Analizador
 from src.parser.parser import parsererror
@@ -42,38 +42,41 @@ def ejecutar_consulta():
     global db
     global funciones
     consola.delete("1.0", END)
-    texto = campo_texto.get("1.0", END).strip()
-    print("**********la db select es " + db)
-    #if db :
-    try:
-        s = texto
-        result = parser.parse(s, lexer=lexer)
-        print(parser)
-        print(len(parsererror))
-        if len(parsererror) !=0 and len(parsererror[0]) != 0:
-            consola.insert(END,parsererror[0])
-            parsererror.clear()
-        else:
-            salida = ''
-            for elemento in result:
-                elemento.ejecutar(db)
-                if len(elemento.errores) != 0:
-                    salida += elemento.errores
-                if hasattr(elemento,'resultado'):
-                    if len(elemento.resultado) !=0:
-                        salida += str(elemento.resultado)
-                if hasattr(elemento,'nueva'):
-                    db = elemento.nueva
-            print('la nueva db es',db)
-            consola.insert(END,salida)
-        arbol= Arbolgramatica(s)
-        arbol.dibujar()
-        cargar_carpetas()
-        cargarArbol(db)
-    except EOFError:
-        print("Error")
-    #else:
-     #   consola.insert(END, 'NO HAY NINGUNA BASE DE DATOS SELECCIONADA')
+    texto = campo_texto.get("1.0", "end-1c").strip()
+    if db :
+        try:
+            lexer.lineno = 0
+            s = texto
+            ast = Arbolgramatica(s)
+            ast.dibujar()
+            result = parser.parse(s, lexer=lexer)
+            if parsererror:
+                errores = ''
+                for r in parsererror:
+                    errores += r +'\n'
+                consola.insert(END,errores)
+                parsererror.clear()
+            else:
+                salida = ''
+                for elemento in result:
+                    if hasattr(elemento,'tablafunciones'):
+                        elemento.tablafunciones = funciones
+                    elemento.ejecutar(db)
+                    if len(elemento.errores) != 0:
+                        salida += elemento.errores
+                    if hasattr(elemento,'resultado'):
+                        if len(elemento.resultado) !=0:
+                            salida += str(elemento.resultado)
+                    if hasattr(elemento,'nueva'):
+                        db = elemento.nueva
+                consola.insert(END,salida)
+
+            cargar_carpetas()
+            cargarArbol(db)
+        except EOFError:
+            print("Error")
+    else:
+        consola.insert(END, 'NO HAY NINGUNA BASE DE DATOS SELECCIONADA')
 
 def abrir_archivo():
     # Abre el cuadro de diálogo para seleccionar un archivo

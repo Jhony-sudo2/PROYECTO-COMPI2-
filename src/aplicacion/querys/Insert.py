@@ -11,7 +11,7 @@ from src.aplicacion.querys.Basicos import getvalores
 
 
 class Insert:
-    def __init__(self, titulos, valores,tabla,tablasimbolos=None):
+    def __init__(self, titulos, valores,tabla,linea,tablasimbolos=None):
         self.errores = ''
         self.titulos=titulos
         self.valores= valores
@@ -21,6 +21,7 @@ class Insert:
         self.ruta3 = ''
         self.combinado = []
         self.tablasimbolos = tablasimbolos
+        self.linea = linea
     def ejecutar(self,db):
         self.valorescambiados()
         ruta_actual = os.getcwd()
@@ -34,9 +35,9 @@ class Insert:
                     self.insertar()
 
             else:
-                self.errores += 'error en envio de parametros en insert\n'
+                self.errores += f'error en envio de parametros en insert linea: {self.linea}\n'
         else:
-            self.errores += f' La tabla {self.tabla} no existe\n'
+            self.errores += f'ERROR La tabla {self.tabla} no existe  linea: {self.linea}\n'
 
 
     # METODO PARA CONVERTIR LAS CADENAS A VALORES.
@@ -44,8 +45,6 @@ class Insert:
         print(self.valores)
         for i in range(len(self.valores)):
             self.valores[i] = getvalores(self.valores[i], self.tablasimbolos)
-        print('valores cambiados')
-        print(self.valores)
     def existe(self):
         return os.path.exists(self.ruta)
 
@@ -107,7 +106,7 @@ class Insert:
                                         primaria in self.titulos]
                 return self.yaexiste(combinados)
             else:
-                self.errores += 'no viene la llave primaria\n'
+                self.errores += f'ERROR: no viene la llave primaria  linea: {self.linea}\n'
                 return False
         else:
             return True
@@ -125,11 +124,11 @@ class Insert:
                             idt = foraneas[index2][2]
                             valor = tupla[1]
                             if not self.verificarexistenciaforanea(tabla,idt,valor):
-                                self.errores += f'la llave foranea {idt} = {valor} no se encuentra en la tabla {tabla}\n'
+                                self.errores += f'la llave foranea {idt} = {valor} no se encuentra en la tabla {tabla}\n  linea: {self.linea}'
                                 return False
                 return True
             else:
-                self.errores += 'no vienene  foraneas\n'
+                self.errores += f'Error inserts: no vienen los campos de llave foranea linea:   {self.linea}\n'
                 return False
         else:
             return True
@@ -163,7 +162,7 @@ class Insert:
         if resultado:
             return self.verificartipos(atributos)
         else:
-            self.errores += 'no coninciden los nombre con los atributos de la tabla\n'
+            self.errores += f'ERROR: no coninciden los nombre con los atributos de la tabla  linea: {self.linea}\n'
             return False
         pass
 
@@ -177,7 +176,7 @@ class Insert:
             if esperado == 2 and tipo == 1:
                 tipo=2
             if tipo != esperado:
-                self.errores += f'tipo de dato incorrecto para {tupla[0]}, se esperaba un tipo de dato {esperado} y se mando {tipo} \n'
+                self.errores += f'ERRRO INSERT: tipo de dato incorrecto para {tupla[0]}, se esperaba un tipo de dato {esperado} y se mando {tipo} \n  linea: {self.linea}'
                 return False
         return True
     def getTipoesperado(self,titulo,atributos):
@@ -218,7 +217,7 @@ class Insert:
             for tmp in combinado:
                 resultado = df.query(f"{tmp[0]} == {tmp[1]}")
                 if not resultado.empty:
-                    mensaje += f'ya hay un elemento {tmp[0]} = {tmp[1]} \n'
+                    mensaje += f'ERROR: ya hay un elemento {tmp[0]} = {tmp[1]} \n linea: {self.linea}'
                 else:
                     tmpresultado = True
             if not tmpresultado:

@@ -14,6 +14,8 @@ from src.parser.lexer import tokens
 from ..aplicacion.querys.Trucate import Trucate
 from ..aplicacion.querys.Update import Update
 from ..aplicacion.querys.Usar import Usar
+from ..aplicacion.querys.bucles.Caso import Caso
+from ..aplicacion.querys.bucles.Casos import Casos
 from ..aplicacion.querys.definidas.Concatena import Concatena
 from ..aplicacion.querys.definidas.Contar import Contar
 from ..aplicacion.querys.definidas.Hoy import Hoy
@@ -38,7 +40,8 @@ def p_seleccionardb(p):
     '''
     seleccionardb : USAR ID
     '''
-    fn = Usar(p[2])
+    linea = p.lineno(1)
+    fn = Usar(p[2],linea)
     p[0] = fn
 
 def p_produccion(p):
@@ -48,7 +51,7 @@ def p_produccion(p):
                 | compartidas PCOMA
                 | seleccionardb PCOMA
                 | funcion
-                | procedure PCOMA
+                | procedure
                 | llamado PCOMA
     '''
     p[0] = p[1]
@@ -71,7 +74,8 @@ def p_createdb(p):
     '''
     createdb : CREATE DATA BASE ID      
     '''
-    deb = CreateDB(str(p[4]))
+    linea = p.lineno(1)
+    deb = CreateDB(str(p[4]),linea)
     p[0] = deb
 
 #CREAR TABLA
@@ -79,6 +83,7 @@ def p_create(p):
     '''
     create      : CREATE TABLE ID LPAREN  defcreate RPAREN      
     '''
+
     new = p[5][::-1]
     nuevatabla = CreateTable(str(p[3]),new)
     p[0] = nuevatabla
@@ -176,11 +181,13 @@ def p_selectmultiple(p):
     selectmultiple  : listacolumn FROM valores WHERE condiciones
                     | listacolumn FROM valores
     '''
+    linea = p.lineno(2)
+
     if len(p) == 4:
-        fn = Select(p[3],p[1])
+        fn = Select(p[3],p[1],linea)
         p[0] = fn
     else:
-        fn = Select(p[3],p[1],condiciones=p[5])
+        fn = Select(p[3],p[1],linea,condiciones=p[5])
         p[0] = fn
 def p_listacolumn(p):
     '''
@@ -264,7 +271,8 @@ def p_insert(p):
     '''
     insert      : INSERT INTO ID parametrosi VALUES entradas
     '''
-    accion = Insert(p[4],p[6],p[3])
+    linea = p.lineno(1)
+    accion = Insert(p[4],p[6],p[3],linea)
     p[0] = accion
 
 def p_parametrosi(p):
@@ -360,12 +368,13 @@ def p_variable(p):
         variable : DECLARE ARROBA ID tipodato
                 | SET ARROBA ID EQUALS valorvar
     '''
+    linea = p.lineno(1)
     if len(p) == 5:
         var = Variable(p[3],p[4])
-        fn = OVariable(var)
+        fn = OVariable(var,linea)
         p[0] = fn
     else:
-        fn = SetVariable(p[3],p[5])
+        fn = SetVariable(p[3],p[5],linea)
         p[0] = fn
 def p_valorvar(p):
     '''
@@ -390,6 +399,7 @@ def p_opespeciales(p):
     opespeciales : if PCOMA
                 | variable PCOMA
                 | compartidas PCOMA
+                | case PCOMA
     '''
     p[0]=p[1]
 
@@ -398,7 +408,7 @@ def p_funcion(p):
     '''
     funcion  : CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END
     '''
-    fn = funcion(p[3],p[5],p[11],p[8])
+    fn = funcion(p[3],p[5],p[11],p[8],p[13],1)
     p[0] = fn
     
 def p_parametros(p):
@@ -415,6 +425,8 @@ def p_procedure(p):
     '''
     procedure  : CREATE PROCEDURE ID LPAREN parametros RPAREN  AS BEGIN initial2 END
     '''
+    fn = funcion(p[3],p[5],p[9],None,None,2)
+    p[0] = fn
 
 def p_llamado(p):
     '''
@@ -485,8 +497,27 @@ def p_explogicas(p):
 #**************CASE
 def p_case(p):
     '''
-    case :
+    case : CASE casos END
+         | CASE casos ELSE THEN initial2 END
     '''
+    if len(p) == 4:
+        fn = Casos(p[2])
+        p[0]= fn
+    else:
+        fn = Casos(p[2],extra=p[5])
+        p[0] = fn
+
+def p_casos(p):
+    '''
+    casos  : WHEN condiciones THEN initial2 casos
+           | WHEN condiciones THEN initial2
+    '''
+    if len(p)== 6:
+        caso= Caso(p[2],p[4])
+        p[0] = [caso] + p[5]
+    else:
+        caso = Caso(p[2],p[4])
+        p[0] = [caso]
 
 def p_expression(p):
     '''
@@ -526,7 +557,7 @@ def p_factor2(p):
     if len(p) == 2:
         p[0] = str(p[1])
     else:
-        p[0] = f'( + {str(p[2])} + )'
+        p[0] = f'(  {str(p[2])}  )'
 
 def p_factor(p):
     '''
@@ -549,7 +580,10 @@ def t_error(t):
     t.lexer.skip(1)
 
 def p_error(t):
-    errores = f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}'
+    if t:
+        errores = f'Error sintáctico en línea {t.lineno}, columna {find_column(t.lexer.lexdata, t)} con: {t.value}'
+    else:
+        errores = f'Error sintactico en EOF fin de caden'
     listaerrores.append(errores)
 def getErrores():
     return listaerrores

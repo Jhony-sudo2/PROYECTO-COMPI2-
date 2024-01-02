@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Tabla>
+  <Estructura>
+    <idalumno>1</idalumno>
+    <nombre>4</nombre>
+    <seccion>4</seccion>
+    <Primaria_1>idalumno</Primaria_1>
+    <Primaria_2>nombre</Primaria_2>
+    <Foranea_1>{'nombre': 'seccion', 'tipo': 4, 'tabla': 'tbseccion', 'referencia': 'name'}</Foranea_1>
+  </Estructura>
+</Tabla>
