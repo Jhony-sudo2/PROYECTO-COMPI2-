@@ -21,7 +21,7 @@ class Ejecutar:
                 self.IniciarTabla()
                 print('ejecutando funcion '+self.funcion.nombre)
                 for accion in self.funcion.acciones:
-                    accion.tablasimbolos = self.tablasimbolos
+                    accion.tablasimbolos = self.funcion.tablasimbolos
                     accion.ejecutar(db)
                     if len(accion.errores) != 0:
                         self.errores += accion.errores
@@ -42,6 +42,7 @@ class Ejecutar:
             tipo   = self.funcion.parametros[index][1]
             variable = Variable(nombre,tipo,tmp)
             self.tablasimbolos.append(variable)
+        self.funcion.tablasimbolos = self.tablasimbolos
 
 
     def buscarretorno(self):

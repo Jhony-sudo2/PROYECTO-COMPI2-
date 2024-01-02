@@ -70,7 +70,10 @@ def buscarvalor(variable):
     for tmp in tablasimbolos:
         if tmp.nombre == variable:
             if tmp.valor != None:
-                return float (tmp.valor)
+                if isinstance(tmp.valor, float) or isinstance(tmp.valor, int):
+                    return float (tmp.valor)
+                else:
+                    return tmp.valor
     return False
     pass
 
