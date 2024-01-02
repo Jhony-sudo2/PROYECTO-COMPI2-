@@ -24,11 +24,12 @@ class Select:
     def ejecutar(self,db):
         if self.verificartablas(db,self.tabla):
             if self.verificarcolumnas(self.columnas):
+                if len(self.columnas) == 0:
+                    self.columnas.append('*')
                 if self.columnas[0] == '*':
                     if self.condiciones == None:
                         self.selectbasico(db)
                     else:
-
                         self.concondiciones(db)
                 else:
                     if self.condiciones == None:
@@ -55,7 +56,7 @@ class Select:
         self.columnasi.clear()
         if columnas[0] != '*':
             for elemento in columnas:
-                if not isinstance(elemento,object):
+                if  isinstance(elemento,str):
                     tupla = elemento.split('.')
                     try:
                         self.tablasi.append(tupla[0])
@@ -63,6 +64,7 @@ class Select:
                     except IndexError:
                         self.errores += f'ERROR SELECT: elemento {tupla}  no esta asociado con ninguna tabla  el formato es tabla.atributo para las tablas linea: {self.linea} \n'
                 else:
+                    print('es objeto')
                     columnas.remove(elemento)
                     self.funciones.append(elemento)
             verificacion = all(tabla in self.tabla for tabla in self.tablasi)
@@ -181,7 +183,7 @@ class Select:
                 newdiccionario = {tmp: datostmp}
                 self.datos.update(newdiccionario)
             resultado = pd.DataFrame(self.datos)
-            print(resultado)
+            self.resultado = str(resultado)
 
     def obtenerFrames(self,tabla1,tabla2,Frames):
         frm = []
