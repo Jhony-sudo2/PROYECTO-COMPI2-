@@ -5,7 +5,7 @@ import pandas as pd
 import xml.etree.ElementTree as ET
 
 class Select:
-    def __init__(self,tablas,columnas,linea,condiciones=None):
+    def __init__(self,tablas,columnas,linea,tablasimbolos=None,condiciones=None):
         pd.set_option('display.max_columns', None)
         pd.set_option('display.max_rows', None)
         self.tabla = tablas
@@ -18,10 +18,14 @@ class Select:
         self.columnasi = []
         self.datos = {}
         self.linea = linea
+        self.tablasimbolos = tablasimbolos
+        self.funciones = []
 
     def ejecutar(self,db):
         if self.verificartablas(db,self.tabla):
             if self.verificarcolumnas(self.columnas):
+                if len(self.columnas) == 0:
+                    self.columnas.append('*')
                 if self.columnas[0] == '*':
                     if self.condiciones == None:
                         self.selectbasico(db)
@@ -34,6 +38,10 @@ class Select:
                         self.combinado(db)
 
 
+
+    def obtenervalores(self):
+        for i in range(self.condiciones):
+            self.condiciones[i] = getvalores(self.condiciones[i], self.tablasimbolos)
 
     def verificartablas(self,db,tablas):
         self.ruta = getrutatablas(db)
@@ -48,12 +56,17 @@ class Select:
         self.columnasi.clear()
         if columnas[0] != '*':
             for elemento in columnas:
-                tupla = elemento.split('.')
-                try:
-                    self.tablasi.append(tupla[0])
-                    self.columnasi.append(tupla[1])
-                except IndexError:
-                    self.errores += f'ERROR SELECT: elemento {tupla}  no esta asociado con ninguna tabla  el formato es tabla.atributo para las tablas linea: {self.linea} \n'
+                if  isinstance(elemento,str):
+                    tupla = elemento.split('.')
+                    try:
+                        self.tablasi.append(tupla[0])
+                        self.columnasi.append(tupla[1])
+                    except IndexError:
+                        self.errores += f'ERROR SELECT: elemento {tupla}  no esta asociado con ninguna tabla  el formato es tabla.atributo para las tablas linea: {self.linea} \n'
+                else:
+                    print('es objeto')
+                    columnas.remove(elemento)
+                    self.funciones.append(elemento)
             verificacion = all(tabla in self.tabla for tabla in self.tablasi)
             if verificacion:
                 for index,elemento in enumerate(self.columnasi):
@@ -170,8 +183,12 @@ class Select:
                 newdiccionario = {tmp: datostmp}
                 self.datos.update(newdiccionario)
             resultado = pd.DataFrame(self.datos)
+<<<<<<< HEAD
             print(resultado)
             self.resultado = resultado
+=======
+            self.resultado = str(resultado)
+>>>>>>> 60b59768f9325e4de037f4676264168541b37026
 
     def obtenerFrames(self,tabla1,tabla2,Frames):
         frm = []
@@ -210,7 +227,8 @@ class Select:
             resultado = df.query(restriccion)
             self.resultado += f'****{self.tabla[0]}****\n' + str(resultado) + '\n'
         except Exception as e:
-            self.errores += ' campo no existe en la tabla'
+            print(e)
+            self.errores += f' ERROR en select: {e} no existe en la tabla {self.tabla[0]} linea {self.linea} \n'
     def obtenerdatos(self,tabla):
         rutatmp = getrutadatos(self.ruta,tabla)
         archivo = open(rutatmp, "r")

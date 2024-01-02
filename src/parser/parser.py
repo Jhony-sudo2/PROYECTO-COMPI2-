@@ -19,6 +19,7 @@ from ..aplicacion.querys.bucles.Casos import Casos
 from ..aplicacion.querys.definidas.Concatena import Concatena
 from ..aplicacion.querys.definidas.Contar import Contar
 from ..aplicacion.querys.definidas.Hoy import Hoy
+from ..aplicacion.querys.definidas.Substraer import Substraer
 from ..aplicacion.querys.definidas.Suma import Suma
 from ..aplicacion.querys.funciones.Ejecutar import Ejecutar
 from ..aplicacion.querys.funciones.OVariable import OVariable
@@ -219,12 +220,13 @@ def p_valorescolumna(p):
 def p_funcionesefinidas(p):
     '''
     funcionesdefinidas :  CONCATENA LPAREN factor COMA factor RPAREN
-                    |  SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+                    |  SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN
                     |  HOY LPAREN RPAREN
                     |  CONTAR LPAREN TIMES RPAREN FROM ID
                     |  SUMA LPAREN ID RPAREN FROM ID
                     |  CAST
     '''
+    linea = p.lineno
     if p[1] == 'CONCATENA' or p[1] == 'concatena':
         valor = Concatena((p[3]),(p[5]))
         p[0] = valor
@@ -236,6 +238,9 @@ def p_funcionesefinidas(p):
         p[0] = fn
     elif p[1] == 'SUMA' or p[1] == 'suma':
         fn = Suma(p[6],p[3])
+        p[0] = fn
+    elif p[1] == 'SUBSTRAER' or p[1] == 'substraer':
+        fn = Substraer(p[3],p[5],p[7],linea)
         p[0] = fn
 
 #****************ALTER TABLE

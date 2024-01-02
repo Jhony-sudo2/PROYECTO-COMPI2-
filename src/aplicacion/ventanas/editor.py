@@ -4,7 +4,7 @@ from tkinter import scrolledtext
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
-
+from src.aplicacion.ventanas.reportes.TablaSimbolos import TablaApp
 from src.parser.lexer import lexer
 from src.parser.parser import parser
 from Analizador import Analizador
@@ -211,6 +211,7 @@ class TextEditorApp():
                     consola.insert(END, salida)
                 cargar_carpetas()
                 cargarArbol(db)
+                self.reporte(self.funciones)
             except EOFError:
                 print("Error")
             # else:
@@ -357,8 +358,16 @@ class TextEditorApp():
         # Crear el campo de texto para la consola
         consola = Text(panel_consola, height=10, width=120)
         consola.pack()
+<<<<<<< HEAD
         boton = Button(panel_consola, text="Generar AST", command=ejecutar_consulta)
         boton.pack()
+=======
+    def reporte(self,tabla):
+        root = tk.Tk()
+        app = TablaApp(root)
+        app.agregar_datos(tabla)
+        root.mainloop()
+>>>>>>> 60b59768f9325e4de037f4676264168541b37026
 
 if __name__ == "__main__":
     root = tk.Tk()

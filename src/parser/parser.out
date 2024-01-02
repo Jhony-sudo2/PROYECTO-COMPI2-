@@ -50,7 +50,7 @@ Rule 44    valorescolumna -> ID
 Rule 45    valorescolumna -> funcionesdefinidas
 Rule 46    valorescolumna -> llamado
 Rule 47    funcionesdefinidas -> CONCATENA LPAREN factor COMA factor RPAREN
-Rule 48    funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+Rule 48    funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN
 Rule 49    funcionesdefinidas -> HOY LPAREN RPAREN
 Rule 50    funcionesdefinidas -> CONTAR LPAREN TIMES RPAREN FROM ID
 Rule 51    funcionesdefinidas -> SUMA LPAREN ID RPAREN FROM ID
@@ -565,7 +565,7 @@ state 22
     (36) select -> SELECT . funcionesdefinidas
     (37) select -> SELECT . selectmultiple
     (47) funcionesdefinidas -> . CONCATENA LPAREN factor COMA factor RPAREN
-    (48) funcionesdefinidas -> . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+    (48) funcionesdefinidas -> . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN
     (49) funcionesdefinidas -> . HOY LPAREN RPAREN
     (50) funcionesdefinidas -> . CONTAR LPAREN TIMES RPAREN FROM ID
     (51) funcionesdefinidas -> . SUMA LPAREN ID RPAREN FROM ID
@@ -855,7 +855,7 @@ state 45
 
 state 46
 
-    (48) funcionesdefinidas -> SUBSTRAER . LPAREN CADENA COMA NUMBER COMA NUMBER
+    (48) funcionesdefinidas -> SUBSTRAER . LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN
 
     LPAREN          shift and go to state 82
 
@@ -1317,7 +1317,7 @@ state 81
 
 state 82
 
-    (48) funcionesdefinidas -> SUBSTRAER LPAREN . CADENA COMA NUMBER COMA NUMBER
+    (48) funcionesdefinidas -> SUBSTRAER LPAREN . CADENA COMA NUMBER COMA NUMBER RPAREN
 
     CADENA          shift and go to state 111
 
@@ -1372,7 +1372,7 @@ state 88
     (45) valorescolumna -> . funcionesdefinidas
     (46) valorescolumna -> . llamado
     (47) funcionesdefinidas -> . CONCATENA LPAREN factor COMA factor RPAREN
-    (48) funcionesdefinidas -> . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+    (48) funcionesdefinidas -> . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN
     (49) funcionesdefinidas -> . HOY LPAREN RPAREN
     (50) funcionesdefinidas -> . CONTAR LPAREN TIMES RPAREN FROM ID
     (51) funcionesdefinidas -> . SUMA LPAREN ID RPAREN FROM ID
@@ -1691,7 +1691,7 @@ state 110
 
 state 111
 
-    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA . COMA NUMBER COMA NUMBER
+    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA . COMA NUMBER COMA NUMBER RPAREN
 
     COMA            shift and go to state 142
 
@@ -2060,7 +2060,7 @@ state 141
 
 state 142
 
-    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA . NUMBER COMA NUMBER
+    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA . NUMBER COMA NUMBER RPAREN
 
     NUMBER          shift and go to state 170
 
@@ -2394,7 +2394,7 @@ state 169
 
 state 170
 
-    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER . COMA NUMBER
+    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER . COMA NUMBER RPAREN
 
     COMA            shift and go to state 201
 
@@ -2996,11 +2996,9 @@ state 218
 
 state 219
 
-    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .
+    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER . RPAREN
 
-    PCOMA           reduce using rule 48 (funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .)
-    COMA            reduce using rule 48 (funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .)
-    FROM            reduce using rule 48 (funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER .)
+    RPAREN          shift and go to state 240
 
 
 state 220
@@ -3050,7 +3048,7 @@ state 224
 
     (28) foranea -> REFERENCES ID LPAREN . ID RPAREN
 
-    ID              shift and go to state 240
+    ID              shift and go to state 241
 
 
 state 225
@@ -3083,7 +3081,7 @@ state 227
 
     (82) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS . BEGIN initial2 RETURN expression PCOMA END
 
-    BEGIN           shift and go to state 241
+    BEGIN           shift and go to state 242
 
 
 state 228
@@ -3097,7 +3095,7 @@ state 229
 
     (85) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 . END
 
-    END             shift and go to state 242
+    END             shift and go to state 243
 
 
 state 230
@@ -3168,28 +3166,28 @@ state 231
 
     (78) opespeciales -> if . PCOMA
 
-    PCOMA           shift and go to state 244
+    PCOMA           shift and go to state 245
 
 
 state 232
 
     (79) opespeciales -> variable . PCOMA
 
-    PCOMA           shift and go to state 245
+    PCOMA           shift and go to state 246
 
 
 state 233
 
     (80) opespeciales -> compartidas . PCOMA
 
-    PCOMA           shift and go to state 246
+    PCOMA           shift and go to state 247
 
 
 state 234
 
     (81) opespeciales -> case . PCOMA
 
-    PCOMA           shift and go to state 247
+    PCOMA           shift and go to state 248
 
 
 state 235
@@ -3197,21 +3195,21 @@ state 235
     (89) if -> IF . LPAREN condiciones RPAREN BEGIN initial2 END
     (90) if -> IF . LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
 
-    LPAREN          shift and go to state 248
+    LPAREN          shift and go to state 249
 
 
 state 236
 
     (72) variable -> DECLARE . ARROBA ID tipodato
 
-    ARROBA          shift and go to state 249
+    ARROBA          shift and go to state 250
 
 
 state 237
 
     (73) variable -> SET . ARROBA ID EQUALS valorvar
 
-    ARROBA          shift and go to state 250
+    ARROBA          shift and go to state 251
 
 
 state 238
@@ -3221,9 +3219,9 @@ state 238
     (105) casos -> . WHEN condiciones THEN initial2 casos
     (106) casos -> . WHEN condiciones THEN initial2
 
-    WHEN            shift and go to state 252
+    WHEN            shift and go to state 253
 
-    casos                          shift and go to state 251
+    casos                          shift and go to state 252
 
 state 239
 
@@ -3234,9 +3232,11 @@ state 239
 
 state 240
 
-    (28) foranea -> REFERENCES ID LPAREN ID . RPAREN
+    (48) funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN .
 
-    RPAREN          shift and go to state 253
+    PCOMA           reduce using rule 48 (funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN .)
+    COMA            reduce using rule 48 (funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN .)
+    FROM            reduce using rule 48 (funcionesdefinidas -> SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN .)
 
 
 state 241
@@ -3298,7 +3298,7 @@ state 241
     alter                          shift and go to state 17
     delete                         shift and go to state 18
 
-state 242
+state 243
 
     (85) procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END .
 
@@ -3316,7 +3316,7 @@ state 242
     $end            reduce using rule 85 (procedure -> CREATE PROCEDURE ID LPAREN parametros RPAREN AS BEGIN initial2 END .)
 
 
-state 243
+state 244
 
     (76) initial2 -> opespeciales initial2 .
 
@@ -3326,7 +3326,7 @@ state 243
     ELSE            reduce using rule 76 (initial2 -> opespeciales initial2 .)
 
 
-state 244
+state 245
 
     (78) opespeciales -> if PCOMA .
 
@@ -3347,7 +3347,7 @@ state 244
     ELSE            reduce using rule 78 (opespeciales -> if PCOMA .)
 
 
-state 245
+state 246
 
     (79) opespeciales -> variable PCOMA .
 
@@ -3368,7 +3368,7 @@ state 245
     ELSE            reduce using rule 79 (opespeciales -> variable PCOMA .)
 
 
-state 246
+state 247
 
     (80) opespeciales -> compartidas PCOMA .
 
@@ -3389,7 +3389,7 @@ state 246
     ELSE            reduce using rule 80 (opespeciales -> compartidas PCOMA .)
 
 
-state 247
+state 248
 
     (81) opespeciales -> case PCOMA .
 
@@ -3410,7 +3410,7 @@ state 247
     ELSE            reduce using rule 81 (opespeciales -> case PCOMA .)
 
 
-state 248
+state 249
 
     (89) if -> IF LPAREN . condiciones RPAREN BEGIN initial2 END
     (90) if -> IF LPAREN . condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
@@ -3446,30 +3446,30 @@ state 248
     factor2                        shift and go to state 72
     factor                         shift and go to state 73
 
-state 249
-
-    (72) variable -> DECLARE ARROBA . ID tipodato
-
-    ID              shift and go to state 256
-
-
 state 250
 
-    (73) variable -> SET ARROBA . ID EQUALS valorvar
+    (72) variable -> DECLARE ARROBA . ID tipodato
 
     ID              shift and go to state 257
 
 
 state 251
 
-    (103) case -> CASE casos . END
-    (104) case -> CASE casos . ELSE THEN initial2 END
+    (73) variable -> SET ARROBA . ID EQUALS valorvar
 
-    END             shift and go to state 258
-    ELSE            shift and go to state 259
+    ID              shift and go to state 258
 
 
 state 252
+
+    (103) case -> CASE casos . END
+    (104) case -> CASE casos . ELSE THEN initial2 END
+
+    END             shift and go to state 259
+    ELSE            shift and go to state 260
+
+
+state 253
 
     (105) casos -> WHEN . condiciones THEN initial2 casos
     (106) casos -> WHEN . condiciones THEN initial2
@@ -3505,7 +3505,7 @@ state 252
     factor2                        shift and go to state 72
     factor                         shift and go to state 73
 
-state 253
+state 254
 
     (28) foranea -> REFERENCES ID LPAREN ID RPAREN .
 
@@ -3513,22 +3513,22 @@ state 253
     RPAREN          reduce using rule 28 (foranea -> REFERENCES ID LPAREN ID RPAREN .)
 
 
-state 254
+state 255
 
     (82) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 . RETURN expression PCOMA END
 
-    RETURN          shift and go to state 261
+    RETURN          shift and go to state 262
 
 
-state 255
+state 256
 
     (89) if -> IF LPAREN condiciones . RPAREN BEGIN initial2 END
     (90) if -> IF LPAREN condiciones . RPAREN BEGIN initial2 END ELSE BEGIN initial2 END
 
-    RPAREN          shift and go to state 262
+    RPAREN          shift and go to state 263
 
 
-state 256
+state 257
 
     (72) variable -> DECLARE ARROBA ID . tipodato
     (29) tipodato -> . INT
@@ -3547,38 +3547,38 @@ state 256
     DATE            shift and go to state 160
     DATETIME        shift and go to state 161
 
-    tipodato                       shift and go to state 263
+    tipodato                       shift and go to state 264
 
-state 257
+state 258
 
     (73) variable -> SET ARROBA ID . EQUALS valorvar
 
-    EQUALS          shift and go to state 264
+    EQUALS          shift and go to state 265
 
 
-state 258
+state 259
 
     (103) case -> CASE casos END .
 
     PCOMA           reduce using rule 103 (case -> CASE casos END .)
 
 
-state 259
-
-    (104) case -> CASE casos ELSE . THEN initial2 END
-
-    THEN            shift and go to state 265
-
-
 state 260
 
-    (105) casos -> WHEN condiciones . THEN initial2 casos
-    (106) casos -> WHEN condiciones . THEN initial2
+    (104) case -> CASE casos ELSE . THEN initial2 END
 
     THEN            shift and go to state 266
 
 
 state 261
+
+    (105) casos -> WHEN condiciones . THEN initial2 casos
+    (106) casos -> WHEN condiciones . THEN initial2
+
+    THEN            shift and go to state 267
+
+
+state 262
 
     (82) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN . expression PCOMA END
     (107) expression -> . expression PLUS term
@@ -3603,27 +3603,27 @@ state 261
     ARROBA          shift and go to state 77
     ID              shift and go to state 66
 
-    expression                     shift and go to state 267
+    expression                     shift and go to state 268
     term                           shift and go to state 71
     factor2                        shift and go to state 72
     factor                         shift and go to state 73
 
-state 262
+state 263
 
     (89) if -> IF LPAREN condiciones RPAREN . BEGIN initial2 END
     (90) if -> IF LPAREN condiciones RPAREN . BEGIN initial2 END ELSE BEGIN initial2 END
 
-    BEGIN           shift and go to state 268
+    BEGIN           shift and go to state 269
 
 
-state 263
+state 264
 
     (72) variable -> DECLARE ARROBA ID tipodato .
 
     PCOMA           reduce using rule 72 (variable -> DECLARE ARROBA ID tipodato .)
 
 
-state 264
+state 265
 
     (73) variable -> SET ARROBA ID EQUALS . valorvar
     (74) valorvar -> . expression
@@ -3632,7 +3632,7 @@ state 264
     (108) expression -> . expression MINUS term
     (109) expression -> . term
     (47) funcionesdefinidas -> . CONCATENA LPAREN factor COMA factor RPAREN
-    (48) funcionesdefinidas -> . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER
+    (48) funcionesdefinidas -> . SUBSTRAER LPAREN CADENA COMA NUMBER COMA NUMBER RPAREN
     (49) funcionesdefinidas -> . HOY LPAREN RPAREN
     (50) funcionesdefinidas -> . CONTAR LPAREN TIMES RPAREN FROM ID
     (51) funcionesdefinidas -> . SUMA LPAREN ID RPAREN FROM ID
@@ -3662,14 +3662,14 @@ state 264
     ARROBA          shift and go to state 77
     ID              shift and go to state 66
 
-    valorvar                       shift and go to state 269
-    expression                     shift and go to state 270
-    funcionesdefinidas             shift and go to state 271
+    valorvar                       shift and go to state 270
+    expression                     shift and go to state 271
+    funcionesdefinidas             shift and go to state 272
     term                           shift and go to state 71
     factor                         shift and go to state 73
     factor2                        shift and go to state 72
 
-state 265
+state 266
 
     (104) case -> CASE casos ELSE THEN . initial2 END
     (76) initial2 -> . opespeciales initial2
@@ -3728,7 +3728,7 @@ state 265
     alter                          shift and go to state 17
     delete                         shift and go to state 18
 
-state 266
+state 267
 
     (105) casos -> WHEN condiciones THEN . initial2 casos
     (106) casos -> WHEN condiciones THEN . initial2
@@ -3788,18 +3788,18 @@ state 266
     alter                          shift and go to state 17
     delete                         shift and go to state 18
 
-state 267
+state 268
 
     (82) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression . PCOMA END
     (107) expression -> expression . PLUS term
     (108) expression -> expression . MINUS term
 
-    PCOMA           shift and go to state 274
+    PCOMA           shift and go to state 275
     PLUS            shift and go to state 103
     MINUS           shift and go to state 104
 
 
-state 268
+state 269
 
     (89) if -> IF LPAREN condiciones RPAREN BEGIN . initial2 END
     (90) if -> IF LPAREN condiciones RPAREN BEGIN . initial2 END ELSE BEGIN initial2 END
@@ -3859,14 +3859,14 @@ state 268
     alter                          shift and go to state 17
     delete                         shift and go to state 18
 
-state 269
+state 270
 
     (73) variable -> SET ARROBA ID EQUALS valorvar .
 
     PCOMA           reduce using rule 73 (variable -> SET ARROBA ID EQUALS valorvar .)
 
 
-state 270
+state 271
 
     (74) valorvar -> expression .
     (107) expression -> expression . PLUS term
@@ -3877,21 +3877,21 @@ state 270
     MINUS           shift and go to state 104
 
 
-state 271
+state 272
 
     (75) valorvar -> funcionesdefinidas .
 
     PCOMA           reduce using rule 75 (valorvar -> funcionesdefinidas .)
 
 
-state 272
+state 273
 
     (104) case -> CASE casos ELSE THEN initial2 . END
 
-    END             shift and go to state 276
+    END             shift and go to state 277
 
 
-state 273
+state 274
 
     (105) casos -> WHEN condiciones THEN initial2 . casos
     (106) casos -> WHEN condiciones THEN initial2 .
@@ -3902,31 +3902,31 @@ state 273
     ELSE            reduce using rule 106 (casos -> WHEN condiciones THEN initial2 .)
     WHEN            shift and go to state 252
 
-    casos                          shift and go to state 277
-
-state 274
-
-    (82) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA . END
-
-    END             shift and go to state 278
-
+    casos                          shift and go to state 278
 
 state 275
 
-    (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 . END
-    (90) if -> IF LPAREN condiciones RPAREN BEGIN initial2 . END ELSE BEGIN initial2 END
+    (82) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA . END
 
     END             shift and go to state 279
 
 
 state 276
 
+    (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 . END
+    (90) if -> IF LPAREN condiciones RPAREN BEGIN initial2 . END ELSE BEGIN initial2 END
+
+    END             shift and go to state 280
+
+
+state 277
+
     (104) case -> CASE casos ELSE THEN initial2 END .
 
     PCOMA           reduce using rule 104 (case -> CASE casos ELSE THEN initial2 END .)
 
 
-state 277
+state 278
 
     (105) casos -> WHEN condiciones THEN initial2 casos .
 
@@ -3934,7 +3934,7 @@ state 277
     ELSE            reduce using rule 105 (casos -> WHEN condiciones THEN initial2 casos .)
 
 
-state 278
+state 279
 
     (82) funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .
 
@@ -3952,7 +3952,7 @@ state 278
     $end            reduce using rule 82 (funcion -> CREATE FUNCTION ID LPAREN parametros RPAREN RETURN tipodato AS BEGIN initial2 RETURN expression PCOMA END .)
 
 
-state 279
+state 280
 
     (89) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END .
     (90) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END . ELSE BEGIN initial2 END
@@ -3961,14 +3961,14 @@ state 279
     ELSE            shift and go to state 280
 
 
-state 280
+state 281
 
     (90) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE . BEGIN initial2 END
 
-    BEGIN           shift and go to state 281
+    BEGIN           shift and go to state 282
 
 
-state 281
+state 282
 
     (90) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN . initial2 END
     (76) initial2 -> . opespeciales initial2
@@ -4027,14 +4027,14 @@ state 281
     alter                          shift and go to state 17
     delete                         shift and go to state 18
 
-state 282
+state 283
 
     (90) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 . END
 
-    END             shift and go to state 283
+    END             shift and go to state 284
 
 
-state 283
+state 284
 
     (90) if -> IF LPAREN condiciones RPAREN BEGIN initial2 END ELSE BEGIN initial2 END .
 
