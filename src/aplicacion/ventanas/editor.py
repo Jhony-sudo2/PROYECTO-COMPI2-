@@ -170,49 +170,51 @@ class SyntaxHighlightingText(scrolledtext.ScrolledText):
         self.after(5000, self.periodic_highlight_check)
 class TextEditorApp():
     db = ''
+    funciones = []
     def __init__(self, master):
         self.master = master
         self.master.title("XSQL-IDE")
 
         self.custom_lexer = CustomLexer()
 
-
         def ejecutar_consulta():
             global db
-
+            global funciones
             consola.delete("1.0", END)
             texto = self.editor.get("1.0", END).strip()
-           # print("**********la db select es " + db)
-            db=self.db
-            #if  self.db:
+            # print("**********la db select es " + db)
+            db = self.db
+            # if  self.db:
             try:
+                lexer.lineno = 0
                 s = texto
                 result = parser.parse(s, lexer=lexer)
-                print(parser)
-                print(len(parsererror))
-                if len(parsererror) != 0 and len(parsererror[0]) != 0:
-                    consola.insert(END, parsererror[0])
+                if parsererror:
+                    errores = ''
+                    for r in parsererror:
+                        errores += r + '\n'
+                    consola.insert(END, errores)
                     parsererror.clear()
                 else:
                     salida = ''
                     for elemento in result:
-                        elemento.ejecutar(self.db)
+                        if hasattr(elemento, 'tablafunciones'):
+                            elemento.tablafunciones = self.funciones
+                        elemento.ejecutar(db)
                         if len(elemento.errores) != 0:
                             salida += elemento.errores
                         if hasattr(elemento, 'resultado'):
                             if len(elemento.resultado) != 0:
                                 salida += str(elemento.resultado)
                         if hasattr(elemento, 'nueva'):
-                            self.db = elemento.nueva
-                            #etiqueta_archivo.config(text="Archivo seleccionado: " + self.db)
-                    print('la nueva db es',self. db)
+                            db = elemento.nueva
                     consola.insert(END, salida)
                 cargar_carpetas()
-                cargarArbol(self.db)
+                cargarArbol(db)
             except EOFError:
                 print("Error")
-            #else:
-             #   consola.insert(END, 'NO HAY NINGUNA BASE DE DATOS SELECCIONADA')
+            # else:
+            #   consola.insert(END, 'NO HAY NINGUNA BASE DE DATOS SELECCIONADA')
 
         def abrir_archivo():
             # Abre el cuadro de diálogo para seleccionar un archivo
